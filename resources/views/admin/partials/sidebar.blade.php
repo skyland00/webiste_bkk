@@ -5,7 +5,7 @@
                     <div class="flex items-center gap-3">
                         <div class="w-11 h-11 rounded-lg flex items-center justify-center">
 
-                            <img src="{{ asset('images/bkk.jpg') }}" alt="Logo">
+                            <img src="{{ asset('img/logo_bkk.png') }}" alt="Logo">
                         </div>
                         <div>
                             <h1 class="text-2xl font-semibold text-slate-900">BKK</h1>
@@ -29,18 +29,31 @@
                         </a>
                         <a href="#"
                             class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 rounded-lg transition-colors">
-                            <i class="ri-building-line text-lg"></i>
-                            <span>Perusahaan</span>
-                        </a>
-                        <a href="#"
-                            class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 rounded-lg transition-colors">
                             <i class="ri-group-line text-lg"></i>
                             <span>Siswa</span>
                         </a>
-                        <a href="#"
-                            class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 rounded-lg transition-colors">
-                            <i class="ri-file-text-line text-lg"></i>
-                            <span>Lamaran</span>
+                        <a href="{{ route('admin.perusahaan') }}"
+                            class="flex items-center gap-3 px-4 py-3 text-slate-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition">
+                            <i class="ri-building-2-line text-xl"></i>
+                            <span>Semua Perusahaan</span>
+                        </a>
+                        <a href="{{ route('admin.perusahaan.pending') }}"
+                            class="flex items-center gap-3 px-4 py-3 text-slate-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition">
+                            <i class="ri-building-line text-xl"></i>
+                            <span>Perusahaan Pending</span>
+                            @if ($pendingCount = \App\Models\PerusahaanModel::where('status', 'pending')->count())
+                                <span
+                                    class="ml-auto bg-red-500 text-white text-xs px-2 py-1 rounded-full">{{ $pendingCount }}</span>
+                            @endif
+                        </a>
+                        <a href="{{ route('admin.perusahaan.rejected') }}"
+                            class="flex items-center gap-3 px-4 py-3 text-slate-700 hover:bg-red-50 hover:text-red-600 rounded-lg transition">
+                            <i class="ri-close-circle-line text-xl"></i>
+                            <span>Perusahaan Ditolak</span>
+                            @if ($rejectedCount = \App\Models\PerusahaanModel::where('status', 'rejected')->count())
+                                <span
+                                    class="ml-auto bg-red-500 text-white text-xs px-2 py-1 rounded-full">{{ $rejectedCount }}</span>
+                            @endif
                         </a>
 
                         <div class="pt-4 mt-4 border-t border-slate-200">

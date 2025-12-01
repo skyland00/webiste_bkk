@@ -15,7 +15,8 @@ class PelamarModel extends Model
         'nisn',
         'tahun_lulus',
         'no_telp',
-        'cv'
+        'cv',
+        'status',
     ];
 
     use HasFactory;

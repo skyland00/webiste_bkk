@@ -8,7 +8,6 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
 
 class AuthController extends Controller
 {
@@ -35,12 +34,29 @@ class AuthController extends Controller
 
         $user = Auth::user();
 
-        if ($user->role === 'admin') {
-            return redirect()->route('admin.dashboard');
+        // Cek jika role perusahaan, validasi status approval
+        if ($user->role === 'perusahaan') {
+            $perusahaan = PerusahaanModel::where('user_id', $user->id)->first();
+
+            if ($perusahaan && $perusahaan->status === 'pending') {
+                Auth::logout();
+                return back()->withErrors([
+                    'email' => 'Akun Anda sedang menunggu persetujuan admin'
+                ])->withInput();
+            }
+
+            if ($perusahaan && $perusahaan->status === 'rejected') {
+                Auth::logout();
+                return back()->withErrors([
+                    'email' => 'Akun Anda ditolak oleh admin. Silakan hubungi admin untuk informasi lebih lanjut'
+                ])->withInput();
+            }
+
+            return redirect()->route('perusahaan.dashboard');
         }
 
-        if ($user->role === 'perusahaan') {
-            return redirect()->route('perusahaan.dashboard');
+        if ($user->role === 'admin') {
+            return redirect()->route('admin.dashboard');
         }
 
         return redirect('/');
@@ -56,7 +72,7 @@ class AuthController extends Controller
     {
         $request->validate([
             'nama_lengkap' => 'required|string|max:255',
-            'nisn' => 'unique:pelamar,nisn',
+            'nisn' => 'required|string|unique:pelamar,nisn',
             'tahun_lulus' => 'required|integer|min:2000|max:' . (date('Y') + 1),
             'telepon' => 'required|string|max:20',
             'email' => 'required|email|unique:users,email',
@@ -64,6 +80,7 @@ class AuthController extends Controller
             'password' => 'required|min:8|confirmed',
         ], [
             'nama_lengkap.required' => 'Nama lengkap wajib diisi',
+            'nisn.required' => 'NISN wajib diisi',
             'nisn.unique' => 'NISN sudah terdaftar',
             'tahun_lulus.required' => 'Tahun lulus wajib diisi',
             'tahun_lulus.min' => 'Tahun lulus tidak valid',
@@ -97,7 +114,7 @@ class AuthController extends Controller
         PelamarModel::create([
             'user_id' => $user->id,
             'nama_lengkap' => $request->nama_lengkap,
-            // 'nisn' => $request->nisn,
+            'nisn' => $request->nisn,
             'tahun_lulus' => $request->tahun_lulus,
             'no_telp' => $request->telepon,
             'cv' => $cvPath,
@@ -147,7 +164,7 @@ class AuthController extends Controller
             'role' => 'perusahaan',
         ]);
 
-        // 2. Simpan data perusahaan
+        // 2. Simpan data perusahaan dengan status pending
         PerusahaanModel::create([
             'user_id' => $user->id,
             'nama_perusahaan' => $request->nama_perusahaan,
@@ -155,9 +172,10 @@ class AuthController extends Controller
             'alamat' => $request->alamat,
             'bidang_usaha' => $request->bidang_usaha,
             'logo' => $logoPath,
+            'status' => 'pending', // default pending
         ]);
 
-        return redirect('/login')->with('success', 'Registrasi berhasil! Silahkan login.');
+        return redirect('/login')->with('success', 'Registrasi berhasil! Akun Anda akan segera diverifikasi oleh admin.');
     }
 
     function logout()

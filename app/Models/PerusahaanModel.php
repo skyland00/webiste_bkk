@@ -15,8 +15,14 @@ class PerusahaanModel extends Model
         'kontak',
         'alamat',
         'bidang_usaha',
-        'logo'
+        'logo',
+        'status',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     use HasFactory;
 }

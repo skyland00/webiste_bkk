@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title') - BKK</title>
 
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <style>
@@ -38,9 +38,9 @@
 
         <div class="flex-1 flex flex-col overflow-hidden">
 
-            @include('admin.partials.header')
+            {{-- @include('admin.partials.header') --}}
 
-            <main class="flex-1 overflow-y-auto p-6 scrollbar-thin">
+            <main class="flex-1 overflow-y-auto p-10 scrollbar-thin">
                 @yield('content')
             </main>
 
