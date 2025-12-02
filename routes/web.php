@@ -29,14 +29,10 @@ Route::middleware(['guest'])->group(function () {
 });
 
 
-// Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
 // Role: Admin
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
     Route::get('/admin/perusahaan', [AdminController::class, 'perusahaan'])->name('admin.perusahaan');
-    Route::get('/admin/perusahaan/pending', [AdminController::class, 'perusahaanPending'])->name('admin.perusahaan.pending');
-    Route::get('/admin/perusahaan/rejected', [AdminController::class, 'perusahaanRejected'])->name('admin.perusahaan.rejected');
     Route::post('/admin/perusahaan/{id}/approve', [AdminController::class, 'approvePerusahaan'])->name('admin.perusahaan.approve');
     Route::post('/admin/perusahaan/{id}/reject', [AdminController::class, 'rejectPerusahaan'])->name('admin.perusahaan.reject');
 });

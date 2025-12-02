@@ -35,25 +35,7 @@
                         <a href="{{ route('admin.perusahaan') }}"
                             class="flex items-center gap-3 px-4 py-3 text-slate-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition">
                             <i class="ri-building-2-line text-xl"></i>
-                            <span>Semua Perusahaan</span>
-                        </a>
-                        <a href="{{ route('admin.perusahaan.pending') }}"
-                            class="flex items-center gap-3 px-4 py-3 text-slate-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition">
-                            <i class="ri-building-line text-xl"></i>
-                            <span>Perusahaan Pending</span>
-                            @if ($pendingCount = \App\Models\PerusahaanModel::where('status', 'pending')->count())
-                                <span
-                                    class="ml-auto bg-red-500 text-white text-xs px-2 py-1 rounded-full">{{ $pendingCount }}</span>
-                            @endif
-                        </a>
-                        <a href="{{ route('admin.perusahaan.rejected') }}"
-                            class="flex items-center gap-3 px-4 py-3 text-slate-700 hover:bg-red-50 hover:text-red-600 rounded-lg transition">
-                            <i class="ri-close-circle-line text-xl"></i>
-                            <span>Perusahaan Ditolak</span>
-                            @if ($rejectedCount = \App\Models\PerusahaanModel::where('status', 'rejected')->count())
-                                <span
-                                    class="ml-auto bg-red-500 text-white text-xs px-2 py-1 rounded-full">{{ $rejectedCount }}</span>
-                            @endif
+                            <span>Perusahaan</span>
                         </a>
 
                         <div class="pt-4 mt-4 border-t border-slate-200">
