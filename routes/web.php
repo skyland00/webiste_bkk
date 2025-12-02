@@ -45,6 +45,6 @@ Route::middleware(['auth', 'role:perusahaan'])->group(function () {
 // Logout
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
 
-// Route::get('/logout', [AuthController::class, 'logout'])
-//     ->name('logout')
-//     ->middleware('auth');
+Route::get('/logout', [AuthController::class, 'logout'])
+    ->name('logout')
+    ->middleware('auth');

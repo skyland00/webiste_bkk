@@ -4,10 +4,19 @@
         {{-- Logo --}}
         <div class="h-24 px-6 flex items-center border-b border-slate-200">
             <div class="flex items-center gap-3">
-                <img src="{{ asset('images/bkk.jpg') }}" class="w-11 h-11 rounded-lg" alt="Logo">
+                @php
+                    $perusahaan = \App\Models\PerusahaanModel::where('user_id', Auth::id())->first();
+                @endphp
+
+                <img src="{{ $perusahaan && $perusahaan->logo
+    ? asset('storage/' . $perusahaan->logo)
+    : asset('images/bkk.jpg') }}" class="w-11 h-11 rounded-lg object-cover" alt="Logo">
+
                 <div>
-                    <h1 class="text-2xl font-semibold text-slate-900">BKK</h1>
-                    <p class="text-xs text-slate-500">SMK Negeri 1 Purwosari</p>
+                    <h1 class="text-2xl font-semibold text-slate-900">
+                        {{ $perusahaan->nama_perusahaan ?? 'Perusahaan' }}
+                    </h1>
+                    <p class="text-xs text-slate-500">BKK SMKN 1 Purwosari</p>
                 </div>
             </div>
         </div>
@@ -65,8 +74,11 @@
                 <summary
                     class="flex items-center gap-3 px-3 py-2.5 hover:bg-slate-100 rounded-lg cursor-pointer list-none">
 
-                    <img src="https://ui-avatars.com/api/?name=PT+Nusantara+Tech&background=3b82f6&color=fff"
-                        class="w-9 h-9 rounded-full">
+                    <img src="{{ $perusahaan && $perusahaan->logo
+    ? asset('storage/' . $perusahaan->logo)
+    : 'https://ui-avatars.com/api/?name=' . urlencode($perusahaan->nama_perusahaan ?? 'Perusahaan') . '&background=3b82f6&color=fff' }}"
+                        class="w-9 h-9 rounded-full object-cover">
+
 
                     <div class="flex-1 min-w-0">
                         <p class="text-sm font-medium text-slate-900 truncate">PT Nusantara Tech</p>
@@ -98,3 +110,15 @@
 
     </div>
 </aside>
+
+<script>
+    document.addEventListener('click', function (e) {
+        const details = document.querySelector('details');
+        if (!details) return;
+
+        // kalau klik di luar summary → tutup dropdown
+        if (!details.contains(e.target)) {
+            details.removeAttribute('open');
+        }
+    });
+</script>
