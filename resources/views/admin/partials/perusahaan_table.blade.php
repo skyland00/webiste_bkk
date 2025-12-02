@@ -25,7 +25,8 @@
                             <div class="flex items-center gap-3">
                                 @if ($p->logo)
                                     <img src="{{ asset('storage/' . $p->logo) }}"
-                                        class="w-10 h-10 rounded-lg border object-cover" alt="{{ $p->nama_perusahaan }}" />
+                                        class="w-10 h-10 rounded-lg border object-cover"
+                                        alt="{{ $p->nama_perusahaan }}" />
                                 @else
                                     <div
                                         class="w-10 h-10 flex items-center justify-center bg-slate-200 rounded-lg text-slate-500">
@@ -61,24 +62,29 @@
                         <td class="px-6 py-4">
                             <div class="flex items-center justify-end gap-2">
                                 @if ($p->status !== 'approved')
-                                    <form action="{{ route('admin.perusahaan.approve', $p->id) }}" method="POST">
+                                    <form action="{{ route('admin.perusahaan.approve', $p->id) }}" method="POST"
+                                        class="form-approve">
                                         @csrf
-                                        <button class="p-2 text-emerald-600 hover:bg-emerald-50 rounded-lg transition"
-                                            onclick="return confirm('Setujui perusahaan ini?')" title="Setujui">
-                                            <i class="ri-check-line text-lg"></i>
+                                        <button type="submit"
+                                            class="btn-approve p-2 text-emerald-600 hover:bg-emerald-50 rounded-lg transition cursor-pointer"
+                                            title="Setujui">
+                                            <i class="ri-check-line text-lg "></i>
                                         </button>
                                     </form>
                                 @endif
 
                                 @if ($p->status !== 'rejected')
-                                    <form action="{{ route('admin.perusahaan.reject', $p->id) }}" method="POST">
+                                    <form action="{{ route('admin.perusahaan.reject', $p->id) }}" method="POST"
+                                        class="form-reject">
                                         @csrf
-                                        <button class="p-2 text-red-600 hover:bg-red-50 rounded-lg transition"
-                                            onclick="return confirm('Tolak perusahaan ini?')" title="Tolak">
+                                        <button type="submit"
+                                            class="btn-reject p-2 text-red-600 hover:bg-red-50 rounded-lg transition cursor-pointer"
+                                            title="Tolak">
                                             <i class="ri-close-line text-lg"></i>
                                         </button>
                                     </form>
                                 @endif
+
                             </div>
                         </td>
                     </tr>
@@ -87,3 +93,52 @@
         </table>
     </div>
 @endif
+<script>
+    // Approve
+    document.querySelectorAll('.form-approve').forEach(form => {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            Swal.fire({
+                title: "Setujui perusahaan ini?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#10b981",
+                cancelButtonColor: "#6b7280",
+                confirmButtonText: "Ya, setujui",
+
+                showClass: {
+                    popup: 'swal-zoom-in'
+                },
+                hideClass: {
+                    popup: 'swal-zoom-out'
+                }
+            }).then(result => {
+                if (result.isConfirmed) form.submit();
+            });
+        });
+    });
+
+    // Reject
+    document.querySelectorAll('.form-reject').forEach(form => {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            Swal.fire({
+                title: "Tolak perusahaan ini?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#ef4444",
+                cancelButtonColor: "#6b7280",
+                confirmButtonText: "Ya, tolak",
+
+                showClass: {
+                    popup: 'swal-zoom-in'
+                },
+                hideClass: {
+                    popup: 'swal-zoom-out'
+                }
+            }).then(result => {
+                if (result.isConfirmed) form.submit();
+            });
+        });
+    });
+</script>

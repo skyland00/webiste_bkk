@@ -116,7 +116,6 @@
         const details = document.querySelector('details');
         if (!details) return;
 
-        // kalau klik di luar summary → tutup dropdown
         if (!details.contains(e.target)) {
             details.removeAttribute('open');
         }
