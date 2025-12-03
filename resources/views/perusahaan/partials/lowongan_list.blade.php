@@ -3,19 +3,19 @@
         <table class="w-full text-sm">
             <thead class="bg-slate-100 text-slate-700 text-xs uppercase border-b border-slate-200">
                 <tr>
-                    <th class="py-3 px-6 text-left font-semibold">No</th>
-                    <th class="py-3 px-6 text-left font-semibold">Lowongan</th>
-                    <th class="py-3 px-6 text-left font-semibold">Lokasi</th>
-                    <th class="py-3 px-6 text-left font-semibold">Tipe</th>
-                    <th class="py-3 px-6 text-left font-semibold">Kuota</th>
-                    <th class="py-3 px-6 text-left font-semibold">Gaji</th>
-                    <th class="py-3 px-6 text-left font-semibold">Status</th>
-                    <th class="py-3 px-6 text-left font-semibold">Periode</th>
-                    <th class="py-3 px-6 text-right font-semibold">Aksi</th>
+                    <th class="py-3 px-6 text-center font-semibold">No</th>
+                    <th class="py-3 px-6 text-center font-semibold">Lowongan</th>
+                    <th class="py-3 px-6 text-center font-semibold">Lokasi</th>
+                    <th class="py-3 px-6 text-center font-semibold">Tipe</th>
+                    <th class="py-3 px-6 text-center font-semibold">Kuota</th>
+                    <th class="py-3 px-6 text-center font-semibold">Gaji</th>
+                    <th class="py-3 px-6 text-center font-semibold">Status</th>
+                    <th class="py-3 px-6 text-center font-semibold">Periode</th>
+                    <th class="py-3 px-6 text-center font-semibold">Aksi</th>
                 </tr>
             </thead>
 
-            <tbody class="divide-y divide-slate-200">
+            <tbody class="divide-y divide-slate-200 text-center">
                 @foreach ($lowongan as $index => $item)
                     <tr class="hover:bg-slate-50 transition">
                         <td class="px-6 py-4 text-slate-600">
@@ -67,14 +67,11 @@
 
                         <td class="px-6 py-4">
                             @if ($item->status === 'aktif')
-                                <span
-                                    class="px-3 py-1 text-xs font-medium bg-green-100 text-green-700 rounded-full">Aktif</span>
+                                <span class="px-3 py-1 text-xs font-medium bg-green-100 text-green-700 rounded-full">Aktif</span>
                             @elseif($item->status === 'nonaktif')
-                                <span
-                                    class="px-3 py-1 text-xs font-medium bg-slate-100 text-slate-700 rounded-full">Nonaktif</span>
+                                <span class="px-3 py-1 text-xs font-medium bg-slate-100 text-slate-700 rounded-full">Nonaktif</span>
                             @else
-                                <span
-                                    class="px-3 py-1 text-xs font-medium bg-red-100 text-red-700 rounded-full">Ditutup</span>
+                                <span class="px-3 py-1 text-xs font-medium bg-red-100 text-red-700 rounded-full">Ditutup</span>
                             @endif
                         </td>
 
@@ -88,8 +85,8 @@
                         <td class="px-6 py-4">
                             <div class="flex items-center justify-end gap-2">
                                 {{-- Toggle Status --}}
-                                <form action="{{ route('perusahaan.lowongan.toggle-status', $item->id) }}"
-                                    method="POST" class="form-toggle">
+                                <form action="{{ route('perusahaan.lowongan.toggle-status', $item->id) }}" method="POST"
+                                    class="form-toggle">
                                     @csrf
                                     <button type="submit"
                                         class="btn-toggle p-2 {{ $item->status === 'aktif' ? 'text-slate-600 hover:bg-slate-50' : 'text-green-600 hover:bg-green-50' }} rounded-lg transition cursor-pointer"
@@ -103,6 +100,12 @@
                                 <a href="{{ route('perusahaan.lowongan.edit', $item->id) }}"
                                     class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition" title="Edit">
                                     <i class="ri-edit-line text-lg"></i>
+                                </a>
+
+                                {{-- Detail --}}
+                                <a href="{{ route('perusahaan.lowongan.show', $item->id) }}"
+                                    class="p-2 text-purple-600 hover:bg-purple-50 rounded-lg transition" title="Detail">
+                                    <i class="ri-eye-line text-lg"></i>
                                 </a>
 
                                 {{-- Delete --}}
@@ -128,7 +131,7 @@
 <script>
     // Toggle Status
     document.querySelectorAll('.form-toggle').forEach(form => {
-        form.addEventListener('submit', function(e) {
+        form.addEventListener('submit', function (e) {
             e.preventDefault();
             const button = this.querySelector('.btn-toggle');
             const isActive = button.classList.contains('text-slate-600');
@@ -155,7 +158,7 @@
 
     // Delete
     document.querySelectorAll('.form-delete').forEach(form => {
-        form.addEventListener('submit', function(e) {
+        form.addEventListener('submit', function (e) {
             e.preventDefault();
             Swal.fire({
                 title: "Hapus lowongan ini?",

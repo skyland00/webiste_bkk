@@ -1,6 +1,6 @@
 @extends('admin.layout')
 
-@section('title', 'Semua Perusahaan')
+@section('title', 'Perusahaan')
 
 @section('content')
     <div class="space-y-8" x-data="perusahaanData()" x-init="init()">

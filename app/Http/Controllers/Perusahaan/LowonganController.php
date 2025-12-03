@@ -38,6 +38,11 @@ class LowonganController extends Controller
             $query->where('status', $statusFilter);
         }
 
+        // Pastikan setiap lowongan hanya muncul sekali
+        $lowongan = $query->orderBy('created_at', 'desc')
+            ->distinct('id') // <--- tambah di sini
+            ->paginate($perPage);
+
         $lowongan = $query->orderBy('created_at', 'desc')->paginate($perPage);
 
         // Hitung statistik
@@ -129,7 +134,7 @@ class LowonganController extends Controller
             'status' => 'aktif',
         ]);
 
-        return redirect()->route('perusahaan.lowongan.index')
+        return redirect()->route('perusahaan.lowongan.lowongan')
             ->with('success', 'Lowongan berhasil dibuat!');
     }
 
@@ -183,7 +188,7 @@ class LowonganController extends Controller
 
         $lowongan->update($validated);
 
-        return redirect()->route('perusahaan.lowongan.index')
+        return redirect()->route('perusahaan.lowongan.lowongan')
             ->with('success', 'Lowongan berhasil diupdate!');
     }
 
@@ -198,7 +203,7 @@ class LowonganController extends Controller
 
         $lowongan->delete();
 
-        return redirect()->route('perusahaan.lowongan.index')
+        return redirect()->route('perusahaan.lowongan.lowongan')
             ->with('success', 'Lowongan berhasil dihapus!');
     }
 
@@ -215,7 +220,14 @@ class LowonganController extends Controller
         $lowongan->status = ($lowongan->status === 'aktif') ? 'nonaktif' : 'aktif';
         $lowongan->save();
 
-        return redirect()->route('perusahaan.lowongan.index')
+        return redirect()->route('perusahaan.lowongan.lowongan')
             ->with('success', 'Status lowongan berhasil diubah!');
     }
+
+    public function show($id)
+    {
+        $lowongan = LowonganModel::findOrFail($id);
+        return view('perusahaan.lowongan.show', compact('lowongan'));
+    }
+
 }

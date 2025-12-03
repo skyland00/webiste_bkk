@@ -27,6 +27,7 @@ return new class extends Migration
             $table->date('tanggal_tutup');
             $table->enum('status', ['aktif', 'nonaktif', 'ditutup'])->default('aktif');
             $table->timestamps();
+
         });
     }
 

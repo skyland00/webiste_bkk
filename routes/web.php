@@ -36,6 +36,11 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/perusahaan', [AdminController::class, 'perusahaan'])->name('admin.perusahaan');
     Route::post('/admin/perusahaan/{id}/approve', [AdminController::class, 'approvePerusahaan'])->name('admin.perusahaan.approve');
     Route::post('/admin/perusahaan/{id}/reject', [AdminController::class, 'rejectPerusahaan'])->name('admin.perusahaan.reject');
+
+    // === Tambahkan ini untuk halaman lowongan admin ===
+    Route::get('/admin/lowongan', [\App\Http\Controllers\Admin\LowonganController::class, 'index'])->name('admin.lowongan');
+    Route::get('/admin/lowongan/{id}', [\App\Http\Controllers\Admin\LowonganController::class, 'show'])->name('admin.lowongan.show');
+    Route::delete('/admin/lowongan/{id}', [\App\Http\Controllers\Admin\LowonganController::class, 'destroy'])->name('admin.lowongan.destroy');
 });
 
 // Role: Perusahaan
@@ -50,6 +55,7 @@ Route::middleware(['auth', 'role:perusahaan'])->group(function () {
     Route::put('/perusahaan/lowongan/{id}', [LowonganController::class, 'update'])->name('perusahaan.lowongan.update');
     Route::delete('/perusahaan/lowongan/{id}', [LowonganController::class, 'destroy'])->name('perusahaan.lowongan.destroy');
     Route::post('/perusahaan/lowongan/{id}/toggle-status', [LowonganController::class, 'toggleStatus'])->name('perusahaan.lowongan.toggle-status');
+    Route::get('/lowongan/{id}', [LowonganController::class, 'show'])->name('perusahaan.lowongan.show');
 
     Route::get('/lowongan/{lowongan}/applicants', [LowonganController::class, 'applicants'])
     ->name('perusahaan.lowongan.applicants');

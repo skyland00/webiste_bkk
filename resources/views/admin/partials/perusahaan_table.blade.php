@@ -3,18 +3,18 @@
         <table class="w-full text-sm">
             <thead class="bg-slate-100 text-slate-700 text-xs uppercase border-b border-slate-200">
                 <tr>
-                    <th class="py-3 px-6 text-left font-semibold">No</th>
-                    <th class="py-3 px-6 text-left font-semibold">Perusahaan</th>
-                    <th class="py-3 px-6 text-left font-semibold">Email</th>
-                    <th class="py-3 px-6 text-left font-semibold">Kontak</th>
-                    <th class="py-3 px-6 text-left font-semibold">Bidang</th>
-                    <th class="py-3 px-6 text-left font-semibold">Status</th>
-                    <th class="py-3 px-6 text-left font-semibold">Tanggal</th>
-                    <th class="py-3 px-6 text-right font-semibold">Aksi</th>
+                    <th class="py-3 px-6 text-center font-semibold">No</th>
+                    <th class="py-3 px-6 text-center font-semibold">Perusahaan</th>
+                    <th class="py-3 px-6 text-cemter font-semibold">Email</th>
+                    <th class="py-3 px-6 text-center font-semibold">Kontak</th>
+                    <th class="py-3 px-6 text-center font-semibold">Bidang</th>
+                    <th class="py-3 px-6 text-center font-semibold">Status</th>
+                    <th class="py-3 px-6 text-center font-semibold">Tanggal</th>
+                    <th class="py-3 px-6 text-center font-semibold">Aksi</th>
                 </tr>
             </thead>
 
-            <tbody class="divide-y divide-slate-200">
+            <tbody class="divide-y divide-slate-200 text-center">
                 @foreach ($perusahaan as $index => $p)
                     <tr class="hover:bg-slate-50 transition">
                         <td class="px-6 py-4 text-slate-600">

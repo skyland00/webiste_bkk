@@ -23,8 +23,8 @@
                     <i class="ri-dashboard-line text-lg"></i>
                     <span>Dashboard</span>
                 </a>
-                <a href="#"
-                    class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium {{ request()->routeIs('admin.lowongan*') ? 'text-blue-600 bg-blue-50' : 'text-slate-700 hover:bg-slate-100' }} rounded-lg transition-colors">
+                <a href="{{ route('admin.lowongan') }}"
+                    class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium {{ request()->routeIs('admin.lowongan') ? 'text-blue-600 bg-blue-50' : 'text-slate-700 hover:bg-slate-100' }} rounded-lg transition-colors">
                     <i class="ri-briefcase-line text-lg"></i>
                     <span>Lowongan Kerja</span>
                 </a>

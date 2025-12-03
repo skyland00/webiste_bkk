@@ -24,14 +24,17 @@
         <nav class="flex-1 p-4 overflow-y-auto scrollbar-thin">
             <div class="space-y-1">
 
-                <a href="#"
-                    class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-blue-600 bg-blue-50 rounded-lg">
+                <a href="{{ route('perusahaan.dashboard') }}"
+                    class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium rounded-lg
+                    {{ Route::is('perusahaan.dashboard') ? 'text-blue-600 bg-blue-50' : 'text-slate-700 hover:bg-slate-100' }}">
                     <i class="ri-dashboard-line text-lg"></i>
                     <span>Dashboard</span>
                 </a>
 
+                {{-- Lowongan Saya --}}
                 <a href="{{ route('perusahaan.lowongan.lowongan') }}"
-                    class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 rounded-lg">
+                    class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium rounded-lg
+                    {{ Route::is('perusahaan.lowongan.*') ? 'text-blue-600 bg-blue-50' : 'text-slate-700 hover:bg-slate-100' }}">
                     <i class="ri-briefcase-line text-lg"></i>
                     <span>Lowongan Saya</span>
                 </a>
@@ -40,12 +43,6 @@
                     class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 rounded-lg">
                     <i class="ri-file-user-line text-lg"></i>
                     <span>Pelamar Masuk</span>
-                </a>
-
-                <a href="#"
-                    class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 rounded-lg">
-                    <i class="ri-bar-chart-grouped-line text-lg"></i>
-                    <span>Statistik Lamaran</span>
                 </a>
 
                 <div class="pt-4 mt-4 border-t border-slate-200">
@@ -74,11 +71,10 @@
                     class="flex items-center gap-3 px-3 py-2.5 hover:bg-slate-100 rounded-lg cursor-pointer list-none">
 
                     <img src="{{ $perusahaan && $perusahaan->logo
-                        ? asset('storage/' . $perusahaan->logo)
-                        : 'https://ui-avatars.com/api/?name=' .
-                            urlencode($perusahaan->nama_perusahaan ?? 'Perusahaan') .
-                            '&background=3b82f6&color=fff' }}"
-                        class="w-9 h-9 rounded-full object-cover">
+    ? asset('storage/' . $perusahaan->logo)
+    : 'https://ui-avatars.com/api/?name=' .
+    urlencode($perusahaan->nama_perusahaan ?? 'Perusahaan') .
+    '&background=3b82f6&color=fff' }}" class="w-9 h-9 rounded-full object-cover">
 
 
                     <div class="flex-1 min-w-0">
@@ -113,7 +109,7 @@
 </aside>
 
 <script>
-    document.addEventListener('click', function(e) {
+    document.addEventListener('click', function (e) {
         const details = document.querySelector('details');
         if (!details) return;
 

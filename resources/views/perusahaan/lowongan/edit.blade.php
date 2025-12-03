@@ -1,7 +1,7 @@
 @extends('perusahaan.layout')
 
 @section('content')
-    <div class="max-w-4xl mx-auto">
+    <div class="p-6 bg-white shadow rounded-lg">
 
         {{-- Header --}}
         <div class="mb-6">
@@ -192,7 +192,7 @@
                         <i class="ri-save-line mr-2"></i>
                         Update Lowongan
                     </button>
-                    <a href="{{ route('perusahaan.lowongan.index') }}"
+                    <a href="{{ route('perusahaan.lowongan.lowongan') }}"
                         class="px-6 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium rounded-lg transition-colors">
                         Batal
                     </a>
