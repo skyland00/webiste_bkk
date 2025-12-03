@@ -46,6 +46,7 @@ class LowonganController extends Controller
         $lowongan = $query->orderBy('created_at', 'desc')->paginate($perPage);
 
         // Hitung statistik
+        $totalCount = LowonganModel::where('perusahaan_id', $perusahaan->id)->count();
         $aktifCount = LowonganModel::where('perusahaan_id', $perusahaan->id)
             ->where('status', 'aktif')->count();
         $nonaktifCount = LowonganModel::where('perusahaan_id', $perusahaan->id)
@@ -73,6 +74,7 @@ class LowonganController extends Controller
             'search',
             'perPage',
             'statusFilter',
+            'totalCount',  // tambah ini
             'aktifCount',
             'nonaktifCount',
             'ditutupCount'

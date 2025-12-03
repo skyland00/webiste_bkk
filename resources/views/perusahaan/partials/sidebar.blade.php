@@ -55,7 +55,7 @@
                     </a>
 
                     <a href="#"
-                        class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-sate-100 rounded-lg">
+                        class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 rounded-lg">
                         <i class="ri-settings-3-line text-lg"></i>
                         <span>Pengaturan Akun</span>
                     </a>
@@ -78,8 +78,8 @@
 
 
                     <div class="flex-1 min-w-0">
-                        <p class="text-sm font-medium text-slate-900 truncate">PT Nusantara Tech</p>
-                        <p class="text-xs text-slate-500 truncate">contact@nusantaratech.com</p>
+                        <p class="text-sm font-medium text-slate-900 truncate">{{ $perusahaan->nama_perusahaan ?? 'Perusahaan' }}</p>
+                        <p class="text-xs text-slate-500 truncate">{{ Auth::user()->email }}</p>
                     </div>
 
                     <i class="ri-more-2-fill text-slate-400 transition-transform"></i>
@@ -90,8 +90,8 @@
                     class="absolute bottom-full left-2 right-2 mb-2 bg-white border border-slate-200 shadow-lg rounded-lg py-1 z-50 hidden group-open:block">
 
                     <div class="px-4 py-3 border-b border-slate-100">
-                        <p class="text-sm font-medium text-slate-900">PT Nusantara Tech</p>
-                        <p class="text-xs text-slate-500 mt-0.5">contact@nusantaratech.com</p>
+                        <p class="text-sm font-medium text-slate-900">{{ $perusahaan->nama_perusahaan ?? 'Perusahaan' }}</p>
+                        <p class="text-xs text-slate-500 mt-0.5">{{ Auth::user()->email }}</p>
                     </div>
 
                     <form action="{{ route('logout') }}" method="POST">

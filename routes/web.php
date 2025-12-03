@@ -5,6 +5,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Perusahaan\LowonganController;
 use App\Http\Controllers\Perusahaan\PerusahaanController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Publicc\HomeController;
+use App\Http\Controllers\Publicc\PublicLowonganController;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,3 +69,10 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middl
 Route::get('/logout', [AuthController::class, 'logout'])
     ->name('logout')
     ->middleware('auth');
+
+
+Route::get('/', [HomeController::class, 'index'])->name('publicc.home');
+
+Route::get('/lowongan', [PublicLowonganController::class, 'lowongan'])->name('publicc.lowongan');
+Route::get('/lowongan/{id}', [PublicLowonganController::class, 'detailLowongan'])->name('publicc.lowongan.detail');
+
