@@ -8,9 +8,8 @@
                     $perusahaan = \App\Models\PerusahaanModel::where('user_id', Auth::id())->first();
                 @endphp
 
-                <img src="{{ $perusahaan && $perusahaan->logo
-    ? asset('storage/' . $perusahaan->logo)
-    : asset('images/bkk.jpg') }}" class="w-11 h-11 rounded-lg object-cover" alt="Logo">
+                <img src="{{ $perusahaan && $perusahaan->logo ? asset('storage/' . $perusahaan->logo) : asset('images/bkk.jpg') }}"
+                    class="w-11 h-11 rounded-lg object-cover" alt="Logo">
 
                 <div>
                     <h1 class="text-2xl font-semibold text-slate-900">
@@ -31,7 +30,7 @@
                     <span>Dashboard</span>
                 </a>
 
-                <a href="#"
+                <a href="{{ route('perusahaan.lowongan.lowongan') }}"
                     class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 rounded-lg">
                     <i class="ri-briefcase-line text-lg"></i>
                     <span>Lowongan Saya</span>
@@ -75,8 +74,10 @@
                     class="flex items-center gap-3 px-3 py-2.5 hover:bg-slate-100 rounded-lg cursor-pointer list-none">
 
                     <img src="{{ $perusahaan && $perusahaan->logo
-    ? asset('storage/' . $perusahaan->logo)
-    : 'https://ui-avatars.com/api/?name=' . urlencode($perusahaan->nama_perusahaan ?? 'Perusahaan') . '&background=3b82f6&color=fff' }}"
+                        ? asset('storage/' . $perusahaan->logo)
+                        : 'https://ui-avatars.com/api/?name=' .
+                            urlencode($perusahaan->nama_perusahaan ?? 'Perusahaan') .
+                            '&background=3b82f6&color=fff' }}"
                         class="w-9 h-9 rounded-full object-cover">
 
 
@@ -112,7 +113,7 @@
 </aside>
 
 <script>
-    document.addEventListener('click', function (e) {
+    document.addEventListener('click', function(e) {
         const details = document.querySelector('details');
         if (!details) return;
 

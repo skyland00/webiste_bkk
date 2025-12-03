@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class PerusahaanModel extends Model
 {
+    use HasFactory;
+
     protected $table = 'perusahaan';
 
     protected $fillable = [
@@ -24,5 +26,8 @@ class PerusahaanModel extends Model
         return $this->belongsTo(User::class);
     }
 
-    use HasFactory;
+    public function lowongan()
+    {
+        return $this->hasMany(LowonganModel::class, 'perusahaan_id');
+    }
 }
