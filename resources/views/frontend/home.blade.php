@@ -6,149 +6,133 @@
 
 @section('content')
 
-<!-- Hero Section - Glass Morphism Style -->
-<section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-[#0f1b24] via-[#122431] to-[#1a3345]">
+<!-- Hero Section - Modern Minimalist -->
+<section class="relative overflow-hidden pt-32 pb-32">
+    <!-- Background Gradient -->
+    <div class="absolute inset-0 bg-gradient-to-br from-[#122431] via-[#1a3345] to-[#0f1b24] opacity-95"></div>
 
-    <!-- Animated Background -->
-    <div class="absolute inset-0">
-        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-[#F8BE09]/30 rounded-full filter blur-[128px] animate-pulse"></div>
-        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#4B5057]/20 rounded-full filter blur-[128px] animate-pulse animation-delay-2000"></div>
-    </div>
+    <!-- Animated Circles -->
+    <div class="absolute top-20 right-10 w-72 h-72 bg-[#F8BE09] rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob"></div>
+    <div class="absolute top-40 left-10 w-72 h-72 bg-[#F8BE09] rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob animation-delay-2000"></div>
+    <div class="absolute bottom-20 left-1/2 w-72 h-72 bg-[#4B5057] rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob animation-delay-4000"></div>
 
-    <!-- Grid Pattern Overlay -->
-    <div class="absolute inset-0 bg-[linear-gradient(rgba(248,190,9,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(248,190,9,0.03)_1px,transparent_1px)] bg-[size:64px_64px]"></div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
 
-    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div class="text-center space-y-8">
-
-            <!-- Badge -->
-            <div class="inline-flex items-center gap-3 px-6 py-3 bg-white/10 backdrop-blur-xl rounded-full border border-white/20 shadow-2xl">
-                <span class="relative flex h-3 w-3">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#F8BE09] opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-3 w-3 bg-[#F8BE09]"></span>
-                </span>
-                <span class="text-white font-semibold text-sm tracking-wider">BKK SMKN 1 PURWOSARI</span>
-            </div>
-
-            <!-- Main Heading -->
-            <h1 class="text-6xl md:text-7xl lg:text-8xl font-extrabold text-white leading-tight">
-                Gerbang Menuju
-                <span class="block mt-2 bg-gradient-to-r from-[#F8BE09] via-[#ffd54f] to-[#F8BE09] bg-clip-text text-transparent animate-gradient">
-                    Karir Sukses
-                </span>
-            </h1>
-
-            <p class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-                Platform inovatif yang menghubungkan talenta terbaik dengan peluang karir impian di perusahaan terkemuka
-            </p>
-
-            <!-- CTA Buttons -->
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-5 pt-6">
-                <a href="#lowongan-section" class="group px-10 py-5 bg-[#F8BE09] text-[#122431] rounded-2xl font-bold text-lg shadow-2xl hover:shadow-[#F8BE09]/50 transition-all duration-300 hover:scale-105 flex items-center gap-3">
-                    Jelajahi Lowongan
-                    <svg class="w-5 h-5 group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-                    </svg>
-                </a>
-                <a href="#tentang" class="px-10 py-5 bg-white/10 backdrop-blur-xl text-white rounded-2xl font-bold text-lg border-2 border-white/30 hover:bg-white/20 transition-all duration-300 shadow-xl">
-                    Pelajari Lebih Lanjut
-                </a>
-            </div>
-
-            <!-- Stats Cards -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-16 max-w-5xl mx-auto">
-                <div class="bg-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/20 shadow-2xl hover:bg-white/15 transition-all duration-300">
-                    <div class="text-5xl font-black text-[#F8BE09] mb-2">{{ $totalLowongan }}+</div>
-                    <div class="text-white font-semibold text-lg">Lowongan Aktif</div>
-                    <div class="text-gray-400 text-sm mt-1">Siap untuk dilamar</div>
+            <!-- Text Content -->
+            <div class="text-white space-y-8">
+                <div class="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20">
+                    <span class="relative flex h-2 w-2">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#F8BE09] opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-[#F8BE09]"></span>
+                    </span>
+                    <span class="text-sm font-medium">Platform BKK Online</span>
                 </div>
-                <div class="bg-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/20 shadow-2xl hover:bg-white/15 transition-all duration-300">
-                    <div class="text-5xl font-black text-[#F8BE09] mb-2">{{ $totalPerusahaan }}+</div>
-                    <div class="text-white font-semibold text-lg">Perusahaan</div>
-                    <div class="text-gray-400 text-sm mt-1">Partner terpercaya</div>
+
+                <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
+                    Wujudkan
+                    <span class="block bg-gradient-to-r from-[#F8BE09] to-[#ffd54f] bg-clip-text text-transparent">
+                        Karir Impian
+                    </span>
+                    Bersama Kami
+                </h1>
+
+                <p class="text-xl text-[#F5F6F5] leading-relaxed max-w-xl">
+                    Jembatan antara talenta muda dan peluang karir terbaik. Mulai perjalanan profesionalmu dari sini.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#lowongan-section" class="group relative inline-flex items-center justify-center px-8 py-4 bg-[#F8BE09] text-[#122431] rounded-2xl font-semibold overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+                        <span class="relative z-10 flex items-center gap-2">
+                            Jelajahi Lowongan
+                            <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </span>
+                    </a>
+                    <a href="#tentang" class="group inline-flex items-center justify-center px-8 py-4 bg-white/10 backdrop-blur-sm text-white rounded-2xl font-semibold border-2 border-white/20 hover:bg-white/20 transition-all duration-300">
+                        Pelajari Lebih Lanjut
+                    </a>
                 </div>
-                <div class="bg-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/20 shadow-2xl hover:bg-white/15 transition-all duration-300">
-                    <div class="text-5xl font-black text-[#F8BE09] mb-2">{{ $totalPelamar }}+</div>
-                    <div class="text-white font-semibold text-lg">Kisah Sukses</div>
-                    <div class="text-gray-400 text-sm mt-1">Alumni terserap</div>
+
+                <!-- Mini Stats -->
+                <div class="grid grid-cols-3 gap-6 pt-8">
+                    <div class="text-center">
+                        <div class="text-3xl font-bold">{{ $totalLowongan }}+</div>
+                        <div class="text-sm text-[#F5F6F5] mt-1">Lowongan</div>
+                    </div>
+                    <div class="text-center border-x border-white/20">
+                        <div class="text-3xl font-bold">{{ $totalPerusahaan }}+</div>
+                        <div class="text-sm text-[#F5F6F5] mt-1">Perusahaan</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold">{{ $totalPelamar }}+</div>
+                        <div class="text-sm text-[#F5F6F5] mt-1">Alumni</div>
+                    </div>
                 </div>
             </div>
 
-        </div>
-    </div>
+            <!-- Image Side -->
+            <div class="relative lg:block hidden">
+                <div class="relative z-10">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80" alt="Students" class="rounded-3xl shadow-2xl">
+                </div>
+                <!-- Decorative Elements -->
+                <div class="absolute -bottom-10 -right-10 w-64 h-64 bg-gradient-to-br from-[#F8BE09] to-[#ffd54f] rounded-3xl -z-10 blur-2xl opacity-30"></div>
+                <div class="absolute -top-10 -left-10 w-64 h-64 bg-gradient-to-br from-[#4B5057] to-[#B2B2AF] rounded-3xl -z-10 blur-2xl opacity-30"></div>
+            </div>
 
-    <!-- Scroll Indicator -->
-    <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <div class="w-6 h-10 border-2 border-white/30 rounded-full flex items-start justify-center p-2">
-            <div class="w-1 h-2 bg-[#F8BE09] rounded-full animate-pulse"></div>
         </div>
     </div>
 </section>
 
-<!-- Features Bento Grid -->
-<section class="py-24 bg-[#F5F6F5]">
+<!-- Stats Section - Card Style -->
+<section class="-mt-20 relative z-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-        <div class="text-center mb-16">
-            <h2 class="text-4xl md:text-5xl font-black text-[#122431] mb-4">Kenapa Memilih Kami?</h2>
-            <p class="text-xl text-[#4B5057]">Semua yang Anda butuhkan untuk memulai perjalanan karir</p>
-        </div>
-
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-
-            <!-- Feature 1 -->
-            <div class="group relative bg-gradient-to-br from-[#122431] to-[#1a3345] rounded-3xl p-8 overflow-hidden hover:scale-105 transition-transform duration-300">
-                <div class="absolute inset-0 bg-gradient-to-br from-[#F8BE09]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                <div class="relative z-10">
-                    <div class="w-14 h-14 bg-[#F8BE09] rounded-2xl flex items-center justify-center mb-6 group-hover:rotate-12 transition-transform">
-                        <svg class="w-7 h-7 text-[#122431]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            <div class="group bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-[#F5F6F5]">
+                <div class="flex items-start gap-4">
+                    <div class="p-4 bg-gradient-to-br from-[#122431] to-[#1a3345] rounded-2xl shadow-lg group-hover:scale-110 transition-transform">
+                        <svg class="w-8 h-8 text-[#F8BE09]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-2">Lowongan Terverifikasi</h3>
-                    <p class="text-gray-300 text-sm">100% peluang kerja legitimate</p>
+                    <div>
+                        <h3 class="text-4xl font-bold text-[#122431] mb-1">{{ $totalLowongan }}+</h3>
+                        <p class="text-[#4B5057] font-medium">Lowongan Aktif</p>
+                        <p class="text-sm text-[#B2B2AF] mt-1">Tersedia setiap hari</p>
+                    </div>
                 </div>
             </div>
 
-            <!-- Feature 2 -->
-            <div class="group relative bg-gradient-to-br from-[#F8BE09] to-[#ffd54f] rounded-3xl p-8 overflow-hidden hover:scale-105 transition-transform duration-300">
-                <div class="absolute inset-0 bg-gradient-to-br from-[#122431]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                <div class="relative z-10">
-                    <div class="w-14 h-14 bg-[#122431] rounded-2xl flex items-center justify-center mb-6 group-hover:rotate-12 transition-transform">
-                        <svg class="w-7 h-7 text-[#F8BE09]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            <div class="group bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-[#F5F6F5]">
+                <div class="flex items-start gap-4">
+                    <div class="p-4 bg-gradient-to-br from-[#F8BE09] to-[#ffd54f] rounded-2xl shadow-lg group-hover:scale-110 transition-transform">
+                        <svg class="w-8 h-8 text-[#122431]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold text-[#122431] mb-2">Proses Cepat</h3>
-                    <p class="text-[#122431]/70 text-sm">Sistem aplikasi yang mudah</p>
+                    <div>
+                        <h3 class="text-4xl font-bold text-[#122431] mb-1">{{ $totalPerusahaan }}+</h3>
+                        <p class="text-[#4B5057] font-medium">Perusahaan Partner</p>
+                        <p class="text-sm text-[#B2B2AF] mt-1">Tersertifikasi & terpercaya</p>
+                    </div>
                 </div>
             </div>
 
-            <!-- Feature 3 -->
-            <div class="group relative bg-white rounded-3xl p-8 border-2 border-[#F5F6F5] overflow-hidden hover:scale-105 transition-transform duration-300 hover:border-[#F8BE09]">
-                <div class="absolute inset-0 bg-gradient-to-br from-[#F8BE09]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                <div class="relative z-10">
-                    <div class="w-14 h-14 bg-[#122431] rounded-2xl flex items-center justify-center mb-6 group-hover:rotate-12 transition-transform">
-                        <svg class="w-7 h-7 text-[#F8BE09]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold text-[#122431] mb-2">Bimbingan Karir</h3>
-                    <p class="text-[#4B5057] text-sm">Konsultasi ahli tersedia</p>
-                </div>
-            </div>
-
-            <!-- Feature 4 -->
-            <div class="group relative bg-gradient-to-br from-[#4B5057] to-[#122431] rounded-3xl p-8 overflow-hidden hover:scale-105 transition-transform duration-300">
-                <div class="absolute inset-0 bg-gradient-to-br from-[#F8BE09]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                <div class="relative z-10">
-                    <div class="w-14 h-14 bg-[#F8BE09] rounded-2xl flex items-center justify-center mb-6 group-hover:rotate-12 transition-transform">
-                        <svg class="w-7 h-7 text-[#122431]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="group bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-[#F5F6F5]">
+                <div class="flex items-start gap-4">
+                    <div class="p-4 bg-gradient-to-br from-[#4B5057] to-[#122431] rounded-2xl shadow-lg group-hover:scale-110 transition-transform">
+                        <svg class="w-8 h-8 text-[#F8BE09]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-2">Komunitas</h3>
-                    <p class="text-gray-300 text-sm">Bergabung dengan ribuan alumni</p>
+                    <div>
+                        <h3 class="text-4xl font-bold text-[#122431] mb-1">{{ $totalPelamar }}+</h3>
+                        <p class="text-[#4B5057] font-medium">Alumni Sukses</p>
+                        <p class="text-sm text-[#B2B2AF] mt-1">Telah bekerja di berbagai industri</p>
+                    </div>
                 </div>
             </div>
 
@@ -156,196 +140,149 @@
     </div>
 </section>
 
-<!-- Latest Jobs Section -->
-<section id="lowongan-section" class="py-24 bg-white">
+<!-- Lowongan Terbaru Section -->
+<section id="lowongan-section" class="py-24">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        <!-- Section Header -->
-        <div class="flex flex-col md:flex-row md:items-end md:justify-between mb-12">
-            <div>
-                <span class="inline-block px-4 py-2 bg-[#F8BE09]/20 text-[#122431] rounded-full text-sm font-bold mb-4">PELUANG TERBARU</span>
-                <h2 class="text-4xl md:text-5xl font-black text-[#122431]">Lowongan Pilihan</h2>
-                <p class="text-lg text-[#4B5057] mt-2">Temukan langkah karir selanjutnya</p>
-            </div>
-            <a href="#" class="mt-6 md:mt-0 inline-flex items-center gap-2 text-[#122431] font-bold hover:text-[#F8BE09] transition-colors">
-                Lihat semua lowongan
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                </svg>
-            </a>
+        <div class="text-center mb-16">
+            <span class="inline-block px-4 py-2 bg-[#F8BE09]/10 text-[#122431] rounded-full text-sm font-semibold mb-4">Peluang Karir</span>
+            <h2 class="text-4xl md:text-5xl font-bold text-[#122431] mb-4">Lowongan Terbaru</h2>
+            <p class="text-lg text-[#4B5057] max-w-2xl mx-auto">Temukan posisi yang sesuai dengan passion dan keahlianmu</p>
         </div>
 
-        <!-- Jobs Grid -->
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
             @forelse($lowonganTerbaru as $lowongan)
-            <div class="group relative bg-white rounded-3xl border border-[#F5F6F5] hover:border-[#F8BE09]/50 transition-all duration-300 overflow-hidden hover:shadow-2xl">
-
-                <!-- Gradient Top -->
-                <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#122431] via-[#F8BE09] to-[#122431]"></div>
-
+            <div class="group bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-[#F5F6F5]">
                 <div class="p-6">
-
-                    <!-- Company -->
-                    <div class="flex items-start justify-between mb-6">
+                    <!-- Header Card -->
+                    <div class="flex items-start justify-between mb-4">
                         <div class="flex items-center gap-3">
                             @if($lowongan->perusahaan->logo)
-                            <img src="{{ asset('storage/' . $lowongan->perusahaan->logo) }}"
-                                 alt="{{ $lowongan->perusahaan->nama_perusahaan }}"
-                                 class="w-12 h-12 rounded-xl object-cover">
+                            <img src="{{ asset('storage/' . $lowongan->perusahaan->logo) }}" alt="{{ $lowongan->perusahaan->nama_perusahaan }}" class="w-14 h-14 rounded-xl object-cover ring-2 ring-[#F5F6F5]">
                             @else
-                            <div class="w-12 h-12 bg-gradient-to-br from-[#122431] to-[#4B5057] rounded-xl flex items-center justify-center">
-                                <span class="text-[#F8BE09] font-bold">{{ substr($lowongan->perusahaan->nama_perusahaan, 0, 1) }}</span>
+                            <div class="w-14 h-14 bg-gradient-to-br from-[#122431] to-[#4B5057] rounded-xl flex items-center justify-center ring-2 ring-[#F5F6F5]">
+                                <span class="text-[#F8BE09] font-bold text-lg">{{ substr($lowongan->perusahaan->nama_perusahaan, 0, 1) }}</span>
                             </div>
                             @endif
                             <div>
-                                <h3 class="font-bold text-[#122431] text-sm line-clamp-1">{{ $lowongan->perusahaan->nama_perusahaan }}</h3>
+                                <h3 class="font-bold text-[#122431] text-sm">{{ $lowongan->perusahaan->nama_perusahaan }}</h3>
                                 <p class="text-xs text-[#B2B2AF]">{{ $lowongan->bidang }}</p>
                             </div>
                         </div>
-                        <span class="px-3 py-1 bg-[#F8BE09]/20 text-[#122431] text-xs font-bold rounded-lg">
-                            {{ ucfirst($lowongan->tipe_pekerjaan) }}
-                        </span>
+                        <span class="px-3 py-1.5 bg-gradient-to-r from-[#F8BE09] to-[#ffd54f] text-[#122431] text-xs font-semibold rounded-full shadow-sm">{{ ucfirst($lowongan->tipe_pekerjaan) }}</span>
                     </div>
 
-                    <!-- Job Title -->
-                    <h4 class="text-xl font-bold text-[#122431] mb-4 line-clamp-2 group-hover:text-[#F8BE09] transition-colors">
-                        {{ $lowongan->judul_lowongan }}
-                    </h4>
+                    <h4 class="text-xl font-bold text-[#122431] mb-3 group-hover:text-[#4B5057] transition-colors line-clamp-2">{{ $lowongan->judul_lowongan }}</h4>
 
-                    <!-- Details -->
-                    <div class="space-y-2 mb-6">
-                        <div class="flex items-center gap-2 text-sm text-[#4B5057]">
-                            <svg class="w-4 h-4 text-[#B2B2AF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="space-y-2.5 mb-6">
+                        <div class="flex items-center text-sm text-[#4B5057]">
+                            <svg class="w-4 h-4 mr-2 text-[#B2B2AF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
                             </svg>
-                            <span>{{ $lowongan->lokasi }}</span>
+                            <span class="font-medium">{{ $lowongan->lokasi }}</span>
                         </div>
-                        <div class="flex items-center gap-2 text-sm">
-                            <svg class="w-4 h-4 text-[#B2B2AF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="flex items-center text-sm text-[#4B5057]">
+                            <svg class="w-4 h-4 mr-2 text-[#B2B2AF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
                             @if($lowongan->gaji_min && $lowongan->gaji_max)
-                                <span class="font-bold text-[#122431]">Rp {{ number_format($lowongan->gaji_min, 0, ',', '.') }} - {{ number_format($lowongan->gaji_max, 0, ',', '.') }}</span>
+                                <span class="font-semibold text-[#122431]">Rp {{ number_format($lowongan->gaji_min, 0, ',', '.') }} - {{ number_format($lowongan->gaji_max, 0, ',', '.') }}</span>
                             @else
-                                <span class="font-semibold text-[#4B5057]">Competitive Salary</span>
+                                <span class="font-medium">Gaji Kompetitif</span>
                             @endif
                         </div>
                     </div>
 
-                    <!-- Action -->
-                    <a href="#" class="flex items-center justify-center gap-2 w-full py-3 bg-[#122431] text-[#F8BE09] rounded-xl font-bold hover:bg-[#F8BE09] hover:text-[#122431] transition-all duration-300 group-hover:shadow-lg">
+                    <a href="#" class="block text-center bg-gradient-to-r from-[#122431] to-[#1a3345] text-[#F8BE09] py-3 rounded-xl hover:from-[#0f1b24] hover:to-[#122431] transition-all font-semibold shadow-md hover:shadow-xl group-hover:scale-105 duration-300">
                         Lihat Detail
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path>
-                        </svg>
                     </a>
-
                 </div>
             </div>
             @empty
             <div class="col-span-full">
-                <div class="text-center py-20 bg-gradient-to-br from-[#F5F6F5] to-white rounded-3xl border-2 border-dashed border-[#B2B2AF]/30">
-                    <div class="w-20 h-20 bg-[#F8BE09]/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <svg class="w-10 h-10 text-[#F8BE09]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-2xl font-bold text-[#122431] mb-2">Belum Ada Lowongan</h3>
-                    <p class="text-[#4B5057]">Periksa kembali untuk peluang baru</p>
+                <div class="text-center py-20 bg-white rounded-3xl border-2 border-dashed border-[#F5F6F5]">
+                    <svg class="w-20 h-20 text-[#B2B2AF] mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
+                    <p class="text-[#4B5057] text-lg font-medium">Belum ada lowongan tersedia saat ini</p>
+                    <p class="text-[#B2B2AF] text-sm mt-2">Periksa kembali nanti untuk peluang terbaru</p>
                 </div>
             </div>
             @endforelse
 
         </div>
 
-    </div>
-</section>
-
-<!-- About Section -->
-<section id="tentang" class="py-24 bg-gradient-to-br from-[#F5F6F5] to-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-        <div class="bg-gradient-to-br from-[#122431] to-[#1a3345] rounded-[3rem] overflow-hidden">
-            <div class="grid lg:grid-cols-2 gap-0">
-
-                <!-- Image Side -->
-                <div class="relative h-[400px] lg:h-auto">
-                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80"
-                         alt="Team"
-                         class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-r from-[#122431] to-transparent"></div>
-                </div>
-
-                <!-- Content Side -->
-                <div class="p-12 lg:p-16 flex flex-col justify-center">
-                    <span class="inline-block w-fit px-5 py-2 bg-[#F8BE09] text-[#122431] rounded-full text-sm font-bold mb-6">TENTANG BKK</span>
-
-                    <h2 class="text-4xl md:text-5xl font-black text-white mb-6 leading-tight">
-                        Memberdayakan Siswa,<br/>
-                        Membangun Masa Depan
-                    </h2>
-
-                    <p class="text-xl text-gray-300 mb-8 leading-relaxed">
-                        BKK SMKN 1 Purwosari adalah platform yang menghubungkan lulusan dengan peluang karir terbaik dari perusahaan terpercaya di seluruh Indonesia.
-                    </p>
-
-                    <div class="space-y-4 mb-8">
-                        <div class="flex items-center gap-4">
-                            <div class="w-10 h-10 bg-[#F8BE09] rounded-full flex items-center justify-center flex-shrink-0">
-                                <svg class="w-5 h-5 text-[#122431]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                            </div>
-                            <span class="text-white font-semibold">Kemitraan perusahaan terverifikasi</span>
-                        </div>
-                        <div class="flex items-center gap-4">
-                            <div class="w-10 h-10 bg-[#F8BE09] rounded-full flex items-center justify-center flex-shrink-0">
-                                <svg class="w-5 h-5 text-[#122431]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                            </div>
-                            <span class="text-white font-semibold">Proses aplikasi yang mudah</span>
-                        </div>
-                        <div class="flex items-center gap-4">
-                            <div class="w-10 h-10 bg-[#F8BE09] rounded-full flex items-center justify-center flex-shrink-0">
-                                <svg class="w-5 h-5 text-[#122431]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                            </div>
-                            <span class="text-white font-semibold">Bimbingan karir profesional</span>
-                        </div>
-                    </div>
-
-                    <a href="#" class="inline-flex items-center justify-center gap-2 w-fit px-8 py-4 bg-[#F8BE09] text-[#122431] rounded-xl font-bold hover:bg-white transition-all duration-300 shadow-xl">
-                        Mulai Sekarang
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-                        </svg>
-                    </a>
-                </div>
-
-            </div>
+        <div class="text-center mt-12">
+            <a href="#lowongan-section" class="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-[#122431] to-[#1a3345] text-[#F8BE09] rounded-2xl hover:from-[#0f1b24] hover:to-[#122431] transition-all font-semibold shadow-lg hover:shadow-xl hover:scale-105">
+                Lihat Semua Lowongan
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+            </a>
         </div>
 
     </div>
 </section>
 
-<!-- Custom Animations -->
-<style>
-@keyframes gradient {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-}
+<!-- Tentang BKK Section -->
+<section id="tentang" class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
 
-.animate-gradient {
-    background-size: 200% 200%;
-    animation: gradient 3s ease infinite;
-}
+            <div class="relative">
+                <div class="relative z-10">
+                    <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=800&q=80" alt="Tentang BKK" class="rounded-3xl shadow-2xl">
+                </div>
+                <!-- Decorative -->
+                <div class="absolute -bottom-8 -right-8 w-64 h-64 bg-gradient-to-br from-[#122431] to-[#4B5057] rounded-3xl -z-10 blur-2xl opacity-20"></div>
+            </div>
 
-.animation-delay-2000 {
-    animation-delay: 2s;
-}
-</style>
+            <div class="space-y-6">
+                <span class="inline-block px-4 py-2 bg-[#F8BE09]/10 text-[#122431] rounded-full text-sm font-semibold">Tentang Kami</span>
+                <h2 class="text-4xl md:text-5xl font-bold text-[#122431] leading-tight">BKK SMKN 1 Purwosari</h2>
+                <p class="text-lg text-[#4B5057] leading-relaxed">
+                    Kami adalah jembatan yang menghubungkan talenta muda dengan peluang karir terbaik. Dengan jaringan perusahaan yang luas dan sistem yang terorganisir, kami berkomitmen membantu setiap lulusan menemukan pekerjaan impian mereka.
+                </p>
+                <div class="space-y-4 pt-4">
+                    <div class="flex items-start gap-4 p-4 bg-[#F8BE09]/10 rounded-2xl border border-[#F8BE09]/20">
+                        <div class="p-2 bg-[#122431] rounded-xl">
+                            <svg class="w-6 h-6 text-[#F8BE09]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-[#122431] mb-1">Informasi Lowongan Terpercaya</h4>
+                            <p class="text-[#4B5057] text-sm">Akses ke ratusan lowongan dari perusahaan terverifikasi</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4 p-4 bg-[#F8BE09]/10 rounded-2xl border border-[#F8BE09]/20">
+                        <div class="p-2 bg-[#122431] rounded-xl">
+                            <svg class="w-6 h-6 text-[#F8BE09]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-[#122431] mb-1">Proses Rekrutmen Mudah</h4>
+                            <p class="text-[#4B5057] text-sm">Sistem aplikasi online yang cepat dan efisien</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4 p-4 bg-[#F8BE09]/10 rounded-2xl border border-[#F8BE09]/20">
+                        <div class="p-2 bg-[#122431] rounded-xl">
+                            <svg class="w-6 h-6 text-[#F8BE09]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-[#122431] mb-1">Bimbingan Karir Profesional</h4>
+                            <p class="text-[#4B5057] text-sm">Konsultasi dan pelatihan untuk persiapan kerja</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
 
 @endsection
