@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Publicc;
+namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\LowonganModel;
@@ -23,12 +23,12 @@ class HomeController extends Controller
         $totalLowongan = LowonganModel::where('status', 'aktif')
             ->where('tanggal_tutup', '>=', now())
             ->count();
-        
+
         $totalPerusahaan = PerusahaanModel::where('status', 'approved')->count();
-        
+
         $totalPelamar = PelamarModel::count();
 
-        return view('publicc.home', compact(
+        return view('frontend.home', compact(
             'lowonganTerbaru',
             'totalLowongan',
             'totalPerusahaan',

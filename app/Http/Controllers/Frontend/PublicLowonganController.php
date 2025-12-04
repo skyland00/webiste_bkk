@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Publicc;
+namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\LowonganModel;
@@ -78,7 +78,7 @@ class PublicLowonganController extends Controller
             ->where('tanggal_tutup', '>=', now())
             ->count();
 
-        return view('publicc.lowongan.lowongan', compact(
+        return view('frontend.lowongan.lowongan', compact(
             'lowongan',
             'search',
             'bidang',
@@ -111,6 +111,6 @@ class PublicLowonganController extends Controller
             ->take(3)
             ->get();
 
-        return view('publicc.lowongan.detail_lowongan', compact('lowongan', 'lowonganTerkait'));
+        return view('frontend.lowongan.detail_lowongan', compact('lowongan', 'lowonganTerkait'));
     }
 }

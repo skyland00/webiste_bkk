@@ -1,27 +1,24 @@
 <?php
 
-use App\Http\Controllers\admin\AdminController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\admin\AdminController;
+
 use App\Http\Controllers\Perusahaan\LowonganController;
 use App\Http\Controllers\Perusahaan\PerusahaanController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Publicc\HomeController;
-use App\Http\Controllers\Publicc\PublicLowonganController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+use App\Http\Controllers\frontend\HomeController;
+use App\Http\Controllers\frontend\PublicLowonganController;
 
-Route::get('/', function () {
-    return view('welcome');
+
+// Role: guest
+Route::get('/home', function () {
+    return redirect('/');
 });
+
+Route::get('/', [HomeController::class, 'index'])->name('frontend.home');
+Route::get('/lowongan', [PublicLowonganController::class, 'lowongan'])->name('frontend.lowongan');
+Route::get('/lowongan/{id}', [PublicLowonganController::class, 'detailLowongan'])->name('frontend.lowongan.detail');
 
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [AuthController::class, 'index'])->name('login');
@@ -31,7 +28,6 @@ Route::middleware(['guest'])->group(function () {
     Route::post('/register/perusahaan', [AuthController::class, 'registerPerusahaan'])->name('register.perusahaan');
 });
 
-
 // Role: Admin
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
@@ -40,9 +36,9 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::post('/admin/perusahaan/{id}/reject', [AdminController::class, 'rejectPerusahaan'])->name('admin.perusahaan.reject');
 
     // === Tambahkan ini untuk halaman lowongan admin ===
-    Route::get('/admin/lowongan', [\App\Http\Controllers\Admin\LowonganController::class, 'index'])->name('admin.lowongan');
-    Route::get('/admin/lowongan/{id}', [\App\Http\Controllers\Admin\LowonganController::class, 'show'])->name('admin.lowongan.show');
-    Route::delete('/admin/lowongan/{id}', [\App\Http\Controllers\Admin\LowonganController::class, 'destroy'])->name('admin.lowongan.destroy');
+    Route::get('/admin/lowongan', [LowonganController::class, 'index'])->name('admin.lowongan');
+    Route::get('/admin/lowongan/{id}', [LowonganController::class, 'show'])->name('admin.lowongan.show');
+    Route::delete('/admin/lowongan/{id}', [LowonganController::class, 'destroy'])->name('admin.lowongan.destroy');
 });
 
 // Role: Perusahaan
@@ -57,10 +53,10 @@ Route::middleware(['auth', 'role:perusahaan'])->group(function () {
     Route::put('/perusahaan/lowongan/{id}', [LowonganController::class, 'update'])->name('perusahaan.lowongan.update');
     Route::delete('/perusahaan/lowongan/{id}', [LowonganController::class, 'destroy'])->name('perusahaan.lowongan.destroy');
     Route::post('/perusahaan/lowongan/{id}/toggle-status', [LowonganController::class, 'toggleStatus'])->name('perusahaan.lowongan.toggle-status');
-    Route::get('/lowongan/{id}', [LowonganController::class, 'show'])->name('perusahaan.lowongan.show');
+    Route::get('perusahaan/lowongan/{id}', [LowonganController::class, 'show'])->name('perusahaan.lowongan.show');
 
     Route::get('/lowongan/{lowongan}/applicants', [LowonganController::class, 'applicants'])
-    ->name('perusahaan.lowongan.applicants');
+        ->name('perusahaan.lowongan.applicants');
 });
 
 // Logout
@@ -69,10 +65,3 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middl
 Route::get('/logout', [AuthController::class, 'logout'])
     ->name('logout')
     ->middleware('auth');
-
-
-Route::get('/', [HomeController::class, 'index'])->name('publicc.home');
-
-Route::get('/lowongan', [PublicLowonganController::class, 'lowongan'])->name('publicc.lowongan');
-Route::get('/lowongan/{id}', [PublicLowonganController::class, 'detailLowongan'])->name('publicc.lowongan.detail');
-
