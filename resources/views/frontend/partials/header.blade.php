@@ -54,8 +54,8 @@
             </div>
 
             <!-- Login Button -->
-            <div class="hidden md:block">
-                <a href="{{ route('login') }}" class="inline-block px-6 py-3 bg-[#F8BE09] text-[#122431] rounded-xl hover:bg-[#ffd54f] transition-all font-bold shadow-lg hover:shadow-xl hover:scale-105">
+           <div class="hidden md:block">
+                <a href="{{ route('login') }}" id="login-btn" class="inline-block px-8 py-3 bg-white text-[#122431] rounded-full font-bold border-2 border-[#122431] hover:bg-[#122431] hover:text-white transition-all duration-300">
                     Login
                 </a>
             </div>
@@ -109,7 +109,7 @@
             <a href="#" class="block px-4 py-3 navbar-text hover:bg-white/10 hover:text-[#F8BE09] font-semibold rounded-xl transition-all">
                 Kontak
             </a>
-            <a href="{{ route('login') }}" class="block px-4 py-3 bg-[#F8BE09] text-[#122431] rounded-xl text-center font-bold shadow-lg hover:bg-[#ffd54f] transition-all mt-2">
+            <a href="{{ route('login') }}" class="block px-4 py-3 bg-white text-[#122431] rounded-xl text-center font-bold border-2 border-[#122431] hover:bg-[#122431] hover:text-white transition-all duration-300 shadow-lg mt-2">
                 Login
             </a>
         </div>
@@ -123,7 +123,7 @@
 }
 
 .navbar-text {
-    color: white;
+    color: #122431;
 }
 
 /* Scrolled state - with background */
@@ -131,6 +131,23 @@
     background-color: rgba(18, 36, 49, 0.95);
     backdrop-filter: blur(20px);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+#navbar.scrolled .navbar-text {
+    color: white;
+}
+
+/* Login button changes when scrolled */
+#navbar.scrolled #login-btn {
+    background-color: #F8BE09;
+    border-color: #F8BE09;
+    color: #122431;
+}
+
+#navbar.scrolled #login-btn:hover {
+    background-color: #ffd54f;
+    border-color: #ffd54f;
+    color: #122431;
 }
 
 /* Mobile menu background */
