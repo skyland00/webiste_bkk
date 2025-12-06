@@ -1,7 +1,7 @@
 {{-- /views/frontend/partials/header.blade.php --}}
 
 <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-[1400px] mx-auto px-8 sm:px-16">
         <div class="flex justify-between items-center h-20">
 
             <!-- Logo & Brand -->
@@ -15,40 +15,40 @@
 
             <!-- Desktop Navigation -->
             <div class="hidden md:flex items-center space-x-1">
-                <a href="{{ route('frontend.home') }}" class="px-4 py-2 navbar-text hover:text-[#F8BE09] font-semibold transition-all rounded-xl hover:bg-white/10">
+                <a href="{{ route('frontend.home') }}" class="nav-link {{ request()->routeIs('frontend.home') ? 'active' : '' }}">
                     Home
                 </a>
-                <a href="{{ route('frontend.lowongan') }}" class="px-4 py-2 navbar-text hover:text-[#F8BE09] font-semibold transition-all rounded-xl hover:bg-white/10">
+                <a href="{{ route('frontend.lowongan') }}" class="nav-link {{ request()->routeIs('frontend.lowongan') ? 'active' : '' }}">
                     Lowongan
                 </a>
 
                 <!-- Dropdown Informasi -->
                 <div class="relative group">
-                    <button class="px-4 py-2 navbar-text hover:text-[#F8BE09] font-semibold transition-all rounded-xl hover:bg-white/10 flex items-center gap-1">
+                    <button class="nav-link flex items-center gap-1">
                         Informasi
                         <svg class="w-4 h-4 group-hover:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                         </svg>
                     </button>
-                    <div class="absolute left-0 mt-2 w-56 bg-white rounded-2xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border border-[#F5F6F5] overflow-hidden">
+                    <div class="dropdown-menu">
                         <div class="py-2">
-                            <a href="#" class="block px-4 py-3 text-[#122431] hover:bg-[#F8BE09] hover:text-white transition-all font-semibold rounded-xl mx-2">
+                            <a href="#" class="dropdown-item">
                                 Tentang BKK
                             </a>
-                            <a href="#" class="block px-4 py-3 text-[#122431] hover:bg-[#F8BE09] hover:text-white transition-all font-semibold rounded-xl mx-2">
+                            <a href="#" class="dropdown-item">
                                 Berita & Artikel
                             </a>
-                            <a href="#" class="block px-4 py-3 text-[#122431] hover:bg-[#F8BE09] hover:text-white transition-all font-semibold rounded-xl mx-2">
+                            <a href="#" class="dropdown-item">
                                 FAQ
                             </a>
                         </div>
                     </div>
                 </div>
 
-                <a href="#" class="px-4 py-2 navbar-text hover:text-[#F8BE09] font-semibold transition-all rounded-xl hover:bg-white/10">
+                <a href="#" class="nav-link">
                     Survey
                 </a>
-                <a href="#" class="px-4 py-2 navbar-text hover:text-[#F8BE09] font-semibold transition-all rounded-xl hover:bg-white/10">
+                <a href="#" class="nav-link">
                     Kontak
                 </a>
             </div>
@@ -74,39 +74,39 @@
 
     <!-- Mobile Menu -->
     <div id="mobile-menu" class="hidden md:hidden mobile-menu-bg border-t border-white/10">
-        <div class="px-4 py-4 space-y-2 max-w-7xl mx-auto">
-            <a href="{{ route('frontend.home') }}" class="block px-4 py-3 navbar-text hover:bg-white/10 hover:text-[#F8BE09] font-semibold rounded-xl transition-all">
+        <div class="px-8 py-4 space-y-2 max-w-[1400px] mx-auto">
+            <a href="{{ route('frontend.home') }}" class="nav-link-mobile {{ request()->routeIs('frontend.home') ? 'active' : '' }}">
                 Home
             </a>
-            <a href="{{ route('frontend.lowongan') }}" class="block px-4 py-3 navbar-text hover:bg-white/10 hover:text-[#F8BE09] font-semibold rounded-xl transition-all">
+            <a href="{{ route('frontend.lowongan') }}" class="nav-link-mobile {{ request()->routeIs('frontend.lowongan') ? 'active' : '' }}">
                 Lowongan
             </a>
 
             <!-- Mobile Dropdown -->
             <div class="space-y-1">
-                <button id="mobile-dropdown-btn" class="w-full flex items-center justify-between px-4 py-3 navbar-text hover:bg-white/10 hover:text-[#F8BE09] font-semibold rounded-xl transition-all">
+                <button id="mobile-dropdown-btn" class="nav-link-mobile-dropdown">
                     <span>Informasi</span>
                     <svg id="mobile-dropdown-icon" class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                     </svg>
                 </button>
                 <div id="mobile-dropdown" class="hidden pl-4 space-y-1">
-                    <a href="#" class="block px-4 py-2 navbar-text hover:bg-white/10 hover:text-[#F8BE09] font-medium rounded-xl transition-all text-sm">
+                    <a href="#" class="nav-link-mobile-sub">
                         Tentang BKK
                     </a>
-                    <a href="#" class="block px-4 py-2 navbar-text hover:bg-white/10 hover:text-[#F8BE09] font-medium rounded-xl transition-all text-sm">
+                    <a href="#" class="nav-link-mobile-sub">
                         Berita & Artikel
                     </a>
-                    <a href="#" class="block px-4 py-2 navbar-text hover:bg-white/10 hover:text-[#F8BE09] font-medium rounded-xl transition-all text-sm">
+                    <a href="#" class="nav-link-mobile-sub">
                         FAQ
                     </a>
                 </div>
             </div>
 
-            <a href="#" class="block px-4 py-3 navbar-text hover:bg-white/10 hover:text-[#F8BE09] font-semibold rounded-xl transition-all">
+            <a href="#" class="nav-link-mobile">
                 Survey
             </a>
-            <a href="#" class="block px-4 py-3 navbar-text hover:bg-white/10 hover:text-[#F8BE09] font-semibold rounded-xl transition-all">
+            <a href="#" class="nav-link-mobile">
                 Kontak
             </a>
             <a href="{{ route('login') }}" class="block px-4 py-3 bg-white text-[#122431] rounded-xl text-center font-bold border-2 border-[#122431] hover:bg-[#122431] hover:text-white transition-all duration-300 shadow-lg mt-2">
@@ -115,53 +115,6 @@
         </div>
     </div>
 </nav>
-
-<style>
-/* Default state - transparent */
-#navbar {
-    background-color: transparent;
-}
-
-.navbar-text {
-    color: #122431;
-}
-
-/* Scrolled state - with background */
-#navbar.scrolled {
-    background-color: rgba(18, 36, 49, 0.95);
-    backdrop-filter: blur(20px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
-
-#navbar.scrolled .navbar-text {
-    color: white;
-}
-
-/* Login button changes when scrolled */
-#navbar.scrolled #login-btn {
-    background-color: #F8BE09;
-    border-color: #F8BE09;
-    color: #122431;
-}
-
-#navbar.scrolled #login-btn:hover {
-    background-color: #ffd54f;
-    border-color: #ffd54f;
-    color: #122431;
-}
-
-/* Mobile menu background */
-.mobile-menu-bg {
-    background-color: rgba(15, 27, 36, 0.95);
-    backdrop-filter: blur(20px);
-}
-
-/* Smooth transitions */
-#navbar,
-.navbar-text {
-    transition: all 0.3s ease;
-}
-</style>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {

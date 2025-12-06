@@ -1,57 +1,97 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+/* public/css/frontend.css */
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 * {
     font-family: "Poppins", sans-serif;
 }
 
-/* Custom Color Scheme CSS - BKK SMKN 1 Purwosari */
-
-/* CSS Variables untuk mudah diakses */
 :root {
     /* Primary Colors */
     --navy-dark: #122431;
-    --yellow-accent: #F8BE09;
+    --yellow-accent: #f8be09;
 
     /* Secondary Colors */
-    --dark-gray: #4B5057;
-    --medium-gray: #B2B2AF;
-    --light-gray: #F5F6F5;
+    --dark-gray: #4b5057;
+    --medium-gray: #b2b2af;
+    --light-gray: #f5f6f5;
 
     /* Neutral */
-    --white: #FFFFFF;
+    --white: #ffffff;
     --black: #000000;
 
     /* Gradients */
-    --gradient-navy: linear-gradient(135deg, #122431 0%, #1a3345 50%, #0f1b24 100%);
-    --gradient-yellow: linear-gradient(135deg, #F8BE09 0%, #ffd54f 100%);
-    --gradient-gray: linear-gradient(135deg, #4B5057 0%, #122431 100%);
+    --gradient-navy: linear-gradient(
+        135deg,
+        #122431 0%,
+        #1a3345 50%,
+        #0f1b24 100%
+    );
+    --gradient-yellow: linear-gradient(135deg, #f8be09 0%, #ffd54f 100%);
+    --gradient-gray: linear-gradient(135deg, #4b5057 0%, #122431 100%);
 }
 
 /* Background Colors */
-.bg-navy-dark { background-color: var(--navy-dark); }
-.bg-yellow-accent { background-color: var(--yellow-accent); }
-.bg-dark-gray { background-color: var(--dark-gray); }
-.bg-medium-gray { background-color: var(--medium-gray); }
-.bg-light-gray { background-color: var(--light-gray); }
+.bg-navy-dark {
+    background-color: var(--navy-dark);
+}
+.bg-yellow-accent {
+    background-color: var(--yellow-accent);
+}
+.bg-dark-gray {
+    background-color: var(--dark-gray);
+}
+.bg-medium-gray {
+    background-color: var(--medium-gray);
+}
+.bg-light-gray {
+    background-color: var(--light-gray);
+}
 
 /* Text Colors */
-.text-navy-dark { color: var(--navy-dark); }
-.text-yellow-accent { color: var(--yellow-accent); }
-.text-dark-gray { color: var(--dark-gray); }
-.text-medium-gray { color: var(--medium-gray); }
-.text-light-gray { color: var(--light-gray); }
+.text-navy-dark {
+    color: var(--navy-dark);
+}
+.text-yellow-accent {
+    color: var(--yellow-accent);
+}
+.text-dark-gray {
+    color: var(--dark-gray);
+}
+.text-medium-gray {
+    color: var(--medium-gray);
+}
+.text-light-gray {
+    color: var(--light-gray);
+}
 
 /* Border Colors */
-.border-navy-dark { border-color: var(--navy-dark); }
-.border-yellow-accent { border-color: var(--yellow-accent); }
-.border-dark-gray { border-color: var(--dark-gray); }
-.border-medium-gray { border-color: var(--medium-gray); }
-.border-light-gray { border-color: var(--light-gray); }
+.border-navy-dark {
+    border-color: var(--navy-dark);
+}
+.border-yellow-accent {
+    border-color: var(--yellow-accent);
+}
+.border-dark-gray {
+    border-color: var(--dark-gray);
+}
+.border-medium-gray {
+    border-color: var(--medium-gray);
+}
+.border-light-gray {
+    border-color: var(--light-gray);
+}
 
 /* Gradient Backgrounds */
-.bg-gradient-navy { background: var(--gradient-navy); }
-.bg-gradient-yellow { background: var(--gradient-yellow); }
-.bg-gradient-gray { background: var(--gradient-gray); }
+.bg-gradient-navy {
+    background: var(--gradient-navy);
+}
+.bg-gradient-yellow {
+    background: var(--gradient-yellow);
+}
+.bg-gradient-gray {
+    background: var(--gradient-gray);
+}
 
 /* Button Styles with New Colors */
 .btn-primary {
@@ -243,7 +283,8 @@
 
 /* Animation Classes */
 @keyframes blob {
-    0%, 100% {
+    0%,
+    100% {
         transform: translate(0, 0) scale(1);
     }
     33% {
@@ -287,7 +328,7 @@
 }
 
 .section-header::before {
-    content: '';
+    content: "";
     position: absolute;
     left: 0;
     top: 0;
@@ -299,6 +340,206 @@
 
 .section-header.navy::before {
     background: var(--gradient-navy);
+}
+
+#navbar {
+    background-color: transparent;
+}
+
+.navbar-text {
+    color: #122431;
+}
+
+#navbar.scrolled {
+    background-color: rgba(18, 36, 49, 0.95);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+#navbar.scrolled .navbar-text {
+    color: white;
+}
+
+.nav-link {
+    position: relative;
+    padding: 0.5rem 1rem;
+    color: #122431;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border-radius: 0.75rem;
+}
+
+.nav-link:hover {
+    color: #f8be09;
+}
+
+.nav-link::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: #f8be09;
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 60%;
+}
+
+.nav-link.active {
+    color: #f8be09;
+}
+
+.nav-link.active::after {
+    width: 0;
+}
+
+#navbar.scrolled .nav-link {
+    color: white;
+}
+
+#navbar.scrolled .nav-link:hover {
+    color: #f8be09;
+}
+
+#navbar.scrolled .nav-link.active {
+    color: #f8be09;
+}
+
+#navbar.scrolled .nav-link.active::after {
+    width: 0;
+}
+
+.dropdown-menu {
+    position: absolute;
+    left: 0;
+    margin-top: 0.5rem;
+    width: 14rem;
+    background-color: white;
+    border-radius: 1rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid #f5f6f5;
+    overflow: hidden;
+}
+
+.group:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+}
+
+.dropdown-item {
+    display: block;
+    padding: 0.75rem 1rem;
+    color: #122431;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border-radius: 0.75rem;
+    margin: 0 0.5rem;
+}
+
+.dropdown-item:hover {
+    background-color: #f8be09;
+    color: white;
+}
+
+.mobile-menu-bg {
+    background-color: rgba(15, 27, 36, 0.95);
+    backdrop-filter: blur(20px);
+}
+
+.nav-link-mobile {
+    display: block;
+    padding: 0.75rem 1rem;
+    color: white;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border-radius: 0.75rem;
+}
+
+.nav-link-mobile:hover {
+    color: #f8be09;
+}
+
+.nav-link-mobile.active {
+    color: #f8be09;
+}
+
+.nav-link-mobile-dropdown {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    color: white;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border-radius: 0.75rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.nav-link-mobile-dropdown:hover {
+    color: #f8be09;
+}
+
+.nav-link-mobile-sub {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border-radius: 0.75rem;
+    font-size: 0.875rem;
+}
+
+.nav-link-mobile-sub:hover {
+    color: #f8be09;
+}
+
+#login-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+#navbar.scrolled #login-btn {
+    background-color: #f8be09;
+    border-color: #f8be09;
+    color: #122431;
+}
+
+#navbar.scrolled #login-btn:hover {
+    background-color: #ffd54f;
+    border-color: #ffd54f;
+    color: #122431;
+}
+
+#navbar,
+.navbar-text,
+.nav-link,
+.nav-link::after {
+    transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    .nav-link::after {
+        display: none;
+    }
+}
+
+/* Latest Jobs */
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
 /* Responsive Typography */
@@ -314,13 +555,3 @@
         padding: 16px;
     }
 }
-
-/* Dark Mode Support (Optional) */
-@media (prefers-color-scheme: dark) {
-    .card {
-        background: var(--navy-dark);
-        color: var(--light-gray);
-        border-color: var(--dark-gray);
-    }
-}
-

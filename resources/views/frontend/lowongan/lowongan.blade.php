@@ -5,35 +5,62 @@
 @section('title', 'Lowongan Kerja - BKK SMKN 1 Purwosari')
 
 @section('content')
-    <!-- Hero Section Mini -->
-    <section class="relative bg-gradient-to-br from-[#122431] via-[#1a3345] to-[#0f1b24] py-16 overflow-hidden">
-        <div class="absolute inset-0 opacity-10">
-            <div class="absolute top-0 right-0 w-96 h-96 bg-[#F8BE09] rounded-full filter blur-3xl"></div>
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 bg-gradient-to-b from-white via-[#F5F6F5] to-white overflow-hidden">
+
+        <!-- Background Pattern -->
+        <div class="absolute inset-0 opacity-30">
+            <div class="absolute top-0 left-0 w-full h-full"
+                style="background-image: radial-gradient(circle at 2px 2px, #F8BE09 1px, transparent 0); background-size: 40px 40px;">
+            </div>
         </div>
-        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4">Temukan Karir Impianmu</h1>
-            <p class="text-lg text-[#F5F6F5] max-w-2xl mx-auto">{{ $totalLowongan }} lowongan kerja menunggu untuk kamu</p>
+
+        <!-- Floating Blobs -->
+        <div class="absolute top-20 right-10 w-72 h-72 bg-[#F8BE09]/20 rounded-full blur-3xl animate-blob"></div>
+        <div class="absolute bottom-20 left-10 w-96 h-96 bg-[#122431]/10 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
+
+        <div class="relative max-w-[1400px] mx-auto px-8 sm:px-16">
+
+            <!-- Badge -->
+            <div class="inline-flex items-center gap-2 px-5 py-2 bg-[#122431] text-[#F8BE09] rounded-full text-sm font-bold mb-6">
+                Lowongan Kerja Terbaru
+            </div>
+
+            <!-- Heading -->
+            <h1 class="text-4xl md:text-6xl font-black text-[#122431] mb-4 leading-tight">
+                Jelajahi Semua
+                <span class="relative inline-block">
+                    <span class="relative z-10">Lowongan Kerja</span>
+                    <span class="absolute bottom-2 left-0 w-full h-4 bg-[#F8BE09] -rotate-1"></span>
+                </span>
+            </h1>
+
+            <p class="text-xl text-[#4B5057] max-w-2xl mb-8">
+                <span class="font-bold text-[#122431]">{{ $totalLowongan }}</span> lowongan kerja menunggu untuk kamu dari berbagai perusahaan terpercaya
+            </p>
+
         </div>
     </section>
 
     <!-- Filter & Search Section -->
-    <section class="-mt-8 relative z-10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="bg-white rounded-3xl shadow-xl p-6 border border-[#F5F6F5]">
-                <form method="GET" action="{{ route('frontend.lowongan') }}" class="space-y-4">
+    <section class="-mt-12 relative z-10">
+        <div class="max-w-[1400px] mx-auto px-8 sm:px-16">
+            <div class="bg-white rounded-3xl shadow-2xl p-8 border border-[#F5F6F5]">
+                <form method="GET" action="{{ route('frontend.lowongan') }}" class="space-y-6">
 
                     <!-- Search Bar -->
                     <div class="flex flex-col md:flex-row gap-4">
                         <div class="flex-1">
                             <div class="relative">
-                                <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#B2B2AF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                                </svg>
-                                <input type="text" name="search" value="{{ $search }}" placeholder="Cari posisi, perusahaan, atau kata kunci..." class="w-full pl-12 pr-4 py-4 border border-[#F5F6F5] rounded-2xl focus:ring-2 focus:ring-[#F8BE09] focus:border-transparent">
+                                <i class="ri-search-line absolute left-5 top-1/2 -translate-y-1/2 text-xl text-[#B2B2AF]"></i>
+                                <input type="text" name="search" value="{{ $search }}"
+                                    placeholder="Cari posisi, perusahaan, atau kata kunci..."
+                                    class="w-full pl-14 pr-4 py-5 border-2 border-[#F5F6F5] rounded-2xl focus:ring-2 focus:ring-[#F8BE09] focus:border-[#F8BE09] text-[#122431] font-medium transition-all">
                             </div>
                         </div>
-                        <button type="submit" class="px-8 py-4 bg-gradient-to-r from-[#122431] to-[#1a3345] text-[#F8BE09] rounded-2xl hover:from-[#0f1b24] hover:to-[#122431] transition font-semibold shadow-lg hover:shadow-xl">
+                        <button type="submit" class="group px-10 py-5 bg-[#122431] text-white rounded-2xl font-bold hover:bg-[#F8BE09] hover:text-[#122431] transition-all duration-300 shadow-xl inline-flex items-center justify-center gap-2">
                             Cari Lowongan
+                            <i class="ri-search-2-line text-xl group-hover:scale-110 transition-transform"></i>
                         </button>
                     </div>
 
@@ -42,8 +69,10 @@
 
                         <!-- Filter Bidang -->
                         <div>
-                            <label class="block text-sm font-semibold text-[#122431] mb-2">Bidang</label>
-                            <select name="bidang" class="w-full px-4 py-3 border border-[#F5F6F5] rounded-xl focus:ring-2 focus:ring-[#F8BE09] focus:border-transparent">
+                            <label class="block text-sm font-bold text-[#122431] mb-2">
+                                <i class="ri-bookmark-line mr-1"></i>Bidang
+                            </label>
+                            <select name="bidang" class="w-full px-4 py-3 border-2 border-[#F5F6F5] rounded-xl focus:ring-2 focus:ring-[#F8BE09] focus:border-[#F8BE09] font-medium text-[#122431] transition-all">
                                 <option value="">Semua Bidang</option>
                                 @foreach($bidangList as $b)
                                 <option value="{{ $b }}" {{ $bidang == $b ? 'selected' : '' }}>{{ $b }}</option>
@@ -53,8 +82,10 @@
 
                         <!-- Filter Tipe Pekerjaan -->
                         <div>
-                            <label class="block text-sm font-semibold text-[#122431] mb-2">Tipe Pekerjaan</label>
-                            <select name="tipe_pekerjaan" class="w-full px-4 py-3 border border-[#F5F6F5] rounded-xl focus:ring-2 focus:ring-[#F8BE09] focus:border-transparent">
+                            <label class="block text-sm font-bold text-[#122431] mb-2">
+                                <i class="ri-time-line mr-1"></i>Tipe Pekerjaan
+                            </label>
+                            <select name="tipe_pekerjaan" class="w-full px-4 py-3 border-2 border-[#F5F6F5] rounded-xl focus:ring-2 focus:ring-[#F8BE09] focus:border-[#F8BE09] font-medium text-[#122431] transition-all">
                                 <option value="">Semua Tipe</option>
                                 <option value="full-time" {{ $tipe_pekerjaan == 'full-time' ? 'selected' : '' }}>Full Time</option>
                                 <option value="part-time" {{ $tipe_pekerjaan == 'part-time' ? 'selected' : '' }}>Part Time</option>
@@ -65,8 +96,10 @@
 
                         <!-- Filter Lokasi -->
                         <div>
-                            <label class="block text-sm font-semibold text-[#122431] mb-2">Lokasi</label>
-                            <select name="lokasi" class="w-full px-4 py-3 border border-[#F5F6F5] rounded-xl focus:ring-2 focus:ring-[#F8BE09] focus:border-transparent">
+                            <label class="block text-sm font-bold text-[#122431] mb-2">
+                                <i class="ri-map-pin-line mr-1"></i>Lokasi
+                            </label>
+                            <select name="lokasi" class="w-full px-4 py-3 border-2 border-[#F5F6F5] rounded-xl focus:ring-2 focus:ring-[#F8BE09] focus:border-[#F8BE09] font-medium text-[#122431] transition-all">
                                 <option value="">Semua Lokasi</option>
                                 @foreach($lokasiList as $l)
                                 <option value="{{ $l }}" {{ $lokasi == $l ? 'selected' : '' }}>{{ $l }}</option>
@@ -76,8 +109,10 @@
 
                         <!-- Sort -->
                         <div>
-                            <label class="block text-sm font-semibold text-[#122431] mb-2">Urutkan</label>
-                            <select name="sort" class="w-full px-4 py-3 border border-[#F5F6F5] rounded-xl focus:ring-2 focus:ring-[#F8BE09] focus:border-transparent">
+                            <label class="block text-sm font-bold text-[#122431] mb-2">
+                                <i class="ri-sort-desc mr-1"></i>Urutkan
+                            </label>
+                            <select name="sort" class="w-full px-4 py-3 border-2 border-[#F5F6F5] rounded-xl focus:ring-2 focus:ring-[#F8BE09] focus:border-[#F8BE09] font-medium text-[#122431] transition-all">
                                 <option value="terbaru" {{ $sort == 'terbaru' ? 'selected' : '' }}>Terbaru</option>
                                 <option value="terlama" {{ $sort == 'terlama' ? 'selected' : '' }}>Terlama</option>
                                 <option value="gaji_tertinggi" {{ $sort == 'gaji_tertinggi' ? 'selected' : '' }}>Gaji Tertinggi</option>
@@ -89,34 +124,46 @@
 
                     <!-- Active Filters -->
                     @if($search || $bidang || $tipe_pekerjaan || $lokasi)
-                    <div class="flex items-center gap-3 pt-2">
-                        <span class="text-sm font-semibold text-[#122431]">Filter Aktif:</span>
+                    <div class="flex flex-wrap items-center gap-3 pt-4 border-t-2 border-[#F5F6F5]">
+                        <span class="text-sm font-bold text-[#122431] flex items-center gap-2">
+                            <i class="ri-filter-3-line"></i>Filter Aktif:
+                        </span>
                         <div class="flex flex-wrap gap-2">
                             @if($search)
-                            <span class="inline-flex items-center gap-2 px-3 py-1 bg-[#F8BE09]/10 text-[#122431] rounded-full text-sm">
-                                "{{ $search }}"
-                                <a href="{{ route('frontend.lowongan', array_merge(request()->except('search'))) }}" class="hover:text-[#4B5057]">×</a>
+                            <span class="inline-flex items-center gap-2 px-4 py-2 bg-[#F8BE09] text-[#122431] rounded-full text-sm font-bold">
+                                <i class="ri-search-line"></i>"{{ $search }}"
+                                <a href="{{ route('frontend.lowongan', array_merge(request()->except('search'))) }}" class="hover:text-white transition-colors">
+                                    <i class="ri-close-line text-lg"></i>
+                                </a>
                             </span>
                             @endif
                             @if($bidang)
-                            <span class="inline-flex items-center gap-2 px-3 py-1 bg-[#F8BE09]/10 text-[#122431] rounded-full text-sm">
-                                {{ $bidang }}
-                                <a href="{{ route('frontend.lowongan', array_merge(request()->except('bidang'))) }}" class="hover:text-[#4B5057]">×</a>
+                            <span class="inline-flex items-center gap-2 px-4 py-2 bg-[#F8BE09] text-[#122431] rounded-full text-sm font-bold">
+                                <i class="ri-bookmark-line"></i>{{ $bidang }}
+                                <a href="{{ route('frontend.lowongan', array_merge(request()->except('bidang'))) }}" class="hover:text-white transition-colors">
+                                    <i class="ri-close-line text-lg"></i>
+                                </a>
                             </span>
                             @endif
                             @if($tipe_pekerjaan)
-                            <span class="inline-flex items-center gap-2 px-3 py-1 bg-[#F8BE09]/10 text-[#122431] rounded-full text-sm">
-                                {{ ucfirst($tipe_pekerjaan) }}
-                                <a href="{{ route('frontend.lowongan', array_merge(request()->except('tipe_pekerjaan'))) }}" class="hover:text-[#4B5057]">×</a>
+                            <span class="inline-flex items-center gap-2 px-4 py-2 bg-[#F8BE09] text-[#122431] rounded-full text-sm font-bold">
+                                <i class="ri-time-line"></i>{{ ucfirst($tipe_pekerjaan) }}
+                                <a href="{{ route('frontend.lowongan', array_merge(request()->except('tipe_pekerjaan'))) }}" class="hover:text-white transition-colors">
+                                    <i class="ri-close-line text-lg"></i>
+                                </a>
                             </span>
                             @endif
                             @if($lokasi)
-                            <span class="inline-flex items-center gap-2 px-3 py-1 bg-[#F8BE09]/10 text-[#122431] rounded-full text-sm">
-                                {{ $lokasi }}
-                                <a href="{{ route('frontend.lowongan', array_merge(request()->except('lokasi'))) }}" class="hover:text-[#4B5057]">×</a>
+                            <span class="inline-flex items-center gap-2 px-4 py-2 bg-[#F8BE09] text-[#122431] rounded-full text-sm font-bold">
+                                <i class="ri-map-pin-line"></i>{{ $lokasi }}
+                                <a href="{{ route('frontend.lowongan', array_merge(request()->except('lokasi'))) }}" class="hover:text-white transition-colors">
+                                    <i class="ri-close-line text-lg"></i>
+                                </a>
                             </span>
                             @endif
-                            <a href="{{ route('frontend.lowongan') }}" class="text-sm text-[#4B5057] hover:text-[#122431] font-medium">Hapus Semua</a>
+                            <a href="{{ route('frontend.lowongan') }}" class="inline-flex items-center gap-1 px-4 py-2 bg-white text-[#122431] rounded-full text-sm font-bold border-2 border-[#122431] hover:bg-[#122431] hover:text-white transition-all">
+                                <i class="ri-delete-bin-line"></i>Hapus Semua
+                            </a>
                         </div>
                     </div>
                     @endif
@@ -127,81 +174,99 @@
     </section>
 
     <!-- Lowongan List -->
-    <section class="py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section class="py-20 bg-[#F5F6F5]">
+        <div class="max-w-[1400px] mx-auto px-8 sm:px-16">
 
             <!-- Result Info -->
-            <div class="mb-6 flex items-center justify-between">
-                <p class="text-[#4B5057]">
-                    Menampilkan <span class="font-bold text-[#122431]">{{ $lowongan->firstItem() ?? 0 }} - {{ $lowongan->lastItem() ?? 0 }}</span> dari <span class="font-bold text-[#122431]">{{ $lowongan->total() }}</span> lowongan
-                </p>
+            <div class="mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div>
+                    <h2 class="text-2xl font-black text-[#122431] mb-2">Hasil Pencarian</h2>
+                    <p class="text-[#4B5057]">
+                        Menampilkan <span class="font-bold text-[#122431]">{{ $lowongan->firstItem() ?? 0 }} - {{ $lowongan->lastItem() ?? 0 }}</span> dari <span class="font-bold text-[#122431]">{{ $lowongan->total() }}</span> lowongan kerja
+                    </p>
+                </div>
+
+                @if($lowongan->total() > 0)
+                <div class="flex items-center gap-2 text-sm text-[#4B5057]">
+                    <i class="ri-information-line text-[#F8BE09] text-lg"></i>
+                    <span>Diperbarui setiap hari</span>
+                </div>
+                @endif
             </div>
 
-            <!-- Grid Lowongan -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            <!-- Grid Lowongan - Lebih lebar dengan 4 kolom di layar besar -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-12">
 
                 @forelse($lowongan as $item)
-                <div class="group bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-[#F5F6F5]">
+                <div class="group bg-white rounded-3xl overflow-hidden hover:shadow-2xl transition-all duration-300 border border-transparent hover:border-[#F8BE09]">
                     <div class="p-6">
-                        <!-- Header Card -->
-                        <div class="flex items-start justify-between mb-4">
+                        <!-- Company Info -->
+                        <div class="flex items-center justify-between mb-6">
                             <div class="flex items-center gap-3">
                                 @if($item->perusahaan->logo)
-                                <img src="{{ asset('storage/' . $item->perusahaan->logo) }}" alt="{{ $item->perusahaan->nama_perusahaan }}" class="w-14 h-14 rounded-xl object-cover ring-2 ring-[#F5F6F5]">
+                                    <img src="{{ asset('storage/' . $item->perusahaan->logo) }}"
+                                        alt="{{ $item->perusahaan->nama_perusahaan }}"
+                                        class="w-14 h-14 rounded-xl object-cover border-2 border-[#F5F6F5]">
                                 @else
-                                <div class="w-14 h-14 bg-gradient-to-br from-[#122431] to-[#4B5057] rounded-xl flex items-center justify-center ring-2 ring-[#F5F6F5]">
-                                    <span class="text-[#F8BE09] font-bold text-lg">{{ substr($item->perusahaan->nama_perusahaan, 0, 1) }}</span>
-                                </div>
+                                    <div class="w-14 h-14 bg-gradient-to-br from-[#122431] to-[#4B5057] rounded-xl flex items-center justify-center border-2 border-[#F5F6F5]">
+                                        <span class="text-[#F8BE09] font-bold text-xl">{{ substr($item->perusahaan->nama_perusahaan, 0, 1) }}</span>
+                                    </div>
                                 @endif
-                                <div>
-                                    <h3 class="font-bold text-[#122431] text-sm">{{ $item->perusahaan->nama_perusahaan }}</h3>
-                                    <p class="text-xs text-[#B2B2AF]">{{ $item->bidang }}</p>
-                                </div>
                             </div>
-                            <span class="px-3 py-1.5 bg-gradient-to-r from-[#F8BE09] to-[#ffd54f] text-[#122431] text-xs font-semibold rounded-full shadow-sm">{{ ucfirst($item->tipe_pekerjaan) }}</span>
+                            <span class="px-3 py-1 bg-[#F8BE09] text-[#122431] text-xs font-bold rounded-full">
+                                {{ ucfirst($item->tipe_pekerjaan) }}
+                            </span>
                         </div>
 
-                        <h4 class="text-xl font-bold text-[#122431] mb-3 group-hover:text-[#4B5057] transition-colors line-clamp-2">{{ $item->judul_lowongan }}</h4>
+                        <!-- Company Name -->
+                        <h3 class="font-bold text-[#122431] mb-1">{{ $item->perusahaan->nama_perusahaan }}</h3>
+                        <p class="text-sm text-[#B2B2AF] mb-4">{{ $item->bidang }}</p>
 
-                        <div class="space-y-2.5 mb-6">
-                            <div class="flex items-center text-sm text-[#4B5057]">
-                                <svg class="w-4 h-4 mr-2 text-[#B2B2AF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                                </svg>
+                        <!-- Job Title -->
+                        <h4 class="text-xl font-bold text-[#122431] mb-4 line-clamp-2 group-hover:text-[#F8BE09] transition-colors">
+                            {{ $item->judul_lowongan }}
+                        </h4>
+
+                        <!-- Details -->
+                        <div class="space-y-3 mb-6">
+                            <div class="flex items-center gap-2 text-sm text-[#4B5057]">
+                                <i class="ri-map-pin-line text-[#F8BE09] text-[20px]"></i>
                                 <span class="font-medium">{{ $item->lokasi }}</span>
                             </div>
-                            <div class="flex items-center text-sm text-[#4B5057]">
-                                <svg class="w-4 h-4 mr-2 text-[#B2B2AF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
+
+                            <div class="flex items-center gap-2 text-sm">
+                                <i class="ri-money-dollar-circle-line text-[#F8BE09] text-[20px]"></i>
                                 @if($item->gaji_min && $item->gaji_max)
-                                    <span class="font-semibold text-[#122431]">Rp {{ number_format($item->gaji_min, 0, ',', '.') }} - {{ number_format($item->gaji_max, 0, ',', '.') }}</span>
+                                    <span class="font-bold text-[#122431]">Rp {{ number_format($item->gaji_min, 0, ',', '.') }} - {{ number_format($item->gaji_max, 0, ',', '.') }}</span>
                                 @else
-                                    <span class="font-medium">Gaji Kompetitif</span>
+                                    <span class="font-semibold text-[#4B5057]">Gaji Kompetitif</span>
                                 @endif
                             </div>
-                            <div class="flex items-center text-sm text-[#4B5057]">
-                                <svg class="w-4 h-4 mr-2 text-[#B2B2AF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                                </svg>
-                                <span>Ditutup: {{ $item->tanggal_tutup->format('d M Y') }}</span>
+
+                            <div class="flex items-center gap-2 text-sm text-[#4B5057]">
+                                <i class="ri-calendar-line text-[#F8BE09] text-[20px]"></i>
+                                <span class="font-medium">Ditutup: {{ $item->tanggal_tutup->format('d M Y') }}</span>
                             </div>
                         </div>
 
-                        <a href="{{ route('frontend.lowongan.detail', $item->id) }}" class="block text-center bg-gradient-to-r from-[#122431] to-[#1a3345] text-[#F8BE09] py-3 rounded-xl hover:from-[#0f1b24] hover:to-[#122431] transition-all font-semibold shadow-md hover:shadow-xl group-hover:scale-105 duration-300">
+                        <!-- Button -->
+                        <a href="{{ route('frontend.lowongan.detail', $item->id) }}"
+                            class="flex items-center justify-center gap-2 w-full py-4 bg-[#122431] text-white rounded-xl font-bold hover:bg-[#F8BE09] hover:text-[#122431] transition-all duration-300 group-hover:shadow-lg">
                             Lihat Detail
+                            <i class="ri-arrow-right-line text-[18px]"></i>
                         </a>
                     </div>
                 </div>
                 @empty
                 <div class="col-span-full">
-                    <div class="text-center py-20 bg-white rounded-3xl border-2 border-dashed border-[#F5F6F5]">
-                        <svg class="w-20 h-20 text-[#B2B2AF] mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                        <p class="text-[#4B5057] text-lg font-medium mb-2">Tidak ada lowongan ditemukan</p>
-                        <p class="text-[#B2B2AF] text-sm mb-4">Coba ubah filter atau kata kunci pencarian</p>
-                        <a href="{{ route('frontend.lowongan') }}" class="inline-block px-6 py-3 bg-[#122431] text-[#F8BE09] rounded-xl hover:bg-[#0f1b24] transition font-semibold">
+                    <div class="text-center py-24 bg-white rounded-3xl border-2 border-dashed border-[#F5F6F5]">
+                        <div class="w-24 h-24 bg-[#F8BE09]/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="ri-briefcase-4-line text-[#F8BE09] text-[48px]"></i>
+                        </div>
+                        <h3 class="text-3xl font-bold text-[#122431] mb-2">Tidak ada lowongan ditemukan</h3>
+                        <p class="text-lg text-[#4B5057] mb-6">Coba ubah filter atau kata kunci pencarian</p>
+                        <a href="{{ route('frontend.lowongan') }}" class="inline-flex items-center gap-2 px-8 py-4 bg-[#122431] text-white rounded-2xl font-bold hover:bg-[#F8BE09] hover:text-[#122431] transition-all duration-300 shadow-xl">
+                            <i class="ri-refresh-line text-xl"></i>
                             Reset Filter
                         </a>
                     </div>
@@ -213,7 +278,9 @@
             <!-- Pagination -->
             @if($lowongan->hasPages())
             <div class="flex justify-center">
-                {{ $lowongan->links() }}
+                <div class="inline-flex items-center gap-2 bg-white rounded-2xl p-2 shadow-lg border border-[#F5F6F5]">
+                    {{ $lowongan->links() }}
+                </div>
             </div>
             @endif
 
