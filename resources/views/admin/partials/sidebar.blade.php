@@ -28,10 +28,10 @@
                     <i class="ri-briefcase-line text-lg"></i>
                     <span>Lowongan Kerja</span>
                 </a>
-                <a href="#"
-                    class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium {{ request()->routeIs('admin.siswa*') ? 'text-blue-600 bg-blue-50' : 'text-slate-700 hover:bg-slate-100' }} rounded-lg transition-colors">
+                <a href="{{ route('admin.pelamar') }}"
+                    class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium {{ request()->routeIs('admin.pelamar') ? 'text-blue-600 bg-blue-50' : 'text-slate-700 hover:bg-slate-100' }} rounded-lg transition-colors">
                     <i class="ri-group-line text-lg"></i>
-                    <span>Siswa</span>
+                    <span>Data Pelamar</span>
                 </a>
                 <a href="{{ route('admin.perusahaan') }}"
                     class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium {{ request()->routeIs('admin.perusahaan*') ? 'text-blue-600 bg-blue-50' : 'text-slate-700 hover:bg-slate-100' }} rounded-lg transition-colors">

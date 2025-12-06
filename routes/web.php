@@ -39,6 +39,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/lowongan', [LowonganController::class, 'index'])->name('admin.lowongan');
     Route::get('/admin/lowongan/{id}', [LowonganController::class, 'show'])->name('admin.lowongan.show');
     Route::delete('/admin/lowongan/{id}', [LowonganController::class, 'destroy'])->name('admin.lowongan.destroy');
+    Route::get('/admin/data-pelamar', [App\Http\Controllers\Admin\PelamarController::class, 'index'])->name('admin.pelamar');
+
 });
 
 // Role: Perusahaan
