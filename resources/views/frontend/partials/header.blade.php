@@ -96,13 +96,13 @@
                                         Dashboard Perusahaan
                                     </a>
                                 @else
-                                    <a href="{{ route('frontend.pelamar.dashboard') }}" class="dropdown-item">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                                        </svg>
-                                        Dashboard Alumni
-                                    </a>
-                                @endif
+    <a href="{{ route('frontend.pelamar.dashboard') }}" class="dropdown-item">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+        </svg>
+        Dashboard Alumni
+    </a>
+@endif
 
                                 <a href="#" class="dropdown-item">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -172,11 +172,11 @@
                     <a href="{{ route('perusahaan.dashboard') }}" class="nav-link-mobile">
                         Dashboard Perusahaan
                     </a>
-                @else
-                    <a href="{{ route('frontend.pelamar.dashboard') }}" class="nav-link-mobile">
-                        Dashboard Alumni
-                    </a>
-                @endif
+@else
+    <a href="{{ route('frontend.pelamar.dashboard') }}" class="nav-link-mobile">
+        Dashboard Alumni
+    </a>
+@endif
             @endauth
 
             <a href="{{ route('frontend.home') }}" class="nav-link-mobile {{ request()->routeIs('frontend.home') ? 'active' : '' }}">

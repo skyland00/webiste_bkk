@@ -42,7 +42,7 @@ class LamaranController extends Controller
                 ->with('error', 'Anda sudah melamar lowongan ini');
         }
 
-        return view('frontend.pelamar.profile', compact('lowongan', 'pelamar'));
+        return view('frontend.pelamar.yylamaran.create', compact('lowongan', 'pelamar'));
     }
 
     // Proses melamar
@@ -95,7 +95,7 @@ class LamaranController extends Controller
             ->with('success', 'Lamaran berhasil dikirim! Kami akan menghubungi Anda segera.');
     }
 
-    // profile pelamar (history lamaran)
+    // Dashboard pelamar (history lamaran)
     public function index(Request $request)
     {
         $pelamar = PelamarModel::where('user_id', Auth::id())->first();
