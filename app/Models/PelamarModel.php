@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class PelamarModel extends Model
 {
+    use HasFactory;
+
     protected $table = 'pelamar';
 
     protected $fillable = [
@@ -19,5 +21,13 @@ class PelamarModel extends Model
         'status',
     ];
 
-    use HasFactory;
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function lamaran()
+    {
+        return $this->hasMany(LamaranModel::class, 'pelamar_id');
+    }
 }

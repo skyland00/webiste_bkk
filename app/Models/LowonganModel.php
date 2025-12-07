@@ -41,9 +41,10 @@ class LowonganModel extends Model
         return $this->belongsTo(PerusahaanModel::class, 'perusahaan_id');
     }
 
-    public function lamarans()
-{
-    return $this->hasMany(Lamaran::class);
-}
+    // Relasi ke Lamaran
+    public function lamaran()
+    {
+        return $this->hasMany(LamaranModel::class, 'lowongan_id');
+    }
 
 }

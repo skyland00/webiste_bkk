@@ -3,29 +3,23 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Lamaran;
 use App\Models\LamaranModel;
+use App\Models\PelamarModel;
 use Illuminate\Http\Request;
 
 class PelamarController extends Controller
 {
     public function index()
     {
-        $lamarans = LamaranModel::with(['pelamar', 'lowongan'])
+        // ambil semua data lamaran (berserta relasi pelamar & lowongan)
+        $pelamar = LamaranModel::with(['pelamar', 'lowongan'])
             ->orderBy('created_at', 'DESC')
             ->get();
 
-        return view('admin.pelamar', compact('lamarans'));
-    }
+        // total pelamar (jumlah record pada tabel pelamar)
+        $totalPelamar = PelamarModel::count();
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
+        // kirim keduanya ke view
+        return view('admin.pelamar', compact('pelamar', 'totalPelamar'));
     }
-
-    public function lamarans()
-    {
-        return $this->hasMany(Lamaran::class);
-    }
-
 }

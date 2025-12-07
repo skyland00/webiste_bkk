@@ -1,3 +1,5 @@
+{{-- views/admin/pelamar.blade.php --}}
+
 @extends('admin.layout')
 
 @section('title', 'Data Pelamar')
@@ -30,7 +32,7 @@
 
         <!-- Table Wrapper -->
         <div class="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
-            
+
             <!-- Search -->
             <div class="p-6 border-b bg-slate-50 border-slate-200">
                 <div class="flex flex-col sm:flex-row gap-3">

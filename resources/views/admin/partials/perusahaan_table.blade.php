@@ -1,3 +1,4 @@
+{{-- views/admin/partial/perusahaan_table.blade.php --}}
 @if ($perusahaan->count())
     <div class="overflow-x-auto">
         <table class="w-full text-sm">

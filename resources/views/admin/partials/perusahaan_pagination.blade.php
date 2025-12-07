@@ -1,3 +1,4 @@
+{{-- views/admin/partial/perushaan_pagination.blade.php --}}
 @if ($perusahaan->hasPages())
     <nav role="navigation" aria-label="Pagination Navigation" class="flex items-center justify-between">
         <div class="flex justify-between flex-1 sm:hidden">

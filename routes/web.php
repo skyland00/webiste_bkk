@@ -8,6 +8,7 @@ use App\Http\Controllers\Perusahaan\LowonganController;
 use App\Http\Controllers\Perusahaan\PerusahaanController;
 
 use App\Http\Controllers\frontend\HomeController;
+use App\Http\Controllers\Frontend\Pelamar\LamaranController;
 use App\Http\Controllers\frontend\PublicLowonganController;
 
 
@@ -28,6 +29,21 @@ Route::middleware(['guest'])->group(function () {
     Route::post('/register/perusahaan', [AuthController::class, 'registerPerusahaan'])->name('register.perusahaan');
 });
 
+// Role: Pelamar (setelah login)
+Route::middleware(['auth', 'role:pelamar'])->group(function () {
+    // Dashboard Pelamar
+    Route::get('/pelamar/profile', [LamaranController::class, 'index'])->name('pelamar.profile');
+    Route::get('/pelamar/dashboard', [LamaranController::class, 'index'])
+        ->name('frontend.pelamar.dashboard');
+
+    // Melamar Pekerjaan
+    Route::get('/lowongan/{id}/lamar', [LamaranController::class, 'create'])->name('lamaran.create');
+    Route::post('/lowongan/{id}/lamar', [LamaranController::class, 'store'])->name('lamaran.store');
+
+    // Detail Lamaran
+    Route::get('/pelamar/lamaran/{id}', [LamaranController::class, 'show'])->name('pelamar.lamaran.show');
+});
+
 // Role: Admin
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
@@ -40,7 +56,6 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/lowongan/{id}', [LowonganController::class, 'show'])->name('admin.lowongan.show');
     Route::delete('/admin/lowongan/{id}', [LowonganController::class, 'destroy'])->name('admin.lowongan.destroy');
     Route::get('/admin/data-pelamar', [App\Http\Controllers\Admin\PelamarController::class, 'index'])->name('admin.pelamar');
-
 });
 
 // Role: Perusahaan
