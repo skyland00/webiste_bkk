@@ -48,7 +48,8 @@
                 <a href="#" class="nav-link">
                     Survey
                 </a>
-                <a href="{{ route('frontend.kontak') }}" class="nav-link">
+                <a href="{{ route('frontend.kontak') }}"
+                    class="nav-link {{ request()->routeIs('frontend.kontak') ? 'active' : '' }}">
                     Kontak
                 </a>
             </div>
@@ -66,7 +67,8 @@
                                 </span>
                             </div>
                             <span class="navbar-text font-semibold">{{ Auth::user()->name }}</span>
-                            <i class="ri-arrow-down-s-line text-lg navbar-text group-hover:rotate-180 transition-transform"></i>
+                            <i
+                                class="ri-arrow-down-s-line text-lg navbar-text group-hover:rotate-180 transition-transform"></i>
                         </button>
 
                         <!-- Dropdown Menu -->
@@ -124,8 +126,7 @@
             </div>
 
             <!-- Mobile Menu Button -->
-            <button id="mobile-menu-btn"
-                class="md:hidden navbar-text p-2 hover:bg-white/10 rounded-xl transition-all">
+            <button id="mobile-menu-btn" class="md:hidden navbar-text p-2 hover:bg-white/10 rounded-xl transition-all">
                 <i id="menu-icon" class="ri-menu-line text-2xl"></i>
                 <i id="close-icon" class="ri-close-line text-2xl hidden"></i>
             </button>
@@ -196,7 +197,8 @@
             <a href="#" class="nav-link-mobile">
                 Survey
             </a>
-            <a href="{{ route('frontend.kontak') }}" class="nav-link-mobile">
+            <a href="{{ route('frontend.kontak') }}"
+                class="nav-link-mobile {{ request()->routeIs('frontend.kontak') ? 'active' : '' }}">
                 Kontak
             </a>
 
