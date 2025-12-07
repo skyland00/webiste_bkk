@@ -146,4 +146,28 @@ class LamaranController extends Controller
 
         return view('frontend.pelamar.detail_lamaran', compact('lamaran'));
     }
+
+    // Batalkan lamaran
+    public function cancel($id)
+    {
+        $pelamar = PelamarModel::where('user_id', Auth::id())->first();
+
+        $lamaran = LamaranModel::where('id', $id)
+            ->where('pelamar_id', $pelamar->id)
+            ->firstOrFail();
+
+        // Hanya bisa membatalkan jika status masih pending
+        if ($lamaran->status !== 'pending') {
+            return redirect()->back()->with('error', 'Hanya lamaran dengan status "Pending" yang dapat dibatalkan.');
+        }
+
+        // Update status menjadi dibatalkan
+        $lamaran->update([
+            'status' => 'dibatalkan',
+            'catatan_perusahaan' => 'Lamaran dibatalkan oleh pelamar pada ' . now()->format('d M Y, H:i') . ' WIB'
+        ]);
+
+        return redirect()->route('frontend.pelamar.riwayat_lamaran')
+            ->with('success', 'Lamaran berhasil dibatalkan.');
+    }
 }

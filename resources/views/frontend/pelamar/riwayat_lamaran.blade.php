@@ -40,9 +40,7 @@
                 <div class="bg-white rounded-3xl shadow-lg p-6 border border-[#F5F6F5] hover:shadow-xl transition-all">
                     <div class="flex items-center justify-between mb-4">
                         <div class="w-12 h-12 bg-[#122431]/10 rounded-xl flex items-center justify-center">
-                            <svg class="w-6 h-6 text-[#122431]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                            </svg>
+                            <i class="ri-file-list-3-line text-2xl text-[#122431]"></i>
                         </div>
                     </div>
                     <h3 class="text-3xl font-black text-[#122431] mb-1">{{ $totalLamaran }}</h3>
@@ -53,9 +51,7 @@
                 <div class="bg-white rounded-3xl shadow-lg p-6 border border-[#F5F6F5] hover:shadow-xl transition-all">
                     <div class="flex items-center justify-between mb-4">
                         <div class="w-12 h-12 bg-yellow-500/10 rounded-xl flex items-center justify-center">
-                            <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
+                            <i class="ri-time-line text-2xl text-yellow-600"></i>
                         </div>
                     </div>
                     <h3 class="text-3xl font-black text-yellow-600 mb-1">{{ $totalPending }}</h3>
@@ -66,9 +62,7 @@
                 <div class="bg-white rounded-3xl shadow-lg p-6 border border-[#F5F6F5] hover:shadow-xl transition-all">
                     <div class="flex items-center justify-between mb-4">
                         <div class="w-12 h-12 bg-green-500/10 rounded-xl flex items-center justify-center">
-                            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
+                            <i class="ri-checkbox-circle-line text-2xl text-green-600"></i>
                         </div>
                     </div>
                     <h3 class="text-3xl font-black text-green-600 mb-1">{{ $totalDiterima }}</h3>
@@ -79,9 +73,7 @@
                 <div class="bg-white rounded-3xl shadow-lg p-6 border border-[#F5F6F5] hover:shadow-xl transition-all">
                     <div class="flex items-center justify-between mb-4">
                         <div class="w-12 h-12 bg-red-500/10 rounded-xl flex items-center justify-center">
-                            <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
+                            <i class="ri-close-circle-line text-2xl text-red-600"></i>
                         </div>
                     </div>
                     <h3 class="text-3xl font-black text-red-600 mb-1">{{ $totalDitolak }}</h3>
@@ -98,9 +90,7 @@
     <section class="py-4">
         <div class="max-w-[1400px] mx-auto px-8 sm:px-16">
             <div class="bg-green-100 border border-green-400 text-green-700 px-6 py-4 rounded-2xl flex items-center gap-3">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
+                <i class="ri-checkbox-circle-line text-2xl"></i>
                 <span class="font-semibold">{{ session('success') }}</span>
             </div>
         </div>

@@ -42,6 +42,9 @@ Route::middleware(['auth', 'role:pelamar'])->group(function () {
 
     // Detail Lamaran
     Route::get('/pelamar/lamaran/{id}', [LamaranController::class, 'show'])->name('pelamar.lamaran.show');
+
+    // Batalkan Lamaran
+    Route::post('/pelamar/lamaran/{id}/cancel', [LamaranController::class, 'cancel'])->name('pelamar.lamaran.cancel');
 });
 
 // Role: Admin

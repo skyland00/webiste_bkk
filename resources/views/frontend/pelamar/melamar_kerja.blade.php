@@ -10,17 +10,11 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center gap-2 text-sm text-[#4B5057]">
                 <a href="{{ route('frontend.home') }}" class="hover:text-[#122431] transition">Home</a>
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                </svg>
+                <i class="ri-arrow-right-s-line text-lg"></i>
                 <a href="{{ route('frontend.lowongan') }}" class="hover:text-[#122431] transition">Lowongan</a>
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                </svg>
+                <i class="ri-arrow-right-s-line text-lg"></i>
                 <a href="{{ route('frontend.lowongan.detail', $lowongan->id) }}" class="hover:text-[#122431] transition">Detail</a>
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                </svg>
+                <i class="ri-arrow-right-s-line text-lg"></i>
                 <span class="text-[#122431] font-medium">Lamar Pekerjaan</span>
             </div>
         </div>
@@ -61,18 +55,14 @@
             <!-- Alert Success/Error -->
             @if(session('success'))
             <div class="bg-green-100 border border-green-400 text-green-700 px-6 py-4 rounded-2xl mb-6 flex items-center gap-3">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
+                <i class="ri-checkbox-circle-line text-2xl"></i>
                 <span class="font-semibold">{{ session('success') }}</span>
             </div>
             @endif
 
             @if(session('error'))
             <div class="bg-red-100 border border-red-400 text-red-700 px-6 py-4 rounded-2xl mb-6 flex items-center gap-3">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
+                <i class="ri-error-warning-line text-2xl"></i>
                 <span class="font-semibold">{{ session('error') }}</span>
             </div>
             @endif
@@ -113,9 +103,7 @@
                 <div class="mb-6">
                     <label class="block text-sm font-bold text-[#122431] mb-2">
                         <span class="flex items-center gap-2">
-                            <svg class="w-5 h-5 text-[#F8BE09]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                            </svg>
+                            <i class="ri-file-text-line text-xl text-[#F8BE09]"></i>
                             Curriculum Vitae (CV) <span class="text-red-500">*</span>
                         </span>
                     </label>
@@ -124,9 +112,7 @@
                     <div class="bg-[#F8BE09]/10 border-2 border-[#F8BE09] rounded-2xl p-4 mb-3 flex items-center justify-between">
                         <div class="flex items-center gap-3">
                             <div class="w-12 h-12 bg-[#F8BE09] rounded-xl flex items-center justify-center">
-                                <svg class="w-6 h-6 text-[#122431]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                                </svg>
+                                <i class="ri-file-text-line text-2xl text-[#122431]"></i>
                             </div>
                             <div>
                                 <p class="font-bold text-[#122431]">CV dari Profil Anda</p>
@@ -150,9 +136,7 @@
 
                     @error('cv')
                     <p class="text-red-500 text-sm mt-2 flex items-center gap-1">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
+                        <i class="ri-error-warning-line"></i>
                         {{ $message }}
                     </p>
                     @enderror
@@ -164,9 +148,7 @@
                 <div class="mb-6">
                     <label class="block text-sm font-bold text-[#122431] mb-2">
                         <span class="flex items-center gap-2">
-                            <svg class="w-5 h-5 text-[#F8BE09]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-                            </svg>
+                            <i class="ri-draft-line text-xl text-[#F8BE09]"></i>
                             Cover Letter / Surat Lamaran <span class="text-[#B2B2AF] text-xs">(Opsional)</span>
                         </span>
                     </label>
@@ -176,9 +158,7 @@
 
                     @error('cover_letter')
                     <p class="text-red-500 text-sm mt-2 flex items-center gap-1">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
+                        <i class="ri-error-warning-line"></i>
                         {{ $message }}
                     </p>
                     @enderror
@@ -206,9 +186,7 @@
                     </a>
                     <button type="submit"
                             class="flex-1 py-4 bg-gradient-to-r from-[#122431] to-[#1a3345] text-white rounded-2xl font-bold hover:from-[#0f1b24] hover:to-[#122431] transition-all shadow-xl hover:shadow-2xl hover:scale-105 duration-300 flex items-center justify-center gap-2">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
-                        </svg>
+                        <i class="ri-send-plane-fill text-xl"></i>
                         Kirim Lamaran
                     </button>
                 </div>
