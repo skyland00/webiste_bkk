@@ -33,8 +33,8 @@ Route::middleware(['guest'])->group(function () {
 Route::middleware(['auth', 'role:pelamar'])->group(function () {
     // Dashboard Pelamar
     Route::get('/pelamar/profile', [LamaranController::class, 'index'])->name('pelamar.profile');
-    Route::get('/pelamar/dashboard', [LamaranController::class, 'index'])
-        ->name('frontend.pelamar.dashboard');
+    Route::get('/pelamar/riwayat-lamaran', [LamaranController::class, 'index'])
+        ->name('frontend.pelamar.riwayat_lamaran');
 
     // Melamar Pekerjaan
     Route::get('/lowongan/{id}/lamar', [LamaranController::class, 'create'])->name('lamaran.create');

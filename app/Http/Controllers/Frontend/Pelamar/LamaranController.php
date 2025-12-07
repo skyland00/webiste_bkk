@@ -1,5 +1,5 @@
 <?php
-
+// controller\frontend\pelamar\LamaranController.php
 namespace App\Http\Controllers\Frontend\Pelamar;
 
 use App\Http\Controllers\Controller;
@@ -42,7 +42,7 @@ class LamaranController extends Controller
                 ->with('error', 'Anda sudah melamar lowongan ini');
         }
 
-        return view('frontend.pelamar.yylamaran.create', compact('lowongan', 'pelamar'));
+        return view('frontend.pelamar.melamar_kerja', compact('lowongan', 'pelamar'));
     }
 
     // Proses melamar
@@ -91,7 +91,7 @@ class LamaranController extends Controller
             'status' => 'pending',
         ]);
 
-        return redirect()->route('pelamar.dashboard')
+        return redirect()->route('pelamar.riwayat_lamaran')
             ->with('success', 'Lamaran berhasil dikirim! Kami akan menghubungi Anda segera.');
     }
 
@@ -115,7 +115,15 @@ class LamaranController extends Controller
         $totalDiterima = LamaranModel::where('pelamar_id', $pelamar->id)->where('status', 'diterima')->count();
         $totalDitolak = LamaranModel::where('pelamar_id', $pelamar->id)->where('status', 'ditolak')->count();
 
-        return view('frontend.pelamar.dashboard', compact(
+        // Jika request AJAX, return JSON
+        if ($request->ajax()) {
+            return response()->json([
+                'html' => view('frontend.partials.lamaran_list', compact('lamaran'))->render(),
+                'pagination' => $lamaran->appends(['status' => $status])->links()->render()
+            ]);
+        }
+
+        return view('frontend.pelamar.riwayat_lamaran', compact(
             'lamaran',
             'totalLamaran',
             'totalPending',

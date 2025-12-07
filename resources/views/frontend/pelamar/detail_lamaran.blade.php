@@ -13,7 +13,7 @@
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                 </svg>
-                <a href="{{ route('frontend.pelamar.dashboard') }}" class="hover:text-[#122431] transition">Dashboard</a>
+                <a href="{{ route('frontend.pelamar.riwayat_lamaran') }}" class="hover:text-[#122431] transition">Dashboard</a>
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                 </svg>
@@ -276,7 +276,7 @@
                                 @endif
                             </div>
 
-                            <a href="{{ route('frontend.pelamar.dashboard') }}"
+                            <a href="{{ route('frontend.pelamar.riwayat_lamaran') }}"
                                class="block w-full bg-[#F8BE09] text-[#122431] text-center py-4 rounded-2xl font-bold hover:bg-[#ffd54f] transition shadow-lg hover:shadow-xl hover:scale-105 duration-300">
                                 Kembali ke Dashboard
                             </a>

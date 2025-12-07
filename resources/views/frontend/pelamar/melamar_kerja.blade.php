@@ -1,4 +1,4 @@
-{{-- /views/frontend/lamaran/create.blade.php --}}
+{{-- /views/frontend/pelamar/melamar_kerja.blade.php --}}
 
 @extends('frontend.layout')
 

@@ -40,7 +40,7 @@
 <section class="py-20 bg-white">
     <div class="max-w-5xl mx-auto px-8">
         <div class="grid lg:grid-cols-2 gap-16 items-center">
-            
+
             <div>
                 <span class="text-[#F8BE09] font-bold mb-4 block">Profil BKK</span>
                 <h2 class="text-4xl font-black text-[#122431] mb-6">
@@ -83,7 +83,7 @@
         </div>
 
         <div class="grid md:grid-cols-2 gap-8">
-            
+
             <!-- Visi -->
             <div class="bg-white rounded-2xl p-8">
                 <div class="flex items-center gap-3 mb-4">
@@ -143,7 +143,7 @@
         </div>
 
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            
+
             <div class="bg-[#F5F6F5] rounded-2xl p-6 hover:bg-white hover:shadow-lg transition-all">
                 <i class="ri-search-line text-3xl text-[#F8BE09] mb-3 block"></i>
                 <h3 class="text-lg font-bold text-[#122431] mb-2">Pencarian Lowongan</h3>
@@ -207,7 +207,7 @@
         </div>
 
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
-            
+
             <div class="bg-white rounded-2xl p-6 text-center">
                 <div class="text-5xl font-black text-[#F8BE09] mb-2">850+</div>
                 <div class="text-sm text-[#4B5057] font-medium">Alumni Tersalurkan</div>
@@ -238,20 +238,20 @@
         <div class="w-16 h-16 bg-[#F8BE09] rounded-2xl flex items-center justify-center mx-auto mb-6">
             <i class="ri-rocket-line text-3xl text-white"></i>
         </div>
-        
+
         <h2 class="text-3xl md:text-4xl font-black text-[#122431] mb-4">
             Siap Memulai Karir Impianmu?
         </h2>
         <p class="text-lg text-[#4B5057] mb-8">
             Bergabunglah dengan ribuan alumni yang telah sukses berkarir
         </p>
-        
+
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="{{ route('frontend.lowongan') }}" 
+            <a href="{{ route('frontend.lowongan') }}"
                class="px-8 py-4 bg-[#122431] text-white rounded-xl font-bold hover:bg-[#F8BE09] hover:text-[#122431] transition-all">
                 Lihat Lowongan
             </a>
-            <a href="{{ route('frontend.kontak') }}" 
+            <a href="{{ route('frontend.kontak') }}"
                class="px-8 py-4 bg-white text-[#122431] border-2 border-[#122431] rounded-xl font-bold hover:bg-[#122431] hover:text-white transition-all">
                 Hubungi Kami
             </a>
