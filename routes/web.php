@@ -82,3 +82,10 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middl
 Route::get('/logout', [AuthController::class, 'logout'])
     ->name('logout')
     ->middleware('auth');
+
+
+//halaman tentang bkk
+Route::get('/tentang-bkk', [HomeController::class, 'tentangBkk'])->name('frontend.tentang');
+
+//halaman kontak
+Route::get('/kontak', [HomeController::class, 'kontak'])->name('frontend.kontak');

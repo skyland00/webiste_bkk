@@ -33,7 +33,7 @@
                     </button>
                     <div class="dropdown-menu">
                         <div class="py-2">
-                            <a href="#" class="dropdown-item">
+                            <a href="{{ route('frontend.tentang') }}" class="dropdown-item">
                                 Tentang BKK
                             </a>
                             <a href="#" class="dropdown-item">
@@ -49,7 +49,7 @@
                 <a href="#" class="nav-link">
                     Survey
                 </a>
-                <a href="#" class="nav-link">
+                <a href="{{ route('frontend.kontak') }}" class="nav-link">
                     Kontak
                 </a>
             </div>
@@ -195,7 +195,7 @@
                     </svg>
                 </button>
                 <div id="mobile-dropdown" class="hidden pl-4 space-y-1">
-                    <a href="#" class="nav-link-mobile-sub">
+                    <a href="{{ route('frontend.tentang') }}" class="nav-link-mobile-sub">
                         Tentang BKK
                     </a>
                     <a href="#" class="nav-link-mobile-sub">
@@ -210,7 +210,7 @@
             <a href="#" class="nav-link-mobile">
                 Survey
             </a>
-            <a href="#" class="nav-link-mobile">
+            <a href="{{ route('frontend.kontak') }}" class="nav-link-mobile">
                 Kontak
             </a>
 

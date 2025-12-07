@@ -35,4 +35,14 @@ class HomeController extends Controller
             'totalPelamar'
         ));
     }
+
+     public function tentangBkk()
+    {
+        return view('frontend.tentang');
+    }
+
+    public function kontak()
+    {
+        return view('frontend.kontak');
+    }
 }
