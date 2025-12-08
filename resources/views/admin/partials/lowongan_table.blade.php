@@ -1,3 +1,5 @@
+<!-- viws/admin/partials/lowongan_table.blade.php -->
+
 @if ($lowongans->count())
     <div class="overflow-x-auto">
         <table class="w-full text-sm">
@@ -23,7 +25,7 @@
 
                         {{-- Judul Lowongan --}}
                         <td class="px-6 py-4 font-medium text-slate-900">
-                            {{ $l->judul }}
+                            {{ $l->judul_lowongan }}
                         </td>
 
                         {{-- Nama Perusahaan --}}

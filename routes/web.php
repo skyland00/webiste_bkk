@@ -4,13 +4,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\Admin\PelamarController;
+use App\Http\Controllers\Admin\LowonganController as AdminLowonganController;
 use App\Http\Controllers\Perusahaan\LowonganController;
 use App\Http\Controllers\Perusahaan\PerusahaanController;
-
+use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\frontend\HomeController;
 use App\Http\Controllers\Frontend\Pelamar\LamaranController;
 use App\Http\Controllers\frontend\PublicLowonganController;
-
 
 // Role: guest
 Route::get('/home', function () {
@@ -31,42 +31,37 @@ Route::middleware(['guest'])->group(function () {
 
 // Role: Pelamar (setelah login)
 Route::middleware(['auth', 'role:pelamar'])->group(function () {
-    // Dashboard Pelamar
     Route::get('/pelamar/profile', [LamaranController::class, 'index'])->name('pelamar.profile');
     Route::get('/pelamar/riwayat-lamaran', [LamaranController::class, 'index'])
         ->name('frontend.pelamar.riwayat_lamaran');
-
-    // Melamar Pekerjaan
     Route::get('/lowongan/{id}/lamar', [LamaranController::class, 'create'])->name('lamaran.create');
     Route::post('/lowongan/{id}/lamar', [LamaranController::class, 'store'])->name('lamaran.store');
-
-    // Detail Lamaran
     Route::get('/pelamar/lamaran/{id}', [LamaranController::class, 'show'])->name('pelamar.lamaran.show');
-
-    // Batalkan Lamaran
     Route::post('/pelamar/lamaran/{id}/cancel', [LamaranController::class, 'cancel'])->name('pelamar.lamaran.cancel');
 });
 
 // Role: Admin
-Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-    Route::get('/admin/perusahaan', [AdminController::class, 'perusahaan'])->name('admin.perusahaan');
-    Route::post('/admin/perusahaan/{id}/approve', [AdminController::class, 'approvePerusahaan'])->name('admin.perusahaan.approve');
-    Route::post('/admin/perusahaan/{id}/reject', [AdminController::class, 'rejectPerusahaan'])->name('admin.perusahaan.reject');
+Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
+    Route::get('/perusahaan', [AdminController::class, 'perusahaan'])->name('perusahaan');
+    Route::post('/perusahaan/{id}/approve', [AdminController::class, 'approvePerusahaan'])->name('perusahaan.approve');
+    Route::post('/perusahaan/{id}/reject', [AdminController::class, 'rejectPerusahaan'])->name('perusahaan.reject');
 
-    // === Tambahkan ini untuk halaman lowongan admin ===
-    Route::get('/admin/lowongan', [LowonganController::class, 'index'])->name('admin.lowongan');
-    Route::get('/admin/lowongan/{id}', [LowonganController::class, 'show'])->name('admin.lowongan.show');
-    Route::delete('/admin/lowongan/{id}', [LowonganController::class, 'destroy'])->name('admin.lowongan.destroy');
-    Route::get('/admin/data-pelamar', [PelamarController::class, 'index'])->name('admin.pelamar');
-    Route::get('/admin/data-pelamar/{id}', [PelamarController::class, 'show'])->name('admin.lamaran.show');
+    // Route Admin Lowongan
+    Route::get('/lowongan', [AdminLowonganController::class, 'index'])->name('lowongan');
+    Route::get('/lowongan/{id}', [AdminLowonganController::class, 'show'])->name('lowongan.show');
+    Route::delete('/lowongan/{id}', [AdminLowonganController::class, 'destroy'])->name('lowongan.destroy');
+    
+    Route::get('/data-pelamar', [PelamarController::class, 'index'])->name('pelamar');
+    Route::get('/data-pelamar/{id}', [PelamarController::class, 'show'])->name('lamaran.show');
+    
+    // Route Berita - FIXED: Sudah dalam prefix admin, jadi tinggal resource aja
+    Route::resource('berita', BeritaController::class);
 });
 
 // Role: Perusahaan
 Route::middleware(['auth', 'role:perusahaan'])->group(function () {
     Route::get('/perusahaan/dashboard', [PerusahaanController::class, 'index'])->name('perusahaan.dashboard');
-
-    // Route Lowongan
     Route::get('/perusahaan/lowongan', [LowonganController::class, 'index'])->name('perusahaan.lowongan.lowongan');
     Route::get('/perusahaan/lowongan/create', [LowonganController::class, 'create'])->name('perusahaan.lowongan.create');
     Route::post('/perusahaan/lowongan', [LowonganController::class, 'store'])->name('perusahaan.lowongan.store');
@@ -75,21 +70,13 @@ Route::middleware(['auth', 'role:perusahaan'])->group(function () {
     Route::delete('/perusahaan/lowongan/{id}', [LowonganController::class, 'destroy'])->name('perusahaan.lowongan.destroy');
     Route::post('/perusahaan/lowongan/{id}/toggle-status', [LowonganController::class, 'toggleStatus'])->name('perusahaan.lowongan.toggle-status');
     Route::get('perusahaan/lowongan/{id}', [LowonganController::class, 'show'])->name('perusahaan.lowongan.show');
-
-    Route::get('/lowongan/{lowongan}/applicants', [LowonganController::class, 'applicants'])
-        ->name('perusahaan.lowongan.applicants');
+    Route::get('/lowongan/{lowongan}/applicants', [LowonganController::class, 'applicants'])->name('perusahaan.lowongan.applicants');
 });
 
 // Logout
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
 
-Route::get('/logout', [AuthController::class, 'logout'])
-    ->name('logout')
-    ->middleware('auth');
-
-
-//halaman tentang bkk
+// Halaman publik
 Route::get('/tentang-bkk', [HomeController::class, 'tentangBkk'])->name('frontend.tentang');
-
-//halaman kontak
 Route::get('/kontak', [HomeController::class, 'kontak'])->name('frontend.kontak');
