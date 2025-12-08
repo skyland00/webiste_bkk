@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\admin\AdminController;
-
+use App\Http\Controllers\Admin\PelamarController;
 use App\Http\Controllers\Perusahaan\LowonganController;
 use App\Http\Controllers\Perusahaan\PerusahaanController;
 
@@ -58,7 +58,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/lowongan', [LowonganController::class, 'index'])->name('admin.lowongan');
     Route::get('/admin/lowongan/{id}', [LowonganController::class, 'show'])->name('admin.lowongan.show');
     Route::delete('/admin/lowongan/{id}', [LowonganController::class, 'destroy'])->name('admin.lowongan.destroy');
-    Route::get('/admin/data-pelamar', [App\Http\Controllers\Admin\PelamarController::class, 'index'])->name('admin.pelamar');
+    Route::get('/admin/data-pelamar', [PelamarController::class, 'index'])->name('admin.pelamar');
+    Route::get('/admin/data-pelamar/{id}', [PelamarController::class, 'show'])->name('admin.lamaran.show');
 });
 
 // Role: Perusahaan
