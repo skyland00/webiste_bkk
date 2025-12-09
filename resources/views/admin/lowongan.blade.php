@@ -57,6 +57,20 @@
             </div>
         </div>
 
+        @if (session('success'))
+            <div x-data="{ show: true }" x-show="show" x-transition
+                class="mb-4 flex items-center justify-between px-4 py-3 bg-emerald-600 text-white rounded-lg shadow">
+                <span>
+                    <i class="ri-check-line mr-2 text-xl"></i>
+                    {{ session('success') }}
+                </span>
+
+                <button @click="show = false" class="text-white/80 hover:text-white">
+                    <i class="ri-close-line text-lg"></i>
+                </button>
+            </div>
+        @endif
+
         <!-- Table Wrapper -->
         <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
             <!-- Header dengan Search dan Filter -->
@@ -72,7 +86,8 @@
                         <!-- Filter Status Tabs -->
                         <div class="flex flex-wrap gap-2">
                             <button @click="setStatus('all')"
-                                :class="statusFilter === 'all' ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'"
+                                :class="statusFilter === 'all' ? 'bg-blue-600 text-white border-blue-600' :
+                                    'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'"
                                 class="px-4 py-2 rounded-lg border font-medium text-sm transition flex items-center gap-2 cursor-pointer">
                                 <i class="ri-briefcase-line"></i>
                                 <span>Semua</span>
@@ -83,7 +98,8 @@
                             </button>
 
                             <button @click="setStatus('aktif')"
-                                :class="statusFilter === 'aktif' ? 'bg-emerald-600 text-white border-emerald-600' : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'"
+                                :class="statusFilter === 'aktif' ? 'bg-emerald-600 text-white border-emerald-600' :
+                                    'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'"
                                 class="px-4 py-2 rounded-lg border font-medium text-sm transition flex items-center gap-2 cursor-pointer">
                                 <i class="ri-checkbox-circle-line"></i>
                                 <span>Aktif</span>
@@ -94,7 +110,8 @@
                             </button>
 
                             <button @click="setStatus('nonaktif')"
-                                :class="statusFilter === 'nonaktif' ? 'bg-red-600 text-white border-red-600' : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'"
+                                :class="statusFilter === 'nonaktif' ? 'bg-red-600 text-white border-red-600' :
+                                    'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'"
                                 class="px-4 py-2 rounded-lg border font-medium text-sm transition flex items-center gap-2 cursor-pointer">
                                 <i class="ri-close-circle-line"></i>
                                 <span>Nonaktif</span>
@@ -131,7 +148,8 @@
                                 <option value="50">50 per halaman</option>
                                 <option value="100">100 per halaman</option>
                             </select>
-                            <i class="ri-arrow-down-s-line absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg pointer-events-none"></i>
+                            <i
+                                class="ri-arrow-down-s-line absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg pointer-events-none"></i>
                         </div>
                     </div>
                 </div>

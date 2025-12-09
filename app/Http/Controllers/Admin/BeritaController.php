@@ -1,8 +1,9 @@
 <?php
+// controller/BeritaController.php
+namespace App\Http\Controllers\Admin;
 
-namespace App\Http\Controllers;
-
-use App\Models\Berita;
+use App\Http\Controllers\Controller;
+use App\Models\BeritaModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -11,10 +12,57 @@ use Illuminate\Support\Str;
 class BeritaController extends Controller
 {
     // Tampilkan daftar berita
-    public function index()
+    // app/Http/Controllers/Admin/BeritaController.php
+
+    public function index(Request $request)
     {
-        $berita = Berita::with('user')->latest()->paginate(10);
-        return view('admin.berita.index', compact('berita'));
+        $search = $request->get('search', '');
+        $perPage = $request->get('per_page', 10);
+        $statusFilter = $request->get('status', 'all');
+
+        // Query builder
+        $query = BeritaModel::query()->latest();
+
+        // Filter by status
+        if ($statusFilter !== 'all') {
+            $query->where('status', $statusFilter);
+        }
+
+        // Search
+        if ($search) {
+            $query->where(function ($q) use ($search) {
+                $q->where('judul', 'like', '%' . $search . '%')
+                    ->orWhere('kategori', 'like', '%' . $search . '%')
+                    ->orWhere('lokasi', 'like', '%' . $search . '%')
+                    ->orWhere('konten', 'like', '%' . $search . '%');
+            });
+        }
+
+        $berita = $query->paginate($perPage)->appends($request->query());
+
+        // Count statistics
+        $publishedCount = BeritaModel::where('status', 'published')->count();
+        $draftCount = BeritaModel::where('status', 'draft')->count();
+
+        // If AJAX request, return JSON
+        if ($request->ajax()) {
+            return response()->json([
+                'html' => view('admin.partials.berita_table', ['berita' => $berita])->render(),
+                'pagination' => view('admin.partials.berita_pagination', ['berita' => $berita])->render(),
+                'total' => $berita->total(),
+                'from' => $berita->firstItem() ?? 0,
+                'to' => $berita->lastItem() ?? 0,
+            ]);
+        }
+
+        return view('admin.berita.berita', compact(
+            'berita',
+            'search',
+            'perPage',
+            'statusFilter',
+            'publishedCount',
+            'draftCount'
+        ));
     }
 
     // Form tambah berita
@@ -50,7 +98,7 @@ class BeritaController extends Controller
             $gambarPath = $request->file('gambar')->store('berita', 'public');
         }
 
-        Berita::create([
+        BeritaModel::create([
             'judul' => $request->judul,
             'slug' => Str::slug($request->judul),
             'konten' => $request->konten,
@@ -67,14 +115,14 @@ class BeritaController extends Controller
     // Form edit berita
     public function edit($id)
     {
-        $berita = Berita::findOrFail($id);
+        $berita = BeritaModel::findOrFail($id);
         return view('admin.berita.edit', compact('berita')); // FIXED: Ganti jadi admin.berita.edit
     }
 
     // Update berita
     public function update(Request $request, $id)
     {
-        $berita = Berita::findOrFail($id);
+        $berita = BeritaModel::findOrFail($id);
 
         $request->validate([
             'judul' => 'required|string|max:255',
@@ -116,10 +164,24 @@ class BeritaController extends Controller
         return redirect()->route('admin.berita.index')->with('success', 'Berita berhasil diupdate!');
     }
 
+    public function toggleStatus($id)
+    {
+        $berita = BeritaModel::findOrFail($id);
+
+        $berita->status = $berita->status === 'published' ? 'draft' : 'published';
+        $berita->save();
+
+        $message = $berita->status === 'published'
+            ? 'Berita berhasil dipublikasikan'
+            : 'Berita berhasil dijadikan draft';
+
+        return redirect()->back()->with('success', $message);
+    }
+
     // Hapus berita
     public function destroy($id)
     {
-        $berita = Berita::findOrFail($id);
+        $berita = BeritaModel::findOrFail($id);
 
         // Hapus gambar jika ada
         if ($berita->gambar) {

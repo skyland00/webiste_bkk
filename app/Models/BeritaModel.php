@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-class Berita extends Model  // ← PENTING: class name harus Berita
+class BeritaModel extends Model  // ← PENTING: class name harus Berita
 {
     use HasFactory;
 

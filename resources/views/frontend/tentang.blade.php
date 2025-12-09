@@ -18,9 +18,9 @@
     <div class="absolute bottom-20 right-10 w-96 h-96 bg-[#122431]/10 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
 
     <div class="relative max-w-4xl mx-auto px-8 text-center">
-        <div class="inline-flex items-center gap-2 px-5 py-2 bg-[#122431] text-[#F8BE09] rounded-full text-sm font-bold mb-8">
-            Tentang BKK
-        </div>
+        <span class="inline-block px-4 py-2 bg-[#F8BE09]/20 text-[#122431] rounded-full text-sm font-bold mb-4">
+                BERITA & INFORMASI
+            </span>
 
         <h1 class="text-5xl md:text-6xl font-black text-[#122431] mb-6 leading-tight">
             Bursa Kerja Khusus

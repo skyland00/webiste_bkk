@@ -1,16 +1,22 @@
+{{-- views/admin/berita/berita.blade.php --}}
+
 @extends('admin.layout')
 
-@section('title', 'Perusahaan')
+@section('title', 'Berita')
 
 @section('content')
-    <div class="space-y-8" x-data="perusahaanData()" x-init="init()">
-
+    <div class="space-y-8" x-data="beritaData()" x-init="init()">
         <!-- Header -->
         <div class="flex items-center justify-between">
             <div>
-                <h1 class="text-3xl font-bold text-slate-900">Semua Perusahaan</h1>
-                <p class="text-sm text-slate-500 mt-1">Kelola seluruh perusahaan yang terdaftar</p>
+                <h1 class="text-3xl font-bold text-slate-900">Semua Berita</h1>
+                <p class="text-sm text-slate-500 mt-1">Kelola seluruh berita yang dipublikasikan</p>
             </div>
+            <a href="{{ route('admin.berita.create') }}"
+                class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-lg transition duration-200 flex items-center gap-2 shadow-sm">
+                <i class="ri-add-line text-lg"></i>
+                Tambah Berita
+            </a>
         </div>
 
         <!-- Cards Statistik -->
@@ -19,40 +25,41 @@
             <div class="p-6 bg-white border border-slate-200 rounded-xl shadow-sm hover:shadow transition">
                 <div class="flex items-center gap-4">
                     <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center">
-                        <i class="ri-building-line text-2xl"></i>
+                        <i class="ri-file-list-line text-2xl"></i>
                     </div>
                     <div>
-                        <p class="text-sm text-slate-500">Total Perusahaan</p>
-                        <p class="text-3xl font-semibold text-slate-900">{{ $totalClean }}</p>
-                        <p class="text-xs text-slate-400 mt-1">Hanya yang disetujui</p>
+                        <p class="text-sm text-slate-500">Total Berita</p>
+                        <p class="text-3xl font-semibold text-slate-900">{{ $publishedCount + $draftCount }}</p>
+                        <p class="text-xs text-slate-400 mt-1">Semua berita</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Rejected -->
+
+            <!-- Total Published -->
             <div class="p-6 bg-white border border-slate-200 rounded-xl shadow-sm hover:shadow transition">
                 <div class="flex items-center gap-4">
-                    <div class="w-12 h-12 bg-red-100 text-red-600 rounded-xl flex items-center justify-center">
-                        <i class="ri-close-circle-line text-2xl"></i>
+                    <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center">
+                        <i class="ri-newspaper-line text-2xl"></i>
                     </div>
                     <div>
-                        <p class="text-sm text-slate-500">Ditolak</p>
-                        <p class="text-3xl font-semibold text-slate-900">{{ $rejectedCount }}</p>
-                        <p class="text-xs text-slate-400 mt-1">Tidak memenuhi syarat</p>
+                        <p class="text-sm text-slate-500">Berita Published</p>
+                        <p class="text-3xl font-semibold text-slate-900">{{ $publishedCount }}</p>
+                        <p class="text-xs text-slate-400 mt-1">Sudah dipublikasikan</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Pending -->
+            <!-- Draft -->
             <div class="p-6 bg-white border border-slate-200 rounded-xl shadow-sm hover:shadow transition">
                 <div class="flex items-center gap-4">
                     <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-xl flex items-center justify-center">
-                        <i class="ri-time-line text-2xl"></i>
+                        <i class="ri-draft-line text-2xl"></i>
                     </div>
                     <div>
-                        <p class="text-sm text-slate-500">Pending</p>
-                        <p class="text-3xl font-semibold text-slate-900">{{ $pendingCount }}</p>
-                        <p class="text-xs text-slate-400 mt-1">Menunggu verifikasi</p>
+                        <p class="text-sm text-slate-500">Draft</p>
+                        <p class="text-3xl font-semibold text-slate-900">{{ $draftCount }}</p>
+                        <p class="text-xs text-slate-400 mt-1">Belum dipublikasikan</p>
                     </div>
                 </div>
             </div>
@@ -80,53 +87,45 @@
                     <!-- Title dan Filter Status -->
                     <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                         <div>
-                            <h2 class="text-lg font-semibold text-slate-900">Daftar Perusahaan</h2>
-                            <p class="text-sm text-slate-500">Menampilkan <span x-text="total"></span> perusahaan</p>
+                            <h2 class="text-lg font-semibold text-slate-900">Daftar Berita</h2>
+                            <p class="text-sm text-slate-500">Menampilkan <span x-text="total"></span> berita</p>
                         </div>
 
                         <!-- Filter Status Tabs -->
                         <div class="flex flex-wrap gap-2">
                             <button @click="setStatus('all')"
-                                :class="statusFilter === 'all' ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'"
+                                :class="statusFilter === 'all' ? 'bg-blue-600 text-white border-blue-600' :
+                                    'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'"
                                 class="px-4 py-2 rounded-lg border font-medium text-sm transition flex items-center gap-2 cursor-pointer">
-                                <i class="ri-building-line"></i>
+                                <i class="ri-file-list-line"></i>
                                 <span>Semua</span>
                                 <span class="px-2 py-0.5 rounded-full text-xs font-semibold"
                                     :class="statusFilter === 'all' ? 'bg-blue-500' : 'bg-slate-200'">
-                                    {{ $approvedCount + $pendingCount + $rejectedCount }}
+                                    {{ $publishedCount + $draftCount }}
                                 </span>
                             </button>
 
-                            <button @click="setStatus('approved')"
-                                :class="statusFilter === 'approved' ? 'bg-emerald-600 text-white border-emerald-600' : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'"
+                            <button @click="setStatus('published')"
+                                :class="statusFilter === 'published' ? 'bg-emerald-600 text-white border-emerald-600' :
+                                    'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'"
                                 class="px-4 py-2 rounded-lg border font-medium text-sm transition flex items-center gap-2 cursor-pointer">
                                 <i class="ri-checkbox-circle-line"></i>
-                                <span>Disetujui</span>
+                                <span>Published</span>
                                 <span class="px-2 py-0.5 rounded-full text-xs font-semibold"
-                                    :class="statusFilter === 'approved' ? 'bg-emerald-500' : 'bg-slate-200'">
-                                    {{ $approvedCount }}
+                                    :class="statusFilter === 'published' ? 'bg-emerald-500' : 'bg-slate-200'">
+                                    {{ $publishedCount }}
                                 </span>
                             </button>
 
-                            <button @click="setStatus('pending')"
-                                :class="statusFilter === 'pending' ? 'bg-amber-600 text-white border-amber-600' : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'"
+                            <button @click="setStatus('draft')"
+                                :class="statusFilter === 'draft' ? 'bg-amber-600 text-white border-amber-600' :
+                                    'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'"
                                 class="px-4 py-2 rounded-lg border font-medium text-sm transition flex items-center gap-2 cursor-pointer">
-                                <i class="ri-time-line"></i>
-                                <span>Pending</span>
+                                <i class="ri-draft-line"></i>
+                                <span>Draft</span>
                                 <span class="px-2 py-0.5 rounded-full text-xs font-semibold"
-                                    :class="statusFilter === 'pending' ? 'bg-amber-500' : 'bg-slate-200'">
-                                    {{ $pendingCount }}
-                                </span>
-                            </button>
-
-                            <button @click="setStatus('rejected')"
-                                :class="statusFilter === 'rejected' ? 'bg-red-600 text-white border-red-600' : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'"
-                                class="px-4 py-2 rounded-lg border font-medium text-sm transition flex items-center gap-2 cursor-pointer">
-                                <i class="ri-close-circle-line"></i>
-                                <span>Ditolak</span>
-                                <span class="px-2 py-0.5 rounded-full text-xs font-semibold"
-                                    :class="statusFilter === 'rejected' ? 'bg-red-500' : 'bg-slate-200'">
-                                    {{ $rejectedCount }}
+                                    :class="statusFilter === 'draft' ? 'bg-amber-500' : 'bg-slate-200'">
+                                    {{ $draftCount }}
                                 </span>
                             </button>
                         </div>
@@ -137,7 +136,7 @@
                         <!-- Search Bar -->
                         <div class="relative flex-1">
                             <input type="text" x-model="search" @input.debounce.500ms="fetchData()"
-                                placeholder="Cari perusahaan, email, bidang..."
+                                placeholder="Cari judul, kategori, lokasi..."
                                 class="pl-10 pr-12 py-2.5 w-full border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm">
                             <i class="ri-search-line absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg"></i>
 
@@ -147,7 +146,7 @@
                             </div>
                         </div>
 
-                       <!-- Per Page Dropdown -->
+                        <!-- Per Page Dropdown -->
                         <div class="relative">
                             <select x-model="perPage" @change="fetchData()"
                                 class="pl-4 pr-10 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm bg-white appearance-none cursor-pointer w-full sm:w-auto">
@@ -157,7 +156,8 @@
                                 <option value="50">50 per halaman</option>
                                 <option value="100">100 per halaman</option>
                             </select>
-                            <i class="ri-arrow-down-s-line absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg pointer-events-none"></i>
+                            <i
+                                class="ri-arrow-down-s-line absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg pointer-events-none"></i>
                         </div>
                     </div>
                 </div>
@@ -175,22 +175,22 @@
                 </div>
 
                 <div id="table-content">
-                    @include('admin.partials.perusahaan_table', ['perusahaan' => $perusahaan])
+                    @include('admin.partials.berita_table', ['berita' => $berita])
                 </div>
             </div>
 
             <!-- Empty State -->
             <div x-show="!loading && total === 0" class="p-12 text-center text-slate-500">
                 <div class="mx-auto w-20 h-20 rounded-full bg-slate-100 flex items-center justify-center mb-4">
-                    <i class="ri-building-line text-4xl text-slate-400"></i>
+                    <i class="ri-newspaper-line text-4xl text-slate-400"></i>
                 </div>
                 <p class="text-lg font-medium text-slate-700 mb-1">
                     <span x-show="search || statusFilter !== 'all'">Tidak Ada Hasil</span>
-                    <span x-show="!search && statusFilter === 'all'">Belum Ada Perusahaan</span>
+                    <span x-show="!search && statusFilter === 'all'">Belum Ada Berita</span>
                 </p>
                 <p class="text-sm text-slate-500">
                     <span x-show="search || statusFilter !== 'all'">Coba kata kunci lain atau ubah filter</span>
-                    <span x-show="!search && statusFilter === 'all'">Data perusahaan masih kosong.</span>
+                    <span x-show="!search && statusFilter === 'all'">Data berita masih kosong.</span>
                 </p>
             </div>
 
@@ -210,7 +210,7 @@
 
                     <!-- Pagination Links -->
                     <div id="pagination-content">
-                        @include('admin.partials.perusahaan_pagination', ['perusahaan' => $perusahaan])
+                        @include('admin.partials.berita_pagination', ['berita' => $berita])
                     </div>
                 </div>
             </div>
@@ -218,15 +218,15 @@
     </div>
 
     <script>
-        function perusahaanData() {
+        function beritaData() {
             return {
                 search: '{{ $search }}',
                 perPage: {{ $perPage }},
                 statusFilter: '{{ $statusFilter }}',
                 loading: false,
-                total: {{ $perusahaan->total() }},
-                from: {{ $perusahaan->firstItem() ?? 0 }},
-                to: {{ $perusahaan->lastItem() ?? 0 }},
+                total: {{ $berita->total() }},
+                from: {{ $berita->firstItem() ?? 0 }},
+                to: {{ $berita->lastItem() ?? 0 }},
 
                 init() {
                     // Handle pagination clicks
@@ -245,7 +245,7 @@
                 },
 
                 fetchData(page = 1) {
-                    const url = new URL('{{ route('admin.perusahaan') }}');
+                    const url = new URL('{{ route('admin.berita.index') }}');
                     url.searchParams.set('search', this.search);
                     url.searchParams.set('per_page', this.perPage);
                     url.searchParams.set('status', this.statusFilter);

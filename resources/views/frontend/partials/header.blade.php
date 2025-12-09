@@ -35,19 +35,12 @@
                             <a href="{{ route('frontend.tentang') }}" class="dropdown-item">
                                 Tentang BKK
                             </a>
-                            <a href="#" class="dropdown-item">
+                            <a href="{{ route('frontend.berita') }}" class="dropdown-item">
                                 Berita & Artikel
-                            </a>
-                            <a href="#" class="dropdown-item">
-                                FAQ
                             </a>
                         </div>
                     </div>
                 </div>
-
-                <a href="#" class="nav-link">
-                    Survey
-                </a>
                 <a href="{{ route('frontend.kontak') }}"
                     class="nav-link {{ request()->routeIs('frontend.kontak') ? 'active' : '' }}">
                     Kontak
@@ -185,18 +178,11 @@
                     <a href="{{ route('frontend.tentang') }}" class="nav-link-mobile-sub">
                         Tentang BKK
                     </a>
-                    <a href="#" class="nav-link-mobile-sub">
+                    <a href="{{ route('frontend.berita') }}" class="nav-link-mobile-sub">
                         Berita & Artikel
-                    </a>
-                    <a href="#" class="nav-link-mobile-sub">
-                        FAQ
                     </a>
                 </div>
             </div>
-
-            <a href="#" class="nav-link-mobile">
-                Survey
-            </a>
             <a href="{{ route('frontend.kontak') }}"
                 class="nav-link-mobile {{ request()->routeIs('frontend.kontak') ? 'active' : '' }}">
                 Kontak

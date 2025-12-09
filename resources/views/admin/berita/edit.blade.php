@@ -1,7 +1,7 @@
 @extends('admin.layout')
 
 @section('content')
-<div class="container mx-auto px-4 py-8">
+<div class="container mx-auto ">
     <!-- Header -->
     <div class="mb-6">
         <a href="{{ route('admin.berita.index') }}" class="text-blue-600 hover:text-blue-800 flex items-center gap-2 mb-4">
@@ -84,7 +84,7 @@
                 <label for="gambar" class="block text-sm font-medium text-gray-700 mb-2">
                     Gambar Berita
                 </label>
-                
+
                 <!-- Gambar Saat Ini -->
                 @if($berita->gambar)
                 <div class="mb-4">
@@ -107,7 +107,7 @@
                 @error('gambar')
                 <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                 @enderror
-                
+
                 <!-- Preview Gambar Baru -->
                 <div id="preview-container" class="mt-4 hidden">
                     <p class="text-sm text-gray-600 mb-2">Preview gambar baru:</p>
@@ -140,7 +140,7 @@
             <!-- Buttons -->
             <div class="flex gap-4">
                 <button type="submit"
-                    class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition duration-200 flex items-center gap-2">
+                    class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition duration-200 flex items-center gap-2 cursor-pointer">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                     </svg>
@@ -160,10 +160,10 @@ function updateFileName(input) {
     const fileName = document.getElementById('file-name');
     const previewContainer = document.getElementById('preview-container');
     const previewImage = document.getElementById('preview-image');
-    
+
     if (input.files && input.files[0]) {
         fileName.textContent = input.files[0].name;
-        
+
         // Show preview
         const reader = new FileReader();
         reader.onload = function(e) {

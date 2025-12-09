@@ -2,15 +2,19 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\Admin\PelamarController;
+use App\Http\Controllers\Admin\BeritaController;
 use App\Http\Controllers\Admin\LowonganController as AdminLowonganController;
+
 use App\Http\Controllers\Perusahaan\LowonganController;
 use App\Http\Controllers\Perusahaan\PerusahaanController;
-use App\Http\Controllers\BeritaController;
+
 use App\Http\Controllers\frontend\HomeController;
 use App\Http\Controllers\Frontend\Pelamar\LamaranController;
 use App\Http\Controllers\frontend\PublicLowonganController;
+use App\Http\Controllers\Frontend\BeritaController as FrontendBeritaController;
 
 // Role: guest
 Route::get('/home', function () {
@@ -51,11 +55,13 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::get('/lowongan', [AdminLowonganController::class, 'index'])->name('lowongan');
     Route::get('/lowongan/{id}', [AdminLowonganController::class, 'show'])->name('lowongan.show');
     Route::delete('/lowongan/{id}', [AdminLowonganController::class, 'destroy'])->name('lowongan.destroy');
-    
+
     Route::get('/data-pelamar', [PelamarController::class, 'index'])->name('pelamar');
     Route::get('/data-pelamar/{id}', [PelamarController::class, 'show'])->name('lamaran.show');
-    
+
     // Route Berita - FIXED: Sudah dalam prefix admin, jadi tinggal resource aja
+    Route::patch('berita/{berita}/toggle-status', [BeritaController::class, 'toggleStatus'])
+    ->name('berita.toggle-status');
     Route::resource('berita', BeritaController::class);
 });
 
@@ -80,3 +86,6 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout')->middle
 // Halaman publik
 Route::get('/tentang-bkk', [HomeController::class, 'tentangBkk'])->name('frontend.tentang');
 Route::get('/kontak', [HomeController::class, 'kontak'])->name('frontend.kontak');
+
+Route::get('/berita', [FrontendBeritaController::class, 'index'])->name('frontend.berita');
+Route::get('/berita/{slug}', [FrontendBeritaController::class, 'show'])->name('frontend.berita.show');
