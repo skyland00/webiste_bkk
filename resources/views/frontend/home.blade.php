@@ -322,12 +322,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <a href="#"
-                        class="inline-flex items-center gap-2 px-8 py-4 bg-[#122431] text-white rounded-2xl font-bold text-lg hover:bg-[#F8BE09] hover:text-[#122431] transition-all duration-300 shadow-xl group">
-                        Mulai Sekarang
-                        <i class="ri-arrow-right-line text-xl group-hover:translate-x-1 transition-transform"></i>
-                    </a>
                 </div>
 
                 <!-- Visual Stats Grid -->

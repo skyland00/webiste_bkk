@@ -1,12 +1,15 @@
 <?php
-// controller/frontend/pelemar/ProfileController.php
+// controller/frontend/pelamar/ProfileController.php
 namespace App\Http\Controllers\Frontend\Pelamar;
 
 use App\Http\Controllers\Controller;
 use App\Models\PelamarModel;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
@@ -113,5 +116,61 @@ class ProfileController extends Controller
         }
 
         return redirect()->back()->with('error', 'CV tidak ditemukan.');
+    }
+
+    // Hapus akun pelamar (SOFT DELETE atau HARD DELETE)
+    public function deleteAccount(Request $request)
+    {
+        // Validasi password untuk keamanan ekstra
+        $request->validate([
+            'password' => 'required|string',
+        ], [
+            'password.required' => 'Password wajib diisi untuk konfirmasi',
+        ]);
+
+        $user = Auth::user();
+
+        // Cek password
+        if (!Hash::check($request->password, $user->password)) {
+            return redirect()->back()->with('error', 'Password yang Anda masukkan salah!');
+        }
+
+        DB::beginTransaction();
+        try {
+            $pelamar = PelamarModel::where('user_id', $user->id)->firstOrFail();
+
+            // Hapus file CV jika ada
+            if ($pelamar->cv && Storage::disk('public')->exists($pelamar->cv)) {
+                Storage::disk('public')->delete($pelamar->cv);
+            }
+
+            // Hapus file foto profil jika ada
+            if ($pelamar->foto_profil && Storage::disk('public')->exists($pelamar->foto_profil)) {
+                Storage::disk('public')->delete($pelamar->foto_profil);
+            }
+
+            // Hapus semua lamaran terkait (atau bisa diubah sesuai kebutuhan)
+            $pelamar->lamaran()->delete();
+
+            // Hapus data pelamar
+            $pelamar->delete();
+
+            // Hapus user
+            $user->delete();
+
+            DB::commit();
+
+            // Logout
+            Auth::logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+
+            return redirect()->route('login')
+                ->with('success', 'Akun Anda berhasil dihapus. Terima kasih telah menggunakan layanan kami.');
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Terjadi kesalahan saat menghapus akun: ' . $e->getMessage());
+        }
     }
 }

@@ -50,6 +50,9 @@ Route::middleware(['auth', 'role:pelamar'])->group(function () {
     Route::post('/lowongan/{id}/lamar', [LamaranController::class, 'store'])->name('lamaran.store');
     Route::get('/pelamar/lamaran/{id}', [LamaranController::class, 'show'])->name('pelamar.lamaran.show');
     Route::post('/pelamar/lamaran/{id}/cancel', [LamaranController::class, 'cancel'])->name('pelamar.lamaran.cancel');
+
+     // Delete entire account - NEW ROUTE
+    Route::delete('/profile/delete-account', [ProfileController::class, 'deleteAccount'])->name('pelamar.profile.delete-account');
 });
 
 // Role: Admin

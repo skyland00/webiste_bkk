@@ -16,6 +16,12 @@
         </div>
         @endif
 
+        @if(session('error'))
+        <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6">
+            {{ session('error') }}
+        </div>
+        @endif
+
         <!-- Profile Card -->
         <div class="bg-white shadow-[0_4px_12px_rgba(0,0,0,0.06)] rounded-xl overflow-hidden">
 
@@ -199,9 +205,118 @@
                     </a>
                 </div>
 
+                <!-- ZONA BERBAHAYA - HAPUS AKUN -->
+                <div class="mt-12 pt-8 border-t border-gray-200">
+                    <div class="bg-red-50 border border-red-200 rounded-lg p-6">
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0">
+                                <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                                </svg>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="text-lg font-semibold text-red-900 mb-2">Zona Berbahaya</h4>
+                                <p class="text-sm text-gray-700 mb-4 leading-relaxed">
+                                    Menghapus akun akan <strong>menghilangkan semua data Anda secara permanen</strong>, termasuk:
+                                </p>
+                                <ul class="text-sm text-gray-700 space-y-1 mb-4 ml-5 list-disc">
+                                    <li>Informasi profil dan dokumen (CV, foto)</li>
+                                    <li>Semua riwayat lamaran yang pernah Anda kirim</li>
+                                    <li>Akses ke sistem BKK</li>
+                                </ul>
+                                <p class="text-sm text-red-700 font-medium mb-4">
+                                    ⚠️ Tindakan ini <strong>TIDAK DAPAT DIBATALKAN</strong>!
+                                </p>
+                                <button type="button"
+                                        onclick="openDeleteModal()"
+                                        class="px-5 py-2.5 bg-red-600 hover:bg-red-700 text-white rounded-lg text-sm font-semibold transition flex items-center gap-2">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                              d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                    </svg>
+                                    Hapus Akun Saya
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
         </div>
     </div>
 </div>
+
+<!-- MODAL KONFIRMASI HAPUS AKUN -->
+<div id="deleteModal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-xl max-w-md w-full p-6 shadow-2xl">
+        <div class="text-center mb-6">
+            <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-2">Konfirmasi Hapus Akun</h3>
+            <p class="text-gray-600 text-sm">
+                Untuk melanjutkan penghapusan akun, masukkan password Anda sebagai konfirmasi.
+            </p>
+        </div>
+
+        <form id="deleteAccountForm" action="{{ route('pelamar.profile.delete-account') }}" method="POST">
+            @csrf
+            @method('DELETE')
+
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Password Anda</label>
+                <input type="password"
+                       name="password"
+                       id="passwordInput"
+                       required
+                       placeholder="Masukkan password"
+                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500">
+                <p class="text-xs text-gray-500 mt-2">Masukkan password untuk memverifikasi identitas Anda</p>
+            </div>
+
+            <div class="flex gap-3">
+                <button type="button"
+                        onclick="closeDeleteModal()"
+                        class="flex-1 px-4 py-3 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded-lg font-semibold transition">
+                    Batal
+                </button>
+                <button type="submit"
+                        class="flex-1 px-4 py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg font-semibold transition">
+                    Ya, Hapus Akun
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+function openDeleteModal() {
+    document.getElementById('deleteModal').classList.remove('hidden');
+    document.getElementById('passwordInput').focus();
+}
+
+function closeDeleteModal() {
+    document.getElementById('deleteModal').classList.add('hidden');
+    document.getElementById('passwordInput').value = '';
+}
+
+// Close modal when clicking outside
+document.getElementById('deleteModal')?.addEventListener('click', function(e) {
+    if (e.target === this) {
+        closeDeleteModal();
+    }
+});
+
+// Close modal with ESC key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeDeleteModal();
+    }
+});
+</script>
 @endsection

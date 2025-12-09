@@ -9,6 +9,8 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -46,7 +48,7 @@
 
 
             {{-- Content --}}
-            <main class="flex-1 overflow-y-auto p-6 scrollbar-thin">
+            <main class="flex-1 overflow-y-auto p-10 scrollbar-thin">
                 @yield('content')
             </main>
 
