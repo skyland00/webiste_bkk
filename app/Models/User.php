@@ -43,4 +43,20 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /**
+     * Relasi ke Pelamar
+     */
+    public function pelamar()
+    {
+        return $this->hasOne(PelamarModel::class);
+    }
+
+    /**
+     * Relasi ke Perusahaan
+     */
+    public function perusahaan()
+    {
+        return $this->hasOne(PerusahaanModel::class);
+    }
 }

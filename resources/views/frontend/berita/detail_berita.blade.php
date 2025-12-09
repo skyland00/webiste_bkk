@@ -6,25 +6,8 @@
 
 @section('content')
 
-<!-- Breadcrumb -->
-<section class="py-6 bg-[#F5F6F5]">
-    <div class="max-w-[1200px] mx-auto px-8 sm:px-16">
-        <div class="flex items-center gap-2 text-sm">
-            <a href="{{ route('frontend.home') }}" class="text-[#4B5057] hover:text-[#F8BE09] transition-colors">
-                <i class="ri-home-line"></i> Beranda
-            </a>
-            <i class="ri-arrow-right-s-line text-[#B2B2AF]"></i>
-            <a href="{{ route('frontend.berita') }}" class="text-[#4B5057] hover:text-[#F8BE09] transition-colors">
-                Berita
-            </a>
-            <i class="ri-arrow-right-s-line text-[#B2B2AF]"></i>
-            <span class="text-[#122431] font-bold">{{ Str::limit($berita->judul, 50) }}</span>
-        </div>
-    </div>
-</section>
-
 <!-- Article Content -->
-<article class="py-16 bg-white">
+<article class="py-32 bg-white">
     <div class="max-w-[1200px] mx-auto px-8 sm:px-16">
 
         <!-- Article Header -->
@@ -43,10 +26,6 @@
 
             <!-- Meta Information -->
             <div class="flex flex-wrap items-center gap-6 text-[#4B5057]">
-                <div class="flex items-center gap-2">
-                    <i class="ri-user-line text-[#F8BE09] text-xl"></i>
-                    <span class="font-medium">{{ $berita->user->name }}</span>
-                </div>
                 <div class="flex items-center gap-2">
                     <i class="ri-calendar-line text-[#F8BE09] text-xl"></i>
                     <span>{{ $berita->created_at->format('d F Y') }}</span>

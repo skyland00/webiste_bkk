@@ -15,6 +15,7 @@ use App\Http\Controllers\frontend\HomeController;
 use App\Http\Controllers\Frontend\Pelamar\LamaranController;
 use App\Http\Controllers\frontend\PublicLowonganController;
 use App\Http\Controllers\Frontend\BeritaController as FrontendBeritaController;
+use App\Http\Controllers\Frontend\Pelamar\ProfileController;
 
 // Role: guest
 Route::get('/home', function () {
@@ -35,7 +36,14 @@ Route::middleware(['guest'])->group(function () {
 
 // Role: Pelamar (setelah login)
 Route::middleware(['auth', 'role:pelamar'])->group(function () {
-    Route::get('/pelamar/profile', [LamaranController::class, 'index'])->name('pelamar.profile');
+    // Profile Routes - TAMBAHKAN INI
+    Route::get('/pelamar/profile', [ProfileController::class, 'index'])->name('pelamar.profile');
+    Route::get('/pelamar/profile/edit', [ProfileController::class, 'edit'])->name('pelamar.profile.edit');
+    Route::put('/pelamar/profile', [ProfileController::class, 'update'])->name('pelamar.profile.update');
+    Route::delete('/pelamar/profile/foto', [ProfileController::class, 'deleteFoto'])->name('pelamar.profile.delete-foto');
+    Route::delete('/pelamar/profile/cv', [ProfileController::class, 'deleteCV'])->name('pelamar.profile.delete-cv');
+
+    // Riwayat Lamaran Routes
     Route::get('/pelamar/riwayat-lamaran', [LamaranController::class, 'index'])
         ->name('frontend.pelamar.riwayat_lamaran');
     Route::get('/lowongan/{id}/lamar', [LamaranController::class, 'create'])->name('lamaran.create');

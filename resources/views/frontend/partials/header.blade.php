@@ -56,10 +56,24 @@
                             class="flex items-center gap-3 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-full transition-all duration-300 border border-white/20">
                             <div class="w-8 h-8 bg-white rounded-full flex items-center justify-center">
                                 <span class="text-[#122431] font-bold text-sm">
-                                    {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+                                    @if(Auth::user()->role === 'pelamar' && Auth::user()->pelamar)
+                                        {{ strtoupper(substr(Auth::user()->pelamar->nama_lengkap, 0, 1)) }}
+                                    @elseif(Auth::user()->role === 'perusahaan' && Auth::user()->perusahaan)
+                                        {{ strtoupper(substr(Auth::user()->perusahaan->nama_perusahaan, 0, 1)) }}
+                                    @else
+                                        {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+                                    @endif
                                 </span>
                             </div>
-                            <span class="navbar-text font-semibold">{{ Auth::user()->name }}</span>
+                            <span class="navbar-text font-semibold">
+                                @if(Auth::user()->role === 'pelamar' && Auth::user()->pelamar)
+                                    {{ Auth::user()->pelamar->nama_lengkap }}
+                                @elseif(Auth::user()->role === 'perusahaan' && Auth::user()->perusahaan)
+                                    {{ Auth::user()->perusahaan->nama_perusahaan }}
+                                @else
+                                    {{ Auth::user()->name }}
+                                @endif
+                            </span>
                             <i
                                 class="ri-arrow-down-s-line text-lg navbar-text group-hover:rotate-180 transition-transform"></i>
                         </button>
@@ -69,7 +83,15 @@
                             <div class="py-2">
                                 <!-- User Info -->
                                 <div class="px-4 py-3 border-b border-gray-200">
-                                    <p class="text-sm font-semibold text-gray-900">{{ Auth::user()->name }}</p>
+                                    <p class="text-sm font-semibold text-gray-900">
+                                        @if(Auth::user()->role === 'pelamar' && Auth::user()->pelamar)
+                                            {{ Auth::user()->pelamar->nama_lengkap }}
+                                        @elseif(Auth::user()->role === 'perusahaan' && Auth::user()->perusahaan)
+                                            {{ Auth::user()->perusahaan->nama_perusahaan }}
+                                        @else
+                                            {{ Auth::user()->name }}
+                                        @endif
+                                    </p>
                                     <p class="text-xs text-gray-500 truncate">{{ Auth::user()->email }}</p>
                                 </div>
 
@@ -86,8 +108,12 @@
                                     </a>
                                 @else
                                     <a href="{{ route('frontend.pelamar.riwayat_lamaran') }}" class="dropdown-item">
-                                        <i class="ri-user-line"></i>
+                                        <i class="ri-file-paper-line"></i>
                                         Riwayat Lamaran
+                                    </a>
+                                    <a href="{{ route('pelamar.profile') }}" class="dropdown-item">
+                                        <i class="ri-user-line"></i>
+                                        Profile Saya
                                     </a>
                                 @endif
 
@@ -134,11 +160,25 @@
                 <div class="flex items-center gap-3 p-3 bg-white/10 rounded-xl mb-3">
                     <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center">
                         <span class="text-[#122431] font-bold">
-                            {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+                            @if(Auth::user()->role === 'pelamar' && Auth::user()->pelamar)
+                                {{ strtoupper(substr(Auth::user()->pelamar->nama_lengkap, 0, 1)) }}
+                            @elseif(Auth::user()->role === 'perusahaan' && Auth::user()->perusahaan)
+                                {{ strtoupper(substr(Auth::user()->perusahaan->nama_perusahaan, 0, 1)) }}
+                            @else
+                                {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+                            @endif
                         </span>
                     </div>
                     <div>
-                        <p class="navbar-text font-semibold">{{ Auth::user()->name }}</p>
+                        <p class="navbar-text font-semibold">
+                            @if(Auth::user()->role === 'pelamar' && Auth::user()->pelamar)
+                                {{ Auth::user()->pelamar->nama_lengkap }}
+                            @elseif(Auth::user()->role === 'perusahaan' && Auth::user()->perusahaan)
+                                {{ Auth::user()->perusahaan->nama_perusahaan }}
+                            @else
+                                {{ Auth::user()->name }}
+                            @endif
+                        </p>
                         <p class="text-xs text-white/60">{{ Auth::user()->email }}</p>
                     </div>
                 </div>
@@ -154,7 +194,7 @@
                     </a>
                 @else
                     <a href="{{ route('frontend.pelamar.riwayat_lamaran') }}" class="nav-link-mobile">
-                        Dashboard Alumni
+                        Profile saya
                     </a>
                 @endif
             @endauth

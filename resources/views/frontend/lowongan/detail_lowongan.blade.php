@@ -5,21 +5,9 @@
 @section('title', $lowongan->judul_lowongan . ' - BKK SMKN 1 Purwosari')
 
 @section('content')
-    <!-- Breadcrumb -->
-    <section class="bg-white border-b border-[#F5F6F5] py-4">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center gap-2 text-sm text-[#4B5057]">
-                <a href="{{ route('frontend.home') }}" class="hover:text-[#122431] transition">Home</a>
-                <i class="ri-arrow-right-s-line text-lg"></i>
-                <a href="{{ route('frontend.lowongan') }}" class="hover:text-[#122431] transition">Lowongan</a>
-                <i class="ri-arrow-right-s-line text-lg"></i>
-                <span class="text-[#122431] font-medium">Detail</span>
-            </div>
-        </div>
-    </section>
 
     <!-- Main Content -->
-    <section class="py-12">
+    <section class="py-30">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid lg:grid-cols-3 gap-8">
 

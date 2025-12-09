@@ -91,7 +91,7 @@ class LamaranController extends Controller
             'status' => 'pending',
         ]);
 
-        return redirect()->route('pelamar.riwayat_lamaran')
+        return redirect()->route('frontend.pelamar.riwayat_lamaran')
             ->with('success', 'Lamaran berhasil dikirim! Kami akan menghubungi Anda segera.');
     }
 

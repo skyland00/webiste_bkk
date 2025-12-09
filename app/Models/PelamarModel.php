@@ -18,6 +18,7 @@ class PelamarModel extends Model
         'tahun_lulus',
         'no_telp',
         'cv',
+        'foto_profil',
         'status',
     ];
 
