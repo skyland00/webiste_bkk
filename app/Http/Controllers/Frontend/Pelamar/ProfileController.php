@@ -1,5 +1,5 @@
 <?php
-// controller/frontend/pelamar/ProfileController.php
+// app/Http/Controllers/Frontend/Pelamar/ProfileController.php
 namespace App\Http\Controllers\Frontend\Pelamar;
 
 use App\Http\Controllers\Controller;
@@ -118,7 +118,44 @@ class ProfileController extends Controller
         return redirect()->back()->with('error', 'CV tidak ditemukan.');
     }
 
-    // Hapus akun pelamar (SOFT DELETE atau HARD DELETE)
+
+    // Tampilkan halaman pengaturan
+    public function pengaturan()
+    {
+        $pelamar = PelamarModel::with('user')->where('user_id', Auth::id())->firstOrFail();
+
+        return view('frontend.pelamar.pengaturan', compact('pelamar'));
+    }
+
+    // Update password
+    public function updatePassword(Request $request)
+    {
+        $request->validate([
+            'current_password' => 'required|string',
+            'new_password' => 'required|string|min:8|confirmed',
+        ], [
+            'current_password.required' => 'Password lama wajib diisi',
+            'new_password.required' => 'Password baru wajib diisi',
+            'new_password.min' => 'Password baru minimal 8 karakter',
+            'new_password.confirmed' => 'Konfirmasi password tidak cocok',
+        ]);
+
+        $user = Auth::user();
+
+        // Cek password lama
+        if (!Hash::check($request->current_password, $user->password)) {
+            return redirect()->back()->with('error', 'Password lama yang Anda masukkan salah!');
+        }
+
+        // Update password
+        $user->update([
+            'password' => Hash::make($request->new_password)
+        ]);
+
+        return redirect()->back()->with('success', 'Password berhasil diperbarui!');
+    }
+
+    // Hapus akun pelamar (HARD DELETE)
     public function deleteAccount(Request $request)
     {
         // Validasi password untuk keamanan ekstra
@@ -149,7 +186,7 @@ class ProfileController extends Controller
                 Storage::disk('public')->delete($pelamar->foto_profil);
             }
 
-            // Hapus semua lamaran terkait (atau bisa diubah sesuai kebutuhan)
+            // Hapus semua lamaran terkait
             $pelamar->lamaran()->delete();
 
             // Hapus data pelamar

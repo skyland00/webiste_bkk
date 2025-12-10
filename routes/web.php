@@ -37,12 +37,17 @@ Route::middleware(['guest'])->group(function () {
 
 // Role: Pelamar (setelah login)
 Route::middleware(['auth', 'role:pelamar'])->group(function () {
-    // Profile Routes - TAMBAHKAN INI
+    // Profile Routes
     Route::get('/pelamar/profile', [ProfileController::class, 'index'])->name('pelamar.profile');
     Route::get('/pelamar/profile/edit', [ProfileController::class, 'edit'])->name('pelamar.profile.edit');
     Route::put('/pelamar/profile', [ProfileController::class, 'update'])->name('pelamar.profile.update');
     Route::delete('/pelamar/profile/foto', [ProfileController::class, 'deleteFoto'])->name('pelamar.profile.delete-foto');
     Route::delete('/pelamar/profile/cv', [ProfileController::class, 'deleteCV'])->name('pelamar.profile.delete-cv');
+
+    // pengaturan Routes (NEW) - Untuk Password & Delete Account
+    Route::get('/pelamar/pengaturan', [ProfileController::class, 'pengaturan'])->name('pelamar.pengaturan');
+    Route::put('/pelamar/pengaturan/password', [ProfileController::class, 'updatePassword'])->name('pelamar.pengaturan.update-password');
+    Route::delete('/pelamar/pengaturan/delete-account', [ProfileController::class, 'deleteAccount'])->name('pelamar.pengaturan.delete-account');
 
     // Riwayat Lamaran Routes
     Route::get('/pelamar/riwayat-lamaran', [LamaranController::class, 'index'])
@@ -51,9 +56,6 @@ Route::middleware(['auth', 'role:pelamar'])->group(function () {
     Route::post('/lowongan/{id}/lamar', [LamaranController::class, 'store'])->name('lamaran.store');
     Route::get('/pelamar/lamaran/{id}', [LamaranController::class, 'show'])->name('pelamar.lamaran.show');
     Route::post('/pelamar/lamaran/{id}/cancel', [LamaranController::class, 'cancel'])->name('pelamar.lamaran.cancel');
-
-     // Delete entire account - NEW ROUTE
-    Route::delete('/profile/delete-account', [ProfileController::class, 'deleteAccount'])->name('pelamar.profile.delete-account');
 });
 
 // Role: Admin
@@ -71,10 +73,13 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::get('/data-pelamar', [PelamarController::class, 'index'])->name('pelamar');
     Route::get('/data-pelamar/{id}', [PelamarController::class, 'show'])->name('lamaran.show');
 
-    // Route Berita - FIXED: Sudah dalam prefix admin, jadi tinggal resource aja
+    // Route Berita
     Route::patch('berita/{berita}/toggle-status', [BeritaController::class, 'toggleStatus'])
-    ->name('berita.toggle-status');
+        ->name('berita.toggle-status');
     Route::resource('berita', BeritaController::class);
+
+    Route::get('/pengaturan', [AdminController::class, 'pengaturan'])->name('pengaturan');
+    Route::put('/pengaturan/password', [AdminController::class, 'updatePassword'])->name('pengaturan.password');
 });
 
 // Role: Perusahaan
@@ -95,24 +100,24 @@ Route::middleware(['auth', 'role:perusahaan'])->group(function () {
         ->name('perusahaan.lowongan.applicants');
 
     // Route Pelamar Masuk
-      Route::get('/perusahaan/pelamar_masuk', [PelamarMasukController::class, 'index'])
+    Route::get('/perusahaan/pelamar_masuk', [PelamarMasukController::class, 'index'])
         ->name('perusahaan.pelamar_masuk');
-
-    // Pelamar berdasarkan lowongan
     Route::get('/perusahaan/pelamar_masuk/lowongan/{id}', [PelamarMasukController::class, 'byLowongan'])
         ->name('perusahaan.pelamar_masuk.lowongan');
-
-    // Detail pelamar
     Route::get('/perusahaan/pelamar_masuk/show/{id}', [PelamarMasukController::class, 'show'])
         ->name('perusahaan.pelamar_masuk.show');
-
-    // Terima pelamar
     Route::post('/perusahaan/pelamar_masuk/{id}/terima', [PelamarMasukController::class, 'terima'])
         ->name('perusahaan.pelamar_masuk.terima');
-
-    // Tolak pelamar
     Route::post('/perusahaan/pelamar_masuk/{id}/tolak', [PelamarMasukController::class, 'tolak'])
         ->name('perusahaan.pelamar_masuk.tolak');
+
+    Route::get('/perusahaan/profile', [PerusahaanController::class, 'profile'])->name('perusahaan.profile');
+    Route::put('/perusahaan/profile', [PerusahaanController::class, 'updateProfile'])->name('perusahaan.profile.update');
+    Route::delete('/perusahaan/profile/logo', [PerusahaanController::class, 'deleteLogo'])->name('perusahaan.profile.delete-logo');
+
+    Route::get('/perusahaan/pengaturan', [PerusahaanController::class, 'pengaturan'])->name('perusahaan.pengaturan');
+    Route::put('/perusahaan/pengaturan/password', [PerusahaanController::class, 'updatePassword'])->name('perusahaan.pengaturan.password');
+    Route::delete('/perusahaan/pengaturan/account', [PerusahaanController::class, 'deleteAccount'])->name('perusahaan.pengaturan.delete-account');
 });
 
 

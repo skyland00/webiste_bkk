@@ -1,3 +1,5 @@
+{{-- views/perusahaan/partials/pelamar_masuk_list.blade.php --}}
+
 @if ($lamaran->count())
     <div class="overflow-x-auto">
         <table class="w-full text-sm">

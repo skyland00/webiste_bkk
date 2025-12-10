@@ -117,7 +117,7 @@
                                     </a>
                                 @endif
 
-                                <a href="#" class="dropdown-item">
+                                <a href="{{ route('pelamar.pengaturan') }}" class="dropdown-item">
                                     <i class="ri-settings-3-line"></i>
                                     Pengaturan
                                 </a>
@@ -229,7 +229,7 @@
             </a>
 
             @auth
-                <a href="#" class="nav-link-mobile">
+                <a href="{{ route('pelamar.pengaturan') }}" class="nav-link-mobile">
                     Pengaturan
                 </a>
                 <form method="POST" action="{{ route('logout') }}">

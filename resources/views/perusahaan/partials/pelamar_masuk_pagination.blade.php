@@ -1,23 +1,23 @@
 
-@if ($pelamar->hasPages())
+@if ($lamaran->hasPages())
     <nav role="navigation" aria-label="Pagination Navigation" class="flex items-center justify-between">
-        
+
         {{-- Mobile --}}
         <div class="flex justify-between flex-1 sm:hidden">
-            @if ($pelamar->onFirstPage())
+            @if ($lamaran->onFirstPage())
                 <span
                     class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-slate-500 bg-white border border-slate-300 cursor-default leading-5 rounded-md">
                     Sebelumnya
                 </span>
             @else
-                <a href="{{ $pelamar->previousPageUrl() }}"
+                <a href="{{ $lamaran->previousPageUrl() }}"
                     class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 leading-5 rounded-md hover:text-slate-500 focus:outline-none focus:ring ring-slate-300 active:bg-slate-100 active:text-slate-700 transition">
                     Sebelumnya
                 </a>
             @endif
 
-            @if ($pelamar->hasMorePages())
-                <a href="{{ $pelamar->nextPageUrl() }}"
+            @if ($lamaran->hasMorePages())
+                <a href="{{ $lamaran->nextPageUrl() }}"
                     class="relative inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-slate-700 bg-white border border-slate-300 leading-5 rounded-md hover:text-slate-500 focus:outline-none focus:ring ring-slate-300 active:bg-slate-100 active:text-slate-700 transition">
                     Selanjutnya
                 </a>
@@ -36,7 +36,7 @@
                 <span class="relative z-0 inline-flex shadow-sm rounded-lg">
 
                     {{-- Tombol Back --}}
-                    @if ($pelamar->onFirstPage())
+                    @if ($lamaran->onFirstPage())
                         <span aria-disabled="true" aria-label="Sebelumnya">
                             <span
                                 class="relative inline-flex items-center px-2 py-2 text-sm font-medium text-slate-500 bg-white border border-slate-300 cursor-default rounded-l-lg leading-5">
@@ -44,7 +44,7 @@
                             </span>
                         </span>
                     @else
-                        <a href="{{ $pelamar->previousPageUrl() }}" rel="prev"
+                        <a href="{{ $lamaran->previousPageUrl() }}" rel="prev"
                             class="relative inline-flex items-center px-2 py-2 text-sm font-medium text-slate-500 bg-white border border-slate-300 rounded-l-lg leading-5 hover:text-slate-400 focus:z-10 focus:outline-none transition"
                             aria-label="Sebelumnya">
                             <i class="ri-arrow-left-s-line text-lg"></i>
@@ -53,8 +53,8 @@
 
 
                     {{-- Nomor halaman --}}
-                    @foreach ($pelamar->getUrlRange(1, $pelamar->lastPage()) as $page => $url)
-                        @if ($page == $pelamar->currentPage())
+                    @foreach ($lamaran->getUrlRange(1, $lamaran->lastPage()) as $page => $url)
+                        @if ($page == $lamaran->currentPage())
                             <span aria-current="page">
                                 <span
                                     class="relative inline-flex items-center px-4 py-2 -ml-px text-sm font-medium text-white bg-blue-600 border border-blue-600 cursor-default leading-5">
@@ -72,8 +72,8 @@
 
 
                     {{-- Tombol Next --}}
-                    @if ($pelamar->hasMorePages())
-                        <a href="{{ $pelamar->nextPageUrl() }}" rel="next"
+                    @if ($lamaran->hasMorePages())
+                        <a href="{{ $lamaran->nextPageUrl() }}" rel="next"
                             class="relative inline-flex items-center px-2 py-2 -ml-px text-sm font-medium text-slate-500 bg-white border border-slate-300 rounded-r-lg leading-5 hover:text-slate-400 focus:z-10 focus:outline-none transition"
                             aria-label="Selanjutnya">
                             <i class="ri-arrow-right-s-line text-lg"></i>

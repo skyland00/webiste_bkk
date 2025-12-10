@@ -45,21 +45,23 @@
                     <i class="ri-user-line text-xl"></i>
                     <span>Pelamar Masuk</span>
                 </a>
-                
+
                 <div class="pt-4 mt-4 border-t border-slate-200">
                     <p class="px-3 mb-2 text-xs font-semibold text-slate-500 uppercase tracking-wider">Pengaturan</p>
 
-                    <a href="#"
-                        class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 rounded-lg">
-                        <i class="ri-building-4-line text-lg"></i>
-                        <span>Profil Perusahaan</span>
-                    </a>
+                    <a href="{{ route('perusahaan.profile') }}"
+    class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium rounded-lg
+    {{ Route::is('perusahaan.profile') ? 'text-blue-600 bg-blue-50' : 'text-slate-700 hover:bg-slate-100' }}">
+    <i class="ri-building-4-line text-lg"></i>
+    <span>Profil Perusahaan</span>
+</a>
 
-                    <a href="#"
-                        class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 rounded-lg">
-                        <i class="ri-settings-3-line text-lg"></i>
-                        <span>Pengaturan Akun</span>
-                    </a>
+                   <a href="{{ route('perusahaan.pengaturan') }}"
+    class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium rounded-lg
+    {{ Route::is('perusahaan.pengaturan') ? 'text-blue-600 bg-blue-50' : 'text-slate-700 hover:bg-slate-100' }}">
+    <i class="ri-settings-3-line text-lg"></i>
+    <span>Pengaturan Akun</span>
+</a>
                 </div>
 
             </div>

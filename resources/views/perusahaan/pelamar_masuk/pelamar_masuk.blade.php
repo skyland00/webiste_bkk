@@ -1,3 +1,5 @@
+{{-- viwes/perusahaan/pelamar_masuk/pelamar_masuk.blade.php --}}
+
 @extends('perusahaan.layout')
 
 @section('content')
@@ -169,7 +171,7 @@
                 </div>
 
                 <div id="table-content">
-                    @include('perusahaan.partials.pelamar_masuk_list', ['pelamar' => $pelamar])
+                    @include('perusahaan.partials.pelamar_masuk_list', ['lamaran' => $lamaran])
                 </div>
             </div>
 
@@ -196,7 +198,7 @@
                     </div>
 
                     <div id="pagination-content">
-                        @include('perusahaan.partials.pelamar_masuk_pagination', ['data' => $pelamar])
+                        @include('perusahaan.partials.pelamar_masuk_pagination', ['data' => $lamaran])
                     </div>
                 </div>
             </div>

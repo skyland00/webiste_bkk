@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\PerusahaanModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -99,5 +101,43 @@ class AdminController extends Controller
         Cache::forget('perusahaan_status_counts');
 
         return back()->with('success', 'Perusahaan berhasil ditolak');
+    }
+
+    public function pengaturan()
+    {
+        return view('admin.pengaturan');
+    }
+
+    public function updatePassword(Request $request)
+    {
+        // Validasi input
+        $request->validate([
+            'current_password' => 'required',
+            'password' => 'required|min:8|confirmed',
+        ], [
+            'current_password.required' => 'Password saat ini harus diisi',
+            'password.required' => 'Password baru harus diisi',
+            'password.min' => 'Password baru minimal 8 karakter',
+            'password.confirmed' => 'Konfirmasi password tidak sesuai',
+        ]);
+
+        $user = Auth::user();
+
+        // Cek apakah password lama sesuai
+        if (!Hash::check($request->current_password, $user->password)) {
+            return back()->with('error', 'Password saat ini tidak sesuai');
+        }
+
+        // Cek apakah password baru sama dengan password lama
+        if (Hash::check($request->password, $user->password)) {
+            return back()->with('error', 'Password baru tidak boleh sama dengan password lama');
+        }
+
+        // Update password
+        $user->update([
+            'password' => Hash::make($request->password)
+        ]);
+
+        return back()->with('success', 'Password berhasil diperbarui');
     }
 }
