@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\LowonganController as AdminLowonganController;
 
 use App\Http\Controllers\Perusahaan\LowonganController;
 use App\Http\Controllers\Perusahaan\PerusahaanController;
+use App\Http\Controllers\Perusahaan\PelamarMasukController;
 
 use App\Http\Controllers\frontend\HomeController;
 use App\Http\Controllers\Frontend\Pelamar\LamaranController;
@@ -79,6 +80,8 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 // Role: Perusahaan
 Route::middleware(['auth', 'role:perusahaan'])->group(function () {
     Route::get('/perusahaan/dashboard', [PerusahaanController::class, 'index'])->name('perusahaan.dashboard');
+
+    // Route Lowongan
     Route::get('/perusahaan/lowongan', [LowonganController::class, 'index'])->name('perusahaan.lowongan.lowongan');
     Route::get('/perusahaan/lowongan/create', [LowonganController::class, 'create'])->name('perusahaan.lowongan.create');
     Route::post('/perusahaan/lowongan', [LowonganController::class, 'store'])->name('perusahaan.lowongan.store');
@@ -87,8 +90,31 @@ Route::middleware(['auth', 'role:perusahaan'])->group(function () {
     Route::delete('/perusahaan/lowongan/{id}', [LowonganController::class, 'destroy'])->name('perusahaan.lowongan.destroy');
     Route::post('/perusahaan/lowongan/{id}/toggle-status', [LowonganController::class, 'toggleStatus'])->name('perusahaan.lowongan.toggle-status');
     Route::get('perusahaan/lowongan/{id}', [LowonganController::class, 'show'])->name('perusahaan.lowongan.show');
-    Route::get('/lowongan/{lowongan}/applicants', [LowonganController::class, 'applicants'])->name('perusahaan.lowongan.applicants');
+
+    Route::get('/lowongan/{lowongan}/applicants', [LowonganController::class, 'applicants'])
+        ->name('perusahaan.lowongan.applicants');
+
+    // Route Pelamar Masuk
+      Route::get('/perusahaan/pelamar_masuk', [PelamarMasukController::class, 'index'])
+        ->name('perusahaan.pelamar_masuk');
+
+    // Pelamar berdasarkan lowongan
+    Route::get('/perusahaan/pelamar_masuk/lowongan/{id}', [PelamarMasukController::class, 'byLowongan'])
+        ->name('perusahaan.pelamar_masuk.lowongan');
+
+    // Detail pelamar
+    Route::get('/perusahaan/pelamar_masuk/show/{id}', [PelamarMasukController::class, 'show'])
+        ->name('perusahaan.pelamar_masuk.show');
+
+    // Terima pelamar
+    Route::post('/perusahaan/pelamar_masuk/{id}/terima', [PelamarMasukController::class, 'terima'])
+        ->name('perusahaan.pelamar_masuk.terima');
+
+    // Tolak pelamar
+    Route::post('/perusahaan/pelamar_masuk/{id}/tolak', [PelamarMasukController::class, 'tolak'])
+        ->name('perusahaan.pelamar_masuk.tolak');
 });
+
 
 // Logout
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');

@@ -39,12 +39,13 @@
                     <span>Lowongan Saya</span>
                 </a>
 
-                <a href="#"
-                    class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 rounded-lg">
-                    <i class="ri-file-user-line text-lg"></i>
+                <a href="{{ route('perusahaan.pelamar_masuk') }}"
+                    class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium rounded-lg
+                    {{ Route::is('perusahaan.pelamar_masuk') ? 'text-blue-600 bg-blue-50' : 'text-slate-700 hover:bg-slate-100' }}">
+                    <i class="ri-user-line text-xl"></i>
                     <span>Pelamar Masuk</span>
                 </a>
-
+                
                 <div class="pt-4 mt-4 border-t border-slate-200">
                     <p class="px-3 mb-2 text-xs font-semibold text-slate-500 uppercase tracking-wider">Pengaturan</p>
 
@@ -78,7 +79,8 @@
 
 
                     <div class="flex-1 min-w-0">
-                        <p class="text-sm font-medium text-slate-900 truncate">{{ $perusahaan->nama_perusahaan ?? 'Perusahaan' }}</p>
+                        <p class="text-sm font-medium text-slate-900 truncate">
+                            {{ $perusahaan->nama_perusahaan ?? 'Perusahaan' }}</p>
                         <p class="text-xs text-slate-500 truncate">{{ Auth::user()->email }}</p>
                     </div>
 
@@ -90,7 +92,8 @@
                     class="absolute bottom-full left-2 right-2 mb-2 bg-white border border-slate-200 shadow-lg rounded-lg py-1 z-50 hidden group-open:block">
 
                     <div class="px-4 py-3 border-b border-slate-100">
-                        <p class="text-sm font-medium text-slate-900">{{ $perusahaan->nama_perusahaan ?? 'Perusahaan' }}</p>
+                        <p class="text-sm font-medium text-slate-900">{{ $perusahaan->nama_perusahaan ?? 'Perusahaan' }}
+                        </p>
                         <p class="text-xs text-slate-500 mt-0.5">{{ Auth::user()->email }}</p>
                     </div>
 
