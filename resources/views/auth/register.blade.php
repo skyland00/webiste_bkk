@@ -8,6 +8,20 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <style>
+        /* Hide browser's default password reveal button */
+        input[type="password"]::-ms-reveal,
+        input[type="password"]::-ms-clear {
+            display: none;
+        }
+        input[type="password"]::-webkit-contacts-auto-fill-button,
+        input[type="password"]::-webkit-credentials-auto-fill-button {
+            visibility: hidden;
+            pointer-events: none;
+            position: absolute;
+            right: 0;
+        }
+    </style>
 </head>
 
 <body
@@ -171,11 +185,16 @@
                 <label class="block text-sm font-medium text-slate-700 mb-1">Password</label>
                 <div class="relative">
                     <i class="ri-lock-line absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg"></i>
-                    <input type="password" name="password"
-                        class="w-full pl-11 pr-3 py-2.5 border rounded-lg bg-slate-50
+                    <input type="password" name="password" id="password_pelamar"
+                        class="w-full pl-11 pr-11 py-2.5 border rounded-lg bg-slate-50
                 @error('password') border-red-500 bg-red-50 @else border-slate-300 @enderror
                 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition outline-none text-slate-900"
                         placeholder="••••••••">
+                    
+                    <button type="button" onclick="togglePasswordPelamar()" 
+                        class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition">
+                        <i id="toggleIconPelamar" class="ri-eye-off-line text-lg"></i>
+                    </button>
                 </div>
                 @error('password')
                     <p class="text-red-500 text-sm mt-1 ml-1 flex items-start gap-1">
@@ -190,10 +209,15 @@
                 <label class="block text-sm font-medium text-slate-700 mb-1">Konfirmasi Password</label>
                 <div class="relative">
                     <i class="ri-lock-check-line absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg"></i>
-                    <input type="password" name="password_confirmation"
-                        class="w-full pl-11 pr-3 py-2.5 border rounded-lg bg-slate-50 border-slate-300
+                    <input type="password" name="password_confirmation" id="password_confirmation_pelamar"
+                        class="w-full pl-11 pr-11 py-2.5 border rounded-lg bg-slate-50 border-slate-300
                 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition outline-none text-slate-900"
                         placeholder="••••••••">
+                    
+                    <button type="button" onclick="togglePasswordConfirmPelamar()" 
+                        class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition">
+                        <i id="toggleIconConfirmPelamar" class="ri-eye-off-line text-lg"></i>
+                    </button>
                 </div>
             </div>
 
@@ -230,7 +254,6 @@
                     </p>
                 @enderror
             </div>
-
 
             <!-- Kontak Perusahaan -->
             <div>
@@ -331,12 +354,16 @@ focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition outline-
                 <label class="block text-sm font-medium text-slate-700 mb-1">Password</label>
                 <div class="relative">
                     <i class="ri-lock-line absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg"></i>
-                    <input type="password" name="password"
-                        class="w-full pl-11 pr-3 py-2.5 border rounded-lg bg-slate-50
+                    <input type="password" name="password" id="password_perusahaan"
+                        class="w-full pl-11 pr-11 py-2.5 border rounded-lg bg-slate-50
 @error('password') border-red-500 bg-red-50 @else border-slate-300 @enderror
 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition outline-none text-slate-900"
                         placeholder="••••••••">
-
+                    
+                    <button type="button" onclick="togglePasswordPerusahaan()" 
+                        class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition">
+                        <i id="toggleIconPerusahaan" class="ri-eye-off-line text-lg"></i>
+                    </button>
                 </div>
                 @error('password')
                     <p class="text-red-500 text-sm mt-1 ml-1 flex items-start gap-1">
@@ -351,10 +378,15 @@ focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition outline-
                 <label class="block text-sm font-medium text-slate-700 mb-1">Konfirmasi Password</label>
                 <div class="relative">
                     <i class="ri-lock-check-line absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg"></i>
-                    <input type="password" name="password_confirmation"
-                        class="w-full pl-11 pr-3 py-2.5 border bg-slate-50 border-slate-300 rounded-lg
+                    <input type="password" name="password_confirmation" id="password_confirmation_perusahaan"
+                        class="w-full pl-11 pr-11 py-2.5 border bg-slate-50 border-slate-300 rounded-lg
                                focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition outline-none text-slate-900"
                         placeholder="••••••••">
+                    
+                    <button type="button" onclick="togglePasswordConfirmPerusahaan()" 
+                        class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition">
+                        <i id="toggleIconConfirmPerusahaan" class="ri-eye-off-line text-lg"></i>
+                    </button>
                 </div>
             </div>
 
@@ -385,6 +417,70 @@ focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition outline-
         </p>
 
     </div>
+
+    <script>
+        // Toggle Password Pelamar
+        function togglePasswordPelamar() {
+            const passwordInput = document.getElementById('password_pelamar');
+            const toggleIcon = document.getElementById('toggleIconPelamar');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.classList.remove('ri-eye-off-line');
+                toggleIcon.classList.add('ri-eye-line');
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.classList.remove('ri-eye-line');
+                toggleIcon.classList.add('ri-eye-off-line');
+            }
+        }
+
+        function togglePasswordConfirmPelamar() {
+            const passwordInput = document.getElementById('password_confirmation_pelamar');
+            const toggleIcon = document.getElementById('toggleIconConfirmPelamar');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.classList.remove('ri-eye-off-line');
+                toggleIcon.classList.add('ri-eye-line');
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.classList.remove('ri-eye-line');
+                toggleIcon.classList.add('ri-eye-off-line');
+            }
+        }
+
+        // Toggle Password Perusahaan
+        function togglePasswordPerusahaan() {
+            const passwordInput = document.getElementById('password_perusahaan');
+            const toggleIcon = document.getElementById('toggleIconPerusahaan');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.classList.remove('ri-eye-off-line');
+                toggleIcon.classList.add('ri-eye-line');
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.classList.remove('ri-eye-line');
+                toggleIcon.classList.add('ri-eye-off-line');
+            }
+        }
+
+        function togglePasswordConfirmPerusahaan() {
+            const passwordInput = document.getElementById('password_confirmation_perusahaan');
+            const toggleIcon = document.getElementById('toggleIconConfirmPerusahaan');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.classList.remove('ri-eye-off-line');
+                toggleIcon.classList.add('ri-eye-line');
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.classList.remove('ri-eye-line');
+                toggleIcon.classList.add('ri-eye-off-line');
+            }
+        }
+    </script>
 
 </body>
 

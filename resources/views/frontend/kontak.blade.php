@@ -7,7 +7,7 @@
 @section('content')
 
     <!-- Hero Section -->
-    <section class="relative pt-32 pb-5 bg-gradient-to-b from-white via-[#F5F6F5] to-white overflow-hidden">
+    <section class="relative pt-32 pb-20 bg-gradient-to-b from-white via-[#F5F6F5] to-white overflow-hidden">
         <!-- Background Pattern -->
         <div class="absolute inset-0 opacity-30">
             <div class="absolute top-0 left-0 w-full h-full"
@@ -38,7 +38,7 @@
     </section>
 
     <!-- Main Contact Section -->
-    <section class="py-16 bg-gradient-to-b from-white to-[#F5F6F5]">
+    <section class="py-20 bg-gradient-to-b from-white to-[#F5F6F5]">
         <div class="max-w-[1400px] mx-auto px-8 sm:px-16">
 
             <div class="grid lg:grid-cols-2 gap-12 items-start">

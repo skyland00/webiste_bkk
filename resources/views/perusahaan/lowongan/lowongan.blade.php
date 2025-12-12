@@ -6,6 +6,7 @@
         <!-- Header -->
         <div class="flex items-center justify-between">
             <div>
+                
                 <h1 class="text-3xl font-bold text-slate-900">Lowongan Saya</h1>
                 <p class="text-sm text-slate-500 mt-1">Kelola semua lowongan pekerjaan yang Anda buat</p>
             </div>

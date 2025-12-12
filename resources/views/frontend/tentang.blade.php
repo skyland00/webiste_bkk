@@ -19,8 +19,8 @@
 
     <div class="relative max-w-4xl mx-auto px-8 text-center">
         <span class="inline-block px-4 py-2 bg-[#F8BE09]/20 text-[#122431] rounded-full text-sm font-bold mb-4">
-                BERITA & INFORMASI
-            </span>
+            BERITA & INFORMASI
+        </span>
 
         <h1 class="text-5xl md:text-6xl font-black text-[#122431] mb-6 leading-tight">
             Bursa Kerja Khusus
@@ -38,7 +38,7 @@
 
 <!-- Profil BKK -->
 <section class="py-20 bg-white">
-    <div class="max-w-5xl mx-auto px-8">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
         <div class="grid lg:grid-cols-2 gap-16 items-center">
 
             <div>
@@ -57,14 +57,11 @@
             </div>
 
             <div class="relative">
-                <div class="aspect-square rounded-2xl bg-gradient-to-br from-[#F8BE09] to-[#ffa000] p-12 flex items-center justify-center">
-                    <div class="text-center text-white">
-                        <div class="w-24 h-24 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-4">
-                            <i class="ri-briefcase-4-line text-5xl text-white"></i>
-                        </div>
-                        <h3 class="text-3xl font-black mb-2">BKK</h3>
-                        <p class="text-lg">SMKN 1 Purwosari</p>
-                    </div>
+                <div class="aspect-[4/3] rounded-2xl overflow-hidden ">
+                    <img src="{{ asset('img/bkk-office.jpg') }}" 
+                         alt="BKK SMKN 1 Purwosari" 
+                         class="w-full h-full object-cover">
+                    
                 </div>
             </div>
 
@@ -74,7 +71,7 @@
 
 <!-- Visi & Misi -->
 <section class="py-20 bg-[#F5F6F5]">
-    <div class="max-w-5xl mx-auto px-8">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
         <div class="text-center mb-16">
             <span class="text-[#F8BE09] font-bold mb-4 block">Visi & Misi</span>
             <h2 class="text-4xl font-black text-[#122431]">
@@ -131,7 +128,7 @@
 
 <!-- Tugas & Fungsi -->
 <section class="py-20 bg-white">
-    <div class="max-w-5xl mx-auto px-8">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
         <div class="text-center mb-16">
             <span class="text-[#F8BE09] font-bold mb-4 block">Tugas & Fungsi</span>
             <h2 class="text-4xl font-black text-[#122431] mb-4">
@@ -198,7 +195,7 @@
 
 <!-- Statistik -->
 <section class="py-20 bg-[#F5F6F5]">
-    <div class="max-w-5xl mx-auto px-8">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
         <div class="text-center mb-16">
             <span class="text-[#F8BE09] font-bold mb-4 block">Pencapaian</span>
             <h2 class="text-4xl font-black text-[#122431]">
@@ -234,27 +231,29 @@
 
 <!-- CTA -->
 <section class="py-20 bg-white">
-    <div class="max-w-3xl mx-auto px-8 text-center">
-        <div class="w-16 h-16 bg-[#F8BE09] rounded-2xl flex items-center justify-center mx-auto mb-6">
-            <i class="ri-rocket-line text-3xl text-white"></i>
-        </div>
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+        <div class="max-w-3xl mx-auto text-center">
+            <div class="w-16 h-16 bg-[#F8BE09] rounded-2xl flex items-center justify-center mx-auto mb-6">
+                <i class="ri-rocket-line text-3xl text-white"></i>
+            </div>
 
-        <h2 class="text-3xl md:text-4xl font-black text-[#122431] mb-4">
-            Siap Memulai Karir Impianmu?
-        </h2>
-        <p class="text-lg text-[#4B5057] mb-8">
-            Bergabunglah dengan ribuan alumni yang telah sukses berkarir
-        </p>
+            <h2 class="text-3xl md:text-4xl font-black text-[#122431] mb-4">
+                Siap Memulai Karir Impianmu?
+            </h2>
+            <p class="text-lg text-[#4B5057] mb-8">
+                Bergabunglah dengan ribuan alumni yang telah sukses berkarir
+            </p>
 
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="{{ route('frontend.lowongan') }}"
-               class="px-8 py-4 bg-[#122431] text-white rounded-xl font-bold hover:bg-[#F8BE09] hover:text-[#122431] transition-all">
-                Lihat Lowongan
-            </a>
-            <a href="{{ route('frontend.kontak') }}"
-               class="px-8 py-4 bg-white text-[#122431] border-2 border-[#122431] rounded-xl font-bold hover:bg-[#122431] hover:text-white transition-all">
-                Hubungi Kami
-            </a>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="{{ route('frontend.lowongan') }}"
+                   class="px-8 py-4 bg-[#122431] text-white rounded-xl font-bold hover:bg-[#F8BE09] hover:text-[#122431] transition-all">
+                    Lihat Lowongan
+                </a>
+                <a href="{{ route('frontend.kontak') }}"
+                   class="px-8 py-4 bg-white text-[#122431] border-2 border-[#122431] rounded-xl font-bold hover:bg-[#122431] hover:text-white transition-all">
+                    Hubungi Kami
+                </a>
+            </div>
         </div>
     </div>
 </section>

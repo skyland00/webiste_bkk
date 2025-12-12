@@ -1,180 +1,221 @@
 @extends('admin.layout')
 
+@section('title', 'Edit Berita')
+
 @section('content')
-<div class="container mx-auto ">
-    <!-- Header -->
-    <div class="mb-6">
-        <a href="{{ route('admin.berita.index') }}" class="text-blue-600 hover:text-blue-800 flex items-center gap-2 mb-4">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-            </svg>
-            Kembali ke Daftar Berita
-        </a>
-        <h1 class="text-3xl font-bold text-gray-800">Edit Berita</h1>
+    <div class="w-full max-w-6xl pb-12 px-4">
+
+        {{-- Breadcrumb --}}
+        <nav class="flex items-center gap-2 text-sm text-slate-500 mb-8">
+            <a href="{{ route('admin.dashboard') }}" class="hover:text-slate-900 transition">Dashboard</a>
+            <i class="ri-arrow-right-s-line text-xs"></i>
+            <a href="{{ route('admin.berita.index') }}" class="hover:text-slate-900 transition">Berita</a>
+            <i class="ri-arrow-right-s-line text-xs"></i>
+            <span class="text-slate-900">Edit Berita</span>
+        </nav>
+
+        {{-- Header --}}
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-slate-900 mb-2">Edit Berita</h1>
+            <p class="text-slate-600">Perbarui informasi berita</p>
+        </div>
+
+        {{-- Form Card --}}
+        <div class="bg-white rounded-lg border border-slate-200 shadow-sm w-full">
+
+            <form action="{{ route('admin.berita.update', $berita->id) }}" method="POST" enctype="multipart/form-data" 
+                  class="p-7 space-y-8" id="beritaForm">
+                @csrf
+                @method('PUT')
+
+                {{-- Informasi Dasar --}}
+                <div class="space-y-6">
+                    <h2 class="text-lg font-semibold text-slate-900 pb-3 border-b">Informasi Dasar</h2>
+
+                    <div class="space-y-5">
+                        {{-- Judul --}}
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-2">
+                                Judul Berita <span class="text-rose-500">*</span>
+                            </label>
+                            <input type="text" name="judul" value="{{ old('judul', $berita->judul) }}"
+                                class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:bg-white focus:border-slate-400 focus:ring-2 focus:ring-slate-200 transition-all @error('judul') border-rose-300 bg-rose-50 @enderror"
+                                placeholder="Masukkan judul berita yang menarik">
+                            @error('judul')
+                                <p class="mt-1.5 text-sm text-rose-600">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        {{-- Grid 2 --}}
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-2">
+                                    Kategori <span class="text-rose-500">*</span>
+                                </label>
+                                <select name="kategori"
+                                    class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:bg-white focus:border-slate-400 focus:ring-2 focus:ring-slate-200 transition-all @error('kategori') border-rose-300 bg-rose-50 @enderror">
+                                    <option value="">Pilih Kategori</option>
+                                    <option value="Berita Terkini" {{ old('kategori', $berita->kategori) == 'Berita Terkini' ? 'selected' : '' }}>Berita Terkini</option>
+                                    <option value="Info Loker" {{ old('kategori', $berita->kategori) == 'Info Loker' ? 'selected' : '' }}>Info Loker</option>
+                                    <option value="Tips Karir" {{ old('kategori', $berita->kategori) == 'Tips Karir' ? 'selected' : '' }}>Tips Karir</option>
+                                    <option value="Pengumuman" {{ old('kategori', $berita->kategori) == 'Pengumuman' ? 'selected' : '' }}>Pengumuman</option>
+                                    <option value="Event" {{ old('kategori', $berita->kategori) == 'Event' ? 'selected' : '' }}>Event</option>
+                                </select>
+                                @error('kategori')
+                                    <p class="mt-1.5 text-sm text-rose-600">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-2">
+                                    Lokasi <span class="text-rose-500">*</span>
+                                </label>
+                                <input type="text" name="lokasi" value="{{ old('lokasi', $berita->lokasi) }}"
+                                    class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:bg-white focus:border-slate-400 focus:ring-2 focus:ring-slate-200 transition-all @error('lokasi') border-rose-300 bg-rose-50 @enderror"
+                                    placeholder="contoh: Jakarta, Bandung, Online">
+                                @error('lokasi')
+                                    <p class="mt-1.5 text-sm text-rose-600">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Konten Berita --}}
+                <div class="space-y-6">
+                    <h2 class="text-lg font-semibold text-slate-900 pb-3 border-b">Konten Berita</h2>
+
+                    <div class="space-y-5">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-2">
+                                Konten <span class="text-rose-500">*</span>
+                            </label>
+                            <textarea name="konten" rows="10"
+                                class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:bg-white focus:border-slate-400 focus:ring-2 resize-none @error('konten') border-rose-300 bg-rose-50 @enderror"
+                                placeholder="Tulis konten berita di sini...">{{ old('konten', $berita->konten) }}</textarea>
+                            @error('konten')
+                                <p class="mt-1.5 text-sm text-rose-600">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Media & Publikasi --}}
+                <div class="space-y-6">
+                    <h2 class="text-lg font-semibold text-slate-900 pb-3 border-b">Media & Publikasi</h2>
+
+                    <div class="space-y-5">
+                        {{-- Gambar --}}
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-2">
+                                Gambar Berita <span class="text-slate-400 text-xs">(opsional)</span>
+                            </label>
+                            
+                            {{-- Gambar Saat Ini --}}
+                            @if($berita->gambar)
+                            <div class="mb-4 p-4 bg-slate-50 border border-slate-200 rounded-lg">
+                                <p class="text-sm font-medium text-slate-700 mb-3">Gambar saat ini:</p>
+                                <img src="{{ asset('storage/' . $berita->gambar) }}" 
+                                     alt="{{ $berita->judul }}" 
+                                     class="max-w-md h-auto rounded-lg shadow-sm">
+                            </div>
+                            @endif
+
+                            <div class="flex items-start gap-4">
+                                <label for="gambar" 
+                                    class="cursor-pointer px-4 py-2.5 bg-slate-100 hover:bg-slate-200 border border-slate-200 rounded-lg transition-all flex items-center gap-2 text-slate-700 font-medium">
+                                    <i class="ri-image-edit-line text-lg"></i>
+                                    <span>{{ $berita->gambar ? 'Ganti Gambar' : 'Pilih Gambar' }}</span>
+                                </label>
+                                <div class="flex-1">
+                                    <span id="file-name" class="text-sm text-slate-500 block">Belum ada file dipilih</span>
+                                    <p class="text-xs text-slate-400 mt-1">Format: JPG, JPEG, PNG. Maksimal 2MB</p>
+                                </div>
+                            </div>
+                            
+                            <input type="file" name="gambar" id="gambar" accept="image/*" class="hidden" onchange="updateFileName(this)">
+                            
+                            @error('gambar')
+                                <p class="mt-1.5 text-sm text-rose-600">{{ $message }}</p>
+                            @enderror
+                            
+                            {{-- Preview Gambar Baru --}}
+                            <div id="preview-container" class="mt-4 hidden">
+                                <div class="p-4 bg-slate-50 border border-slate-200 rounded-lg">
+                                    <p class="text-sm font-medium text-slate-700 mb-3">Preview gambar baru:</p>
+                                    <img id="preview-image" src="" alt="Preview" class="max-w-md h-auto rounded-lg shadow-sm">
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- Status --}}
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-3">
+                                Status Publikasi <span class="text-rose-500">*</span>
+                            </label>
+                            <div class="flex gap-4">
+                                <label class="flex items-center gap-2 cursor-pointer group">
+                                    <input type="radio" name="status" value="draft" {{ old('status', $berita->status) == 'draft' ? 'checked' : '' }}
+                                        class="w-4 h-4 text-slate-900 focus:ring-2 focus:ring-slate-400">
+                                    <span class="text-slate-700 group-hover:text-slate-900">Draft</span>
+                                </label>
+                                <label class="flex items-center gap-2 cursor-pointer group">
+                                    <input type="radio" name="status" value="published" {{ old('status', $berita->status) == 'published' ? 'checked' : '' }}
+                                        class="w-4 h-4 text-slate-900 focus:ring-2 focus:ring-slate-400">
+                                    <span class="text-slate-700 group-hover:text-slate-900">Publish</span>
+                                </label>
+                            </div>
+                            @error('status')
+                                <p class="mt-1.5 text-sm text-rose-600">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Actions --}}
+                <div class="flex items-center justify-end gap-3 pt-6 border-t">
+                    <a href="{{ route('admin.berita.index') }}"
+                        class="px-6 py-2.5 text-slate-600 hover:text-slate-900 font-medium">
+                        Batal
+                    </a>
+                    <button type="submit" id="submitBtn"
+                        class="px-6 py-2.5 bg-slate-900 hover:bg-slate-800 text-white font-medium rounded-lg shadow-sm">
+                        Update Berita
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 
-    <!-- Form -->
-    <div class="bg-white rounded-lg shadow-md p-6">
-        <form action="{{ route('admin.berita.update', $berita->id) }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            @method('PUT')
+    @push('scripts')
+        <script>
+            function updateFileName(input) {
+                const fileName = document.getElementById('file-name');
+                const previewContainer = document.getElementById('preview-container');
+                const previewImage = document.getElementById('preview-image');
+                
+                if (input.files && input.files[0]) {
+                    fileName.textContent = input.files[0].name;
+                    
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        previewImage.src = e.target.result;
+                        previewContainer.classList.remove('hidden');
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                } else {
+                    fileName.textContent = 'Belum ada file dipilih';
+                    previewContainer.classList.add('hidden');
+                }
+            }
 
-            <!-- Judul -->
-            <div class="mb-6">
-                <label for="judul" class="block text-sm font-medium text-gray-700 mb-2">
-                    Judul Berita <span class="text-red-500">*</span>
-                </label>
-                <input type="text" name="judul" id="judul" value="{{ old('judul', $berita->judul) }}"
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('judul') border-red-500 @enderror"
-                    placeholder="Masukkan judul berita">
-                @error('judul')
-                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                @enderror
-            </div>
+            document.getElementById('beritaForm').addEventListener('submit', function() {
+                const btn = document.getElementById('submitBtn');
+                btn.disabled = true;
+                btn.textContent = 'Menyimpan...';
+                btn.classList.add('opacity-75');
+            });
+        </script>
+    @endpush
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                <!-- Kategori -->
-                <div>
-                    <label for="kategori" class="block text-sm font-medium text-gray-700 mb-2">
-                        Kategori <span class="text-red-500">*</span>
-                    </label>
-                    <select name="kategori" id="kategori"
-                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('kategori') border-red-500 @enderror">
-                        <option value="">Pilih Kategori</option>
-                        <option value="Berita Terkini" {{ old('kategori', $berita->kategori) == 'Berita Terkini' ? 'selected' : '' }}>Berita Terkini</option>
-                        <option value="Info Loker" {{ old('kategori', $berita->kategori) == 'Info Loker' ? 'selected' : '' }}>Info Loker</option>
-                        <option value="Tips Karir" {{ old('kategori', $berita->kategori) == 'Tips Karir' ? 'selected' : '' }}>Tips Karir</option>
-                        <option value="Pengumuman" {{ old('kategori', $berita->kategori) == 'Pengumuman' ? 'selected' : '' }}>Pengumuman</option>
-                        <option value="Event" {{ old('kategori', $berita->kategori) == 'Event' ? 'selected' : '' }}>Event</option>
-                    </select>
-                    @error('kategori')
-                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
-
-                <!-- Lokasi -->
-                <div>
-                    <label for="lokasi" class="block text-sm font-medium text-gray-700 mb-2">
-                        Lokasi <span class="text-red-500">*</span>
-                    </label>
-                    <input type="text" name="lokasi" id="lokasi" value="{{ old('lokasi', $berita->lokasi) }}"
-                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('lokasi') border-red-500 @enderror"
-                        placeholder="Contoh: Jakarta, Bandung, Online">
-                    @error('lokasi')
-                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
-            </div>
-
-            <!-- Konten -->
-            <div class="mb-6">
-                <label for="konten" class="block text-sm font-medium text-gray-700 mb-2">
-                    Konten Berita <span class="text-red-500">*</span>
-                </label>
-                <textarea name="konten" id="konten" rows="10"
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('konten') border-red-500 @enderror"
-                    placeholder="Tulis konten berita di sini...">{{ old('konten', $berita->konten) }}</textarea>
-                @error('konten')
-                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                @enderror
-            </div>
-
-            <!-- Gambar -->
-            <div class="mb-6">
-                <label for="gambar" class="block text-sm font-medium text-gray-700 mb-2">
-                    Gambar Berita
-                </label>
-
-                <!-- Gambar Saat Ini -->
-                @if($berita->gambar)
-                <div class="mb-4">
-                    <p class="text-sm text-gray-600 mb-2">Gambar saat ini:</p>
-                    <img src="{{ asset('storage/' . $berita->gambar) }}" alt="{{ $berita->judul }}" class="max-w-md h-auto rounded-lg shadow-md">
-                </div>
-                @endif
-
-                <div class="flex items-center gap-4">
-                    <label for="gambar" class="cursor-pointer bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg transition duration-200 flex items-center gap-2">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                        </svg>
-                        {{ $berita->gambar ? 'Ganti Gambar' : 'Pilih Gambar' }}
-                    </label>
-                    <span id="file-name" class="text-sm text-gray-500">Belum ada file dipilih</span>
-                </div>
-                <input type="file" name="gambar" id="gambar" accept="image/*" class="hidden" onchange="updateFileName(this)">
-                <p class="text-xs text-gray-500 mt-2">Format: JPG, JPEG, PNG. Maksimal 2MB</p>
-                @error('gambar')
-                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                @enderror
-
-                <!-- Preview Gambar Baru -->
-                <div id="preview-container" class="mt-4 hidden">
-                    <p class="text-sm text-gray-600 mb-2">Preview gambar baru:</p>
-                    <img id="preview-image" src="" alt="Preview" class="max-w-md h-auto rounded-lg shadow-md">
-                </div>
-            </div>
-
-            <!-- Status -->
-            <div class="mb-6">
-                <label class="block text-sm font-medium text-gray-700 mb-2">
-                    Status <span class="text-red-500">*</span>
-                </label>
-                <div class="flex gap-6">
-                    <label class="flex items-center cursor-pointer">
-                        <input type="radio" name="status" value="draft" {{ old('status', $berita->status) == 'draft' ? 'checked' : '' }}
-                            class="w-4 h-4 text-blue-600 focus:ring-blue-500">
-                        <span class="ml-2 text-gray-700">Draft</span>
-                    </label>
-                    <label class="flex items-center cursor-pointer">
-                        <input type="radio" name="status" value="published" {{ old('status', $berita->status) == 'published' ? 'checked' : '' }}
-                            class="w-4 h-4 text-blue-600 focus:ring-blue-500">
-                        <span class="ml-2 text-gray-700">Publish</span>
-                    </label>
-                </div>
-                @error('status')
-                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                @enderror
-            </div>
-
-            <!-- Buttons -->
-            <div class="flex gap-4">
-                <button type="submit"
-                    class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition duration-200 flex items-center gap-2 cursor-pointer">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    Update Berita
-                </button>
-                <a href="{{ route('admin.berita.index') }}"
-                    class="bg-gray-300 hover:bg-gray-400 text-gray-700 px-6 py-2 rounded-lg transition duration-200">
-                    Batal
-                </a>
-            </div>
-        </form>
-    </div>
-</div>
-
-<script>
-function updateFileName(input) {
-    const fileName = document.getElementById('file-name');
-    const previewContainer = document.getElementById('preview-container');
-    const previewImage = document.getElementById('preview-image');
-
-    if (input.files && input.files[0]) {
-        fileName.textContent = input.files[0].name;
-
-        // Show preview
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            previewImage.src = e.target.result;
-            previewContainer.classList.remove('hidden');
-        }
-        reader.readAsDataURL(input.files[0]);
-    } else {
-        fileName.textContent = 'Belum ada file dipilih';
-        previewContainer.classList.add('hidden');
-    }
-}
-</script>
 @endsection

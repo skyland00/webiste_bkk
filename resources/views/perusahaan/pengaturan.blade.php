@@ -1,254 +1,235 @@
 @extends('perusahaan.layout')
 
 @section('content')
-<div class="min-h-screen bg-slate-50">
-    <div class="max-w-4xl">
 
-        {{-- Header --}}
-        <div class="mb-6">
-            <h1 class="text-2xl font-bold text-slate-900">Pengaturan Akun</h1>
-            <p class="text-sm text-slate-600 mt-1">Kelola keamanan dan akun Anda</p>
-        </div>
+    <main class="flex-1 overflow-y-auto scrollbar-thin">
 
-        {{-- Alert Success --}}
-        @if(session('success'))
-        <div class="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg flex items-start gap-3">
-            <i class="ri-checkbox-circle-line text-green-600 text-xl flex-shrink-0 mt-0.5"></i>
-            <div class="flex-1">
-                <p class="text-sm font-medium text-green-900">Berhasil!</p>
-                <p class="text-sm text-green-700 mt-0.5">{{ session('success') }}</p>
+        <div class="w-full max-w-6xl pb-12 px-4">
+
+            {{-- Breadcrumb --}}
+            <!-- <nav class="flex items-center gap-2 text-sm text-slate-500 mb-8">
+                <a href="{{ route('perusahaan.dashboard') }}" class="hover:text-slate-900 transition">Dashboard</a>
+                <i class="ri-arrow-right-s-line text-xs"></i>
+                <span class="text-slate-900">Pengaturan Akun</span>
+            </nav> -->
+
+            {{-- Header --}}
+            <div class="mb-8">
+                <h1 class="text-3xl font-bold text-slate-900 mb-2">Pengaturan Akun</h1>
+                <p class="text-slate-600">Kelola keamanan dan akun Anda</p>
             </div>
-            <button onclick="this.parentElement.remove()" class="text-green-600 hover:text-green-800">
-                <i class="ri-close-line text-xl"></i>
-            </button>
-        </div>
-        @endif
 
-        <div class="space-y-6">
-
-            {{-- Card 1: Ganti Password --}}
-            <div class="bg-white rounded-lg border border-slate-200 shadow-sm">
-                <div class="p-6 border-b border-slate-200">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center">
-                            <i class="ri-lock-password-line text-blue-600 text-xl"></i>
-                        </div>
-                        <div>
-                            <h2 class="text-lg font-semibold text-slate-900">Ganti Password</h2>
-                            <p class="text-sm text-slate-600">Perbarui password Anda secara berkala</p>
-                        </div>
-                    </div>
+            {{-- Alert Success --}}
+            @if(session('success'))
+            <div class="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg flex items-start gap-3">
+                <i class="ri-checkbox-circle-line text-green-600 text-xl flex-shrink-0 mt-0.5"></i>
+                <div class="flex-1">
+                    <p class="text-sm font-medium text-green-900">Berhasil!</p>
+                    <p class="text-sm text-green-700 mt-0.5">{{ session('success') }}</p>
                 </div>
+                <button onclick="this.parentElement.remove()" class="text-green-600 hover:text-green-800">
+                    <i class="ri-close-line text-xl"></i>
+                </button>
+            </div>
+            @endif
 
-                <form action="{{ route('perusahaan.pengaturan.password') }}" method="POST">
-                    @csrf
-                    @method('PUT')
+            <div class="space-y-6">
 
-                    <div class="p-6 space-y-5">
+                {{-- Card 1: Ganti Password --}}
+                <div class="bg-white rounded-lg border border-slate-200 shadow-sm w-full">
 
-                        {{-- Password Lama --}}
-                        <div>
-                            <label for="current_password" class="block text-sm font-medium text-slate-700 mb-2">
-                                Password Saat Ini <span class="text-red-500">*</span>
-                            </label>
-                            <div class="relative">
-                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <i class="ri-lock-line text-slate-400"></i>
-                                </div>
+                    <form action="{{ route('perusahaan.pengaturan.password') }}" method="POST" class="p-7 space-y-8">
+                        @csrf
+                        @method('PUT')
+
+                        {{-- Header Section --}}
+                        <div class="space-y-6">
+                            <h2 class="text-lg font-semibold text-slate-900 pb-3 border-b">Ganti Password</h2>
+                            <p class="text-sm text-slate-600">Perbarui password Anda secara berkala untuk keamanan akun</p>
+                        </div>
+
+                        {{-- Form Fields --}}
+                        <div class="space-y-5">
+                            {{-- Password Lama --}}
+                            <div>
+                                <label for="current_password" class="block text-sm font-medium text-slate-700 mb-2">
+                                    Password Saat Ini <span class="text-rose-500">*</span>
+                                </label>
                                 <input type="password"
                                     name="current_password"
                                     id="current_password"
-                                    class="w-full pl-10 pr-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('current_password') border-red-500 @enderror"
+                                    class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:bg-white focus:border-slate-400 focus:ring-2 focus:ring-slate-200 transition-all @error('current_password') border-rose-300 bg-rose-50 @enderror"
                                     placeholder="Masukkan password saat ini">
+                                @error('current_password')
+                                    <p class="mt-1.5 text-sm text-rose-600">{{ $message }}</p>
+                                @enderror
                             </div>
-                            @error('current_password')
-                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                            @enderror
-                        </div>
 
-                        {{-- Password Baru --}}
-                        <div>
-                            <label for="password" class="block text-sm font-medium text-slate-700 mb-2">
-                                Password Baru <span class="text-red-500">*</span>
-                            </label>
-                            <div class="relative">
-                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <i class="ri-key-line text-slate-400"></i>
-                                </div>
+                            {{-- Password Baru --}}
+                            <div>
+                                <label for="password" class="block text-sm font-medium text-slate-700 mb-2">
+                                    Password Baru <span class="text-rose-500">*</span>
+                                </label>
                                 <input type="password"
                                     name="password"
                                     id="password"
-                                    class="w-full pl-10 pr-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('password') border-red-500 @enderror"
+                                    class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:bg-white focus:border-slate-400 focus:ring-2 focus:ring-slate-200 transition-all @error('password') border-rose-300 bg-rose-50 @enderror"
                                     placeholder="Minimal 8 karakter">
+                                @error('password')
+                                    <p class="mt-1.5 text-sm text-rose-600">{{ $message }}</p>
+                                @enderror
                             </div>
-                            @error('password')
-                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                            @enderror
-                        </div>
 
-                        {{-- Konfirmasi Password --}}
-                        <div>
-                            <label for="password_confirmation" class="block text-sm font-medium text-slate-700 mb-2">
-                                Konfirmasi Password Baru <span class="text-red-500">*</span>
-                            </label>
-                            <div class="relative">
-                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <i class="ri-shield-check-line text-slate-400"></i>
-                                </div>
+                            {{-- Konfirmasi Password --}}
+                            <div>
+                                <label for="password_confirmation" class="block text-sm font-medium text-slate-700 mb-2">
+                                    Konfirmasi Password Baru <span class="text-rose-500">*</span>
+                                </label>
                                 <input type="password"
                                     name="password_confirmation"
                                     id="password_confirmation"
-                                    class="w-full pl-10 pr-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                    class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:bg-white focus:border-slate-400 focus:ring-2 focus:ring-slate-200 transition-all"
                                     placeholder="Masukkan ulang password baru">
                             </div>
                         </div>
 
-                    </div>
-
-                    {{-- Footer Actions --}}
-                    <div class="px-6 py-4 bg-slate-50 border-t border-slate-200 rounded-b-lg flex items-center justify-end">
-                        <button type="submit"
-                            class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2">
-                            <i class="ri-save-line"></i>
-                            Update Password
-                        </button>
-                    </div>
-                </form>
-            </div>
-
-            {{-- Card 2: Zona Berbahaya --}}
-            <div class="bg-white rounded-lg border border-red-200 shadow-sm">
-                <div class="p-6 border-b border-red-200 bg-red-50">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center">
-                            <i class="ri-alert-line text-red-600 text-xl"></i>
+                        {{-- Actions --}}
+                        <div class="flex items-center justify-end gap-3 pt-6 border-t">
+                            <button type="submit"
+                                class="px-6 py-2.5 bg-slate-900 hover:bg-slate-800 text-white font-medium rounded-lg shadow-sm transition-colors flex items-center gap-2">
+                                <i class="ri-save-line"></i>
+                                Update Password
+                            </button>
                         </div>
+                    </form>
+                </div>
+
+                {{-- Card 2: Zona Berbahaya --}}
+                <div class="bg-white rounded-lg border border-rose-200 shadow-sm w-full">
+
+                    <div class="p-7 space-y-6">
+                        {{-- Header Section --}}
                         <div>
-                            <h2 class="text-lg font-semibold text-red-900">Zona Berbahaya</h2>
-                            <p class="text-sm text-red-700">Tindakan ini tidak dapat dibatalkan</p>
+                            <h2 class="text-lg font-semibold text-rose-900 pb-3 border-b border-rose-200">Zona Berbahaya</h2>
+                            <p class="text-sm text-rose-700 mt-3">Tindakan ini tidak dapat dibatalkan</p>
+                        </div>
+
+                        {{-- Delete Account Section --}}
+                        <div class="flex items-start justify-between gap-4">
+                            <div class="flex-1">
+                                <h3 class="text-base font-semibold text-slate-900 mb-2">
+                                    Hapus Akun Perusahaan
+                                </h3>
+                                <p class="text-sm text-slate-600">
+                                    Semua data perusahaan, lowongan, dan lamaran akan dihapus permanen. Tindakan ini tidak dapat dibatalkan.
+                                </p>
+                            </div>
+                            <button type="button"
+                                onclick="openDeleteModal()"
+                                class="px-5 py-2.5 bg-rose-600 hover:bg-rose-700 text-white font-medium rounded-lg shadow-sm transition-colors flex items-center gap-2 whitespace-nowrap">
+                                <i class="ri-delete-bin-line"></i>
+                                Hapus Akun
+                            </button>
                         </div>
                     </div>
                 </div>
 
-                <div class="p-6">
-                    <div class="flex items-start justify-between gap-4">
-                        <div class="flex-1">
-                            <h3 class="text-base font-semibold text-slate-900 mb-1">
-                                Hapus Akun Perusahaan
-                            </h3>
-                            <p class="text-sm text-slate-600">
-                                Semua data perusahaan, lowongan, dan lamaran akan dihapus permanen. Tindakan ini tidak dapat dibatalkan.
-                            </p>
-                        </div>
-                        <button type="button"
-                            onclick="openDeleteModal()"
-                            class="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 transition-colors flex items-center gap-2 whitespace-nowrap">
-                            <i class="ri-delete-bin-line"></i>
-                            Hapus Akun
-                        </button>
+            </div>
+        </div>
+
+    </main>
+
+    {{-- Modal Konfirmasi Hapus Akun --}}
+    <div id="deleteModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg max-w-md w-full shadow-xl">
+
+            {{-- Header --}}
+            <div class="p-6 border-b border-slate-200">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 bg-rose-100 rounded-full flex items-center justify-center flex-shrink-0">
+                        <i class="ri-error-warning-line text-rose-600 text-2xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-900">Hapus Akun?</h3>
+                        <p class="text-sm text-slate-600">Tindakan ini tidak dapat dibatalkan</p>
                     </div>
                 </div>
             </div>
 
-        </div>
-    </div>
-</div>
+            {{-- Body --}}
+            <form action="{{ route('perusahaan.pengaturan.delete-account') }}" method="POST" id="deleteAccountForm">
+                @csrf
+                @method('DELETE')
 
-{{-- Modal Konfirmasi Hapus Akun --}}
-<div id="deleteModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-    <div class="bg-white rounded-lg max-w-md w-full shadow-xl">
+                <div class="p-6 space-y-4">
+                    <div class="p-4 bg-rose-50 border border-rose-200 rounded-lg">
+                        <p class="text-sm text-rose-800 font-medium mb-2">⚠️ Peringatan:</p>
+                        <ul class="text-sm text-rose-700 space-y-1 list-disc list-inside">
+                            <li>Semua data perusahaan akan dihapus</li>
+                            <li>Semua lowongan kerja akan dihapus</li>
+                            <li>Data lamaran akan hilang permanen</li>
+                            <li>Anda tidak dapat login lagi</li>
+                        </ul>
+                    </div>
 
-        {{-- Header --}}
-        <div class="p-6 border-b border-slate-200">
-            <div class="flex items-center gap-3">
-                <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center">
-                    <i class="ri-error-warning-line text-red-600 text-2xl"></i>
-                </div>
-                <div>
-                    <h3 class="text-lg font-bold text-slate-900">Hapus Akun?</h3>
-                    <p class="text-sm text-slate-600">Tindakan ini tidak dapat dibatalkan</p>
-                </div>
-            </div>
-        </div>
-
-        {{-- Body --}}
-        <form action="{{ route('perusahaan.pengaturan.delete-account') }}" method="POST" id="deleteAccountForm">
-            @csrf
-            @method('DELETE')
-
-            <div class="p-6 space-y-4">
-                <div class="p-4 bg-red-50 border border-red-200 rounded-lg">
-                    <p class="text-sm text-red-800 font-medium mb-2">⚠️ Peringatan:</p>
-                    <ul class="text-sm text-red-700 space-y-1 list-disc list-inside">
-                        <li>Semua data perusahaan akan dihapus</li>
-                        <li>Semua lowongan kerja akan dihapus</li>
-                        <li>Data lamaran akan hilang permanen</li>
-                        <li>Anda tidak dapat login lagi</li>
-                    </ul>
-                </div>
-
-                <div>
-                    <label for="delete_password" class="block text-sm font-medium text-slate-700 mb-2">
-                        Masukkan Password untuk Konfirmasi <span class="text-red-500">*</span>
-                    </label>
-                    <div class="relative">
-                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <i class="ri-lock-line text-slate-400"></i>
-                        </div>
+                    <div>
+                        <label for="delete_password" class="block text-sm font-medium text-slate-700 mb-2">
+                            Masukkan Password untuk Konfirmasi <span class="text-rose-500">*</span>
+                        </label>
                         <input type="password"
                             name="password"
                             id="delete_password"
                             required
-                            class="w-full pl-10 pr-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                            class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:bg-white focus:border-slate-400 focus:ring-2 focus:ring-rose-200 transition-all"
                             placeholder="Masukkan password Anda">
+                        @error('password')
+                            <p class="mt-1.5 text-sm text-rose-600">{{ $message }}</p>
+                        @enderror
                     </div>
-                    @error('password')
-                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                    @enderror
                 </div>
-            </div>
 
-            {{-- Footer --}}
-            <div class="px-6 py-4 bg-slate-50 border-t border-slate-200 rounded-b-lg flex items-center justify-end gap-3">
-                <button type="button"
-                    onclick="closeDeleteModal()"
-                    class="px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-lg hover:bg-slate-50 transition-colors">
-                    Batal
-                </button>
-                <button type="submit"
-                    class="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 transition-colors flex items-center gap-2">
-                    <i class="ri-delete-bin-line"></i>
-                    Ya, Hapus Akun
-                </button>
-            </div>
-        </form>
+                {{-- Footer --}}
+                <div class="px-6 py-4 bg-slate-50 border-t border-slate-200 rounded-b-lg flex items-center justify-end gap-3">
+                    <button type="button"
+                        onclick="closeDeleteModal()"
+                        class="px-5 py-2.5 text-slate-600 hover:text-slate-900 font-medium transition-colors">
+                        Batal
+                    </button>
+                    <button type="submit"
+                        class="px-5 py-2.5 bg-rose-600 hover:bg-rose-700 text-white font-medium rounded-lg shadow-sm transition-colors flex items-center gap-2">
+                        <i class="ri-delete-bin-line"></i>
+                        Ya, Hapus Akun
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-<script>
-function openDeleteModal() {
-    document.getElementById('deleteModal').classList.remove('hidden');
-    document.body.style.overflow = 'hidden';
-}
-
-function closeDeleteModal() {
-    document.getElementById('deleteModal').classList.add('hidden');
-    document.body.style.overflow = 'auto';
-    document.getElementById('deleteAccountForm').reset();
-}
-
-// Close modal saat klik di luar
-document.getElementById('deleteModal').addEventListener('click', function(e) {
-    if (e.target === this) {
-        closeDeleteModal();
+    <script>
+    function openDeleteModal() {
+        document.getElementById('deleteModal').classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
     }
-});
 
-// Close modal dengan ESC
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-        closeDeleteModal();
+    function closeDeleteModal() {
+        document.getElementById('deleteModal').classList.add('hidden');
+        document.body.style.overflow = 'auto';
+        document.getElementById('deleteAccountForm').reset();
     }
-});
-</script>
+
+    // Close modal saat klik di luar
+    document.getElementById('deleteModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeDeleteModal();
+        }
+    });
+
+    // Close modal dengan ESC
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeDeleteModal();
+        }
+    });
+    </script>
+
 @endsection

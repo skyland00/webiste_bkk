@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\PerusahaanModel;
+use App\Models\LowonganModel;
+use App\Models\PelamarModel;
+use App\Models\LamaranModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
@@ -13,26 +16,58 @@ class AdminController extends Controller
 {
     function index()
     {
-        return view('admin.dashboard');
+        // Statistik Cards
+        $totalLowongan = LowonganModel::where('status', 'aktif')->count();
+        $totalPerusahaan = PerusahaanModel::where('status', 'approved')->count();
+        $totalSiswa = PelamarModel::count();
+        $siswaDiterima = LamaranModel::where('status', 'diterima')->count();
+
+        // Lowongan Terbaru (5 terakhir)
+        $lowonganTerbaru = LowonganModel::with(['perusahaan'])
+            ->where('status', 'aktif')
+            ->latest()
+            ->take(4)
+            ->get();
+
+        // Lamaran Terbaru (5 terakhir)
+        $lamaranTerbaru = LamaranModel::with(['pelamar.user', 'lowongan.perusahaan'])
+            ->latest()
+            ->take(5)
+            ->get();
+
+        // Notifikasi
+        $lamaranMenunggu = LamaranModel::where('status', 'menunggu')->count();
+        $lowonganBerakhir = LowonganModel::where('status', 'aktif')
+            ->whereDate('tanggal_tutup', '<=', now()->addDays(7))
+            ->whereDate('tanggal_tutup', '>=', now())
+            ->count();
+
+        return view('admin.dashboard', compact(
+            'totalLowongan',
+            'totalPerusahaan',
+            'totalSiswa',
+            'siswaDiterima',
+            'lowonganTerbaru',
+            'lamaranTerbaru',
+            'lamaranMenunggu',
+            'lowonganBerakhir'
+        ));
     }
 
     function perusahaan(Request $request)
     {
         $perPage = $request->get('per_page', 15);
         $search = $request->get('search', '');
-        $statusFilter = $request->get('status', 'all'); // all, pending, approved, rejected
+        $statusFilter = $request->get('status', 'all');
 
-        // Gunakan select untuk membatasi kolom yang dimuat
         $query = PerusahaanModel::with(['user:id,email'])
             ->select('id', 'user_id', 'nama_perusahaan', 'logo', 'kontak', 'bidang_usaha', 'status', 'created_at')
             ->latest();
 
-        // Filter berdasarkan status
         if ($statusFilter !== 'all') {
             $query->where('status', $statusFilter);
         }
 
-        // Filter berdasarkan search
         if ($search) {
             $query->where(function ($q) use ($search) {
                 $q->where('nama_perusahaan', 'like', "%{$search}%")
@@ -46,9 +81,6 @@ class AdminController extends Controller
 
         $perusahaan = $query->paginate($perPage)->withQueryString();
 
-        // Gunakan query yang lebih efisien untuk statistik
-        // Cache hasil ini jika datanya jarang berubah
-
         $statusCounts = Cache::remember('perusahaan_status_counts', 300, function () {
             return PerusahaanModel::selectRaw('status, COUNT(*) as count')
                 ->groupBy('status')
@@ -60,7 +92,6 @@ class AdminController extends Controller
         $rejectedCount = $statusCounts['rejected'] ?? 0;
         $totalClean = $approvedCount;
 
-        // Jika request AJAX, return JSON
         if ($request->ajax()) {
             return response()->json([
                 'html' => view('admin.partials.perusahaan_table', compact('perusahaan'))->render(),
@@ -110,7 +141,6 @@ class AdminController extends Controller
 
     public function updatePassword(Request $request)
     {
-        // Validasi input
         $request->validate([
             'current_password' => 'required',
             'password' => 'required|min:8|confirmed',
@@ -123,17 +153,14 @@ class AdminController extends Controller
 
         $user = Auth::user();
 
-        // Cek apakah password lama sesuai
         if (!Hash::check($request->current_password, $user->password)) {
             return back()->with('error', 'Password saat ini tidak sesuai');
         }
 
-        // Cek apakah password baru sama dengan password lama
         if (Hash::check($request->password, $user->password)) {
             return back()->with('error', 'Password baru tidak boleh sama dengan password lama');
         }
 
-        // Update password
         $user->update([
             'password' => Hash::make($request->password)
         ]);

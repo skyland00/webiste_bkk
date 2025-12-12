@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\PelamarController;
 use App\Http\Controllers\Admin\BeritaController;
 use App\Http\Controllers\Admin\LowonganController as AdminLowonganController;
 
+use App\Http\Controllers\Perusahaan\DashboardController;
 use App\Http\Controllers\Perusahaan\LowonganController;
 use App\Http\Controllers\Perusahaan\PerusahaanController;
 use App\Http\Controllers\Perusahaan\PelamarMasukController;
@@ -84,7 +85,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 
 // Role: Perusahaan
 Route::middleware(['auth', 'role:perusahaan'])->group(function () {
-    Route::get('/perusahaan/dashboard', [PerusahaanController::class, 'index'])->name('perusahaan.dashboard');
+   Route::get('/perusahaan/dashboard', [DashboardController::class, 'index'])->name('perusahaan.dashboard');
 
     // Route Lowongan
     Route::get('/perusahaan/lowongan', [LowonganController::class, 'index'])->name('perusahaan.lowongan.lowongan');

@@ -1,204 +1,217 @@
 @extends('perusahaan.layout')
 
 @section('content')
-    <div class="p-6 bg-white shadow rounded-lg">
 
-        {{-- Header --}}
-        <div class="mb-6">
-            <h1 class="text-2xl font-bold text-slate-900">Edit Lowongan</h1>
-            <p class="text-sm text-slate-600 mt-1">Perbarui informasi lowongan pekerjaan</p>
-        </div>
+    <main class="flex-1 overflow-y-auto scrollbar-thin">
 
-        {{-- Form Card --}}
-        <div class="bg-white rounded-xl shadow-sm border border-slate-200">
-            <form action="{{ route('perusahaan.lowongan.update', $lowongan->id) }}" method="POST" class="p-6 space-y-6">
-                @csrf
-                @method('PUT')
+       <div class="w-full max-w-6xl pb-12 px-4">
 
-                {{-- Judul Lowongan --}}
-                <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-2">
-                        Judul Lowongan <span class="text-red-500">*</span>
-                    </label>
-                    <input type="text" name="judul_lowongan"
-                        value="{{ old('judul_lowongan', $lowongan->judul_lowongan) }}"
-                        class="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('judul_lowongan') border-red-500 @enderror"
-                        placeholder="Contoh: Staff IT, Marketing Manager, Web Developer">
-                    @error('judul_lowongan')
-                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                    @enderror
-                </div>
+            {{-- Breadcrumb --}}
+            <nav class="flex items-center gap-2 text-sm text-slate-500 mb-8">
+                <a href="{{ route('perusahaan.dashboard') }}" class="hover:text-slate-900 transition">Dashboard</a>
+                <i class="ri-arrow-right-s-line text-xs"></i>
+                <a href="{{ route('perusahaan.lowongan.lowongan') }}" class="hover:text-slate-900 transition">Lowongan</a>
+                <i class="ri-arrow-right-s-line text-xs"></i>
+                <span class="text-slate-900">Edit Lowongan</span>
+            </nav>
 
-                {{-- Bidang --}}
-                <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-2">
-                        Bidang <span class="text-red-500">*</span>
-                    </label>
-                    <input type="text" name="bidang" value="{{ old('bidang', $lowongan->bidang) }}"
-                        class="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('bidang') border-red-500 @enderror"
-                        placeholder="Contoh: IT & Software, Marketing, Finance">
-                    @error('bidang')
-                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                    @enderror
-                </div>
+            {{-- Header --}}
+            <div class="mb-8">
+                <h1 class="text-3xl font-bold text-slate-900 mb-2">Edit Lowongan</h1>
+                <p class="text-slate-600">Perbarui informasi lowongan pekerjaan</p>
+            </div>
 
-                {{-- Grid: Tipe & Jumlah Orang --}}
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {{-- Form Card --}}
+            <div class="bg-white rounded-lg border border-slate-200 shadow-sm w-full">
 
-                    {{-- Tipe Pekerjaan --}}
-                    <div>
-                        <label class="block text-sm font-medium text-slate-700 mb-2">
-                            Tipe Pekerjaan <span class="text-red-500">*</span>
-                        </label>
-                        <select name="tipe_pekerjaan"
-                            class="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('tipe_pekerjaan') border-red-500 @enderror">
-                            <option value="">Pilih tipe pekerjaan</option>
-                            <option value="full-time"
-                                {{ old('tipe_pekerjaan', $lowongan->tipe_pekerjaan) == 'full-time' ? 'selected' : '' }}>Full
-                                Time</option>
-                            <option value="part-time"
-                                {{ old('tipe_pekerjaan', $lowongan->tipe_pekerjaan) == 'part-time' ? 'selected' : '' }}>Part
-                                Time</option>
-                            <option value="kontrak"
-                                {{ old('tipe_pekerjaan', $lowongan->tipe_pekerjaan) == 'kontrak' ? 'selected' : '' }}>
-                                Kontrak</option>
-                            <option value="magang"
-                                {{ old('tipe_pekerjaan', $lowongan->tipe_pekerjaan) == 'magang' ? 'selected' : '' }}>Magang
-                            </option>
-                        </select>
-                        @error('tipe_pekerjaan')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                        @enderror
-                    </div>
+                <form action="{{ route('perusahaan.lowongan.update', $lowongan->id) }}" method="POST" class="p-7 space-y-8" id="lowonganForm">
+                    @csrf
+                    @method('PUT')
 
-                    {{-- Jumlah Orang --}}
-                    <div>
-                        <label class="block text-sm font-medium text-slate-700 mb-2">
-                            Jumlah Orang Dibutuhkan <span class="text-red-500">*</span>
-                        </label>
-                        <input type="number" name="jumlah_orang"
-                            value="{{ old('jumlah_orang', $lowongan->jumlah_orang) }}" min="1"
-                            class="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('jumlah_orang') border-red-500 @enderror"
-                            placeholder="Contoh: 2">
-                        @error('jumlah_orang')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                        @enderror
-                    </div>
+                    {{-- Informasi Dasar --}}
+                    <div class="space-y-6">
+                        <h2 class="text-lg font-semibold text-slate-900 pb-3 border-b">Informasi Dasar</h2>
 
-                </div>
+                        <div class="space-y-5">
+                            {{-- Judul --}}
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-2">
+                                    Judul Lowongan <span class="text-rose-500">*</span>
+                                </label>
+                                <input type="text" name="judul_lowongan" value="{{ old('judul_lowongan', $lowongan->judul_lowongan) }}"
+                                    class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:bg-white focus:border-slate-400 focus:ring-2 focus:ring-slate-200 transition-all @error('judul_lowongan') border-rose-300 bg-rose-50 @enderror"
+                                    placeholder="contoh: Senior Frontend Developer">
+                                @error('judul_lowongan')
+                                    <p class="mt-1.5 text-sm text-rose-600">{{ $message }}</p>
+                                @enderror
+                            </div>
 
-                {{-- Lokasi --}}
-                <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-2">
-                        Lokasi <span class="text-red-500">*</span>
-                    </label>
-                    <input type="text" name="lokasi" value="{{ old('lokasi', $lowongan->lokasi) }}"
-                        class="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('lokasi') border-red-500 @enderror"
-                        placeholder="Contoh: Jakarta Selatan, Bandung, Remote">
-                    @error('lokasi')
-                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                    @enderror
-                </div>
+                            {{-- Bidang --}}
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-2">
+                                    Bidang <span class="text-rose-500">*</span>
+                                </label>
+                                <input type="text" name="bidang" value="{{ old('bidang', $lowongan->bidang) }}"
+                                    class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:bg-white focus:border-slate-400 focus:ring-2 focus:ring-slate-200 transition-all @error('bidang') border-rose-300 bg-rose-50 @enderror"
+                                    placeholder="contoh: Technology & IT">
+                                @error('bidang')
+                                    <p class="mt-1.5 text-sm text-rose-600">{{ $message }}</p>
+                                @enderror
+                            </div>
 
-                {{-- Grid: Gaji --}}
-                <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-2">
-                        Range Gaji (Opsional)
-                    </label>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <input type="number" name="gaji_min" value="{{ old('gaji_min', $lowongan->gaji_min) }}"
-                                min="0"
-                                class="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('gaji_min') border-red-500 @enderror"
-                                placeholder="Gaji minimal (Rp)">
-                            @error('gaji_min')
-                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                            @enderror
-                        </div>
-                        <div>
-                            <input type="number" name="gaji_max" value="{{ old('gaji_max', $lowongan->gaji_max) }}"
-                                min="0"
-                                class="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('gaji_max') border-red-500 @enderror"
-                                placeholder="Gaji maksimal (Rp)">
-                            @error('gaji_max')
-                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                            @enderror
+                            {{-- Grid 2 --}}
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                <div>
+                                    <label class="block text-sm font-medium text-slate-700 mb-2">
+                                        Tipe Pekerjaan <span class="text-rose-500">*</span>
+                                    </label>
+                                    <select name="tipe_pekerjaan"
+                                        class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:bg-white focus:border-slate-400 focus:ring-2 focus:ring-slate-200 transition-all @error('tipe_pekerjaan') border-rose-300 bg-rose-50 @enderror">
+                                        <option value="">Pilih tipe</option>
+                                        <option value="full-time" {{ old('tipe_pekerjaan', $lowongan->tipe_pekerjaan) == 'full-time' ? 'selected' : '' }}>Full Time</option>
+                                        <option value="part-time" {{ old('tipe_pekerjaan', $lowongan->tipe_pekerjaan) == 'part-time' ? 'selected' : '' }}>Part Time</option>
+                                        <option value="kontrak" {{ old('tipe_pekerjaan', $lowongan->tipe_pekerjaan) == 'kontrak' ? 'selected' : '' }}>Kontrak</option>
+                                        <option value="magang" {{ old('tipe_pekerjaan', $lowongan->tipe_pekerjaan) == 'magang' ? 'selected' : '' }}>Magang</option>
+                                    </select>
+                                    @error('tipe_pekerjaan')
+                                        <p class="mt-1.5 text-sm text-rose-600">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-medium text-slate-700 mb-2">
+                                        Jumlah Dibutuhkan <span class="text-rose-500">*</span>
+                                    </label>
+                                    <input type="number" name="jumlah_orang" value="{{ old('jumlah_orang', $lowongan->jumlah_orang) }}" min="1"
+                                        class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:bg-white focus:border-slate-400 focus:ring-2 focus:ring-slate-200 transition-all @error('jumlah_orang') border-rose-300 bg-rose-50 @enderror"
+                                        placeholder="2">
+                                    @error('jumlah_orang')
+                                        <p class="mt-1.5 text-sm text-rose-600">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            {{-- Lokasi --}}
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-2">
+                                    Lokasi <span class="text-rose-500">*</span>
+                                </label>
+                                <input type="text" name="lokasi" value="{{ old('lokasi', $lowongan->lokasi) }}"
+                                    class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:bg-white focus:border-slate-400 focus:ring-2 focus:ring-slate-200 transition-all @error('lokasi') border-rose-300 bg-rose-50 @enderror"
+                                    placeholder="contoh: Jakarta / Remote">
+                                @error('lokasi')
+                                    <p class="mt-1.5 text-sm text-rose-600">{{ $message }}</p>
+                                @enderror
+                            </div>
                         </div>
                     </div>
-                    <p class="mt-1 text-xs text-slate-500">Kosongkan jika tidak ingin menampilkan range gaji</p>
-                </div>
 
-                {{-- Grid: Tanggal Buka & Tutup --}}
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {{-- Kompensasi & Periode --}}
+                    <div class="space-y-6">
+                        <h2 class="text-lg font-semibold text-slate-900 pb-3 border-b">Kompensasi & Periode</h2>
 
-                    {{-- Tanggal Buka --}}
-                    <div>
-                        <label class="block text-sm font-medium text-slate-700 mb-2">
-                            Tanggal Buka Lamaran <span class="text-red-500">*</span>
-                        </label>
-                        <input type="date" name="tanggal_buka"
-                            value="{{ old('tanggal_buka', $lowongan->tanggal_buka->format('Y-m-d')) }}"
-                            class="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('tanggal_buka') border-red-500 @enderror">
-                        @error('tanggal_buka')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                        @enderror
+                        <div class="space-y-5">
+                            {{-- Gaji --}}
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-2">
+                                    Range Gaji <span class="text-slate-400 text-xs">(opsional)</span>
+                                </label>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <input type="number" name="gaji_min" min="0" value="{{ old('gaji_min', $lowongan->gaji_min) }}"
+                                        class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:bg-white focus:border-slate-400 focus:ring-2 focus:ring-slate-200 transition-all"
+                                        placeholder="Min (Rp)">
+                                    <input type="number" name="gaji_max" min="0" value="{{ old('gaji_max', $lowongan->gaji_max) }}"
+                                        class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:bg-white focus:border-slate-400 focus:ring-2 focus:ring-slate-200 transition-all"
+                                        placeholder="Max (Rp)">
+                                </div>
+                            </div>
+
+                            {{-- Tanggal --}}
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                <div>
+                                    <label class="block text-sm font-medium text-slate-700 mb-2">
+                                        Tanggal Buka <span class="text-rose-500">*</span>
+                                    </label>
+                                    <input type="date" name="tanggal_buka" value="{{ old('tanggal_buka', $lowongan->tanggal_buka->format('Y-m-d')) }}"
+                                        class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:bg-white focus:border-slate-400 focus:ring-2 focus:ring-slate-200 @error('tanggal_buka') border-rose-300 bg-rose-50 @enderror">
+                                    @error('tanggal_buka')
+                                        <p class="mt-1.5 text-sm text-rose-600">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-medium text-slate-700 mb-2">
+                                        Tanggal Tutup <span class="text-rose-500">*</span>
+                                    </label>
+                                    <input type="date" name="tanggal_tutup" value="{{ old('tanggal_tutup', $lowongan->tanggal_tutup->format('Y-m-d')) }}"
+                                        class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:bg-white focus:border-slate-400 focus:ring-2 focus:ring-slate-200 @error('tanggal_tutup') border-rose-300 bg-rose-50 @enderror">
+                                    @error('tanggal_tutup')
+                                        <p class="mt-1.5 text-sm text-rose-600">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
-                    {{-- Tanggal Tutup --}}
-                    <div>
-                        <label class="block text-sm font-medium text-slate-700 mb-2">
-                            Tanggal Tutup Lamaran <span class="text-red-500">*</span>
-                        </label>
-                        <input type="date" name="tanggal_tutup"
-                            value="{{ old('tanggal_tutup', $lowongan->tanggal_tutup->format('Y-m-d')) }}"
-                            class="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('tanggal_tutup') border-red-500 @enderror">
-                        @error('tanggal_tutup')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                        @enderror
+                    {{-- Detail Lowongan --}}
+                    <div class="space-y-6">
+                        <h2 class="text-lg font-semibold text-slate-900 pb-3 border-b">Detail Lowongan</h2>
+
+                        <div class="space-y-5">
+                            {{-- Deskripsi --}}
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-2">
+                                    Deskripsi Pekerjaan <span class="text-rose-500">*</span>
+                                </label>
+                                <textarea name="deskripsi_pekerjaan" rows="5"
+                                    class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:bg-white focus:border-slate-400 focus:ring-2 resize-none @error('deskripsi_pekerjaan') border-rose-300 bg-rose-50 @enderror"
+                                    placeholder="Jelaskan tanggung jawab dan detail pekerjaan...">{{ old('deskripsi_pekerjaan', $lowongan->deskripsi_pekerjaan) }}</textarea>
+                                @error('deskripsi_pekerjaan')
+                                    <p class="mt-1.5 text-sm text-rose-600">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+                            {{-- Kualifikasi --}}
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-2">
+                                    Kualifikasi <span class="text-rose-500">*</span>
+                                </label>
+                                <textarea name="kualifikasi" rows="5"
+                                    class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:bg-white focus:border-slate-400 focus:ring-2 resize-none @error('kualifikasi') border-rose-300 bg-rose-50 @enderror"
+                                    placeholder="Tulis kualifikasi, skill, dan pengalaman yang dibutuhkan...">{{ old('kualifikasi', $lowongan->kualifikasi) }}</textarea>
+                                @error('kualifikasi')
+                                    <p class="mt-1.5 text-sm text-rose-600">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
                     </div>
 
-                </div>
-                <p class="mt-1 text-xs text-slate-500">Tanggal tutup harus setelah tanggal buka</p>
-
-                {{-- Deskripsi Pekerjaan --}}
-                <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-2">
-                        Deskripsi Pekerjaan <span class="text-red-500">*</span>
-                    </label>
-                    <textarea name="deskripsi_pekerjaan" rows="5"
-                        class="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('deskripsi_pekerjaan') border-red-500 @enderror"
-                        placeholder="Jelaskan deskripsi pekerjaan, tanggung jawab, dan detail lainnya...">{{ old('deskripsi_pekerjaan', $lowongan->deskripsi_pekerjaan) }}</textarea>
-                    @error('deskripsi_pekerjaan')
-                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                    @enderror
-                </div>
-                {{-- Kualifikasi --}}
-                <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-2">
-                        Kualifikasi <span class="text-red-500">*</span>
-                    </label>
-                    <textarea name="kualifikasi" rows="5"
-                        class="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('kualifikasi') border-red-500 @enderror"
-                        placeholder="Tulis kualifikasi yang dibutuhkan, skill, pengalaman, dll...">{{ old('kualifikasi', $lowongan->kualifikasi) }}</textarea>
-                    @error('kualifikasi')
-                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                    @enderror
-                </div>
-
-                {{-- Buttons --}}
-                <div class="flex items-center gap-3 pt-4 border-t border-slate-200">
-                    <button type="submit"
-                        class="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors">
-                        <i class="ri-save-line mr-2"></i>
-                        Update Lowongan
-                    </button>
-                    <a href="{{ route('perusahaan.lowongan.lowongan') }}"
-                        class="px-6 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium rounded-lg transition-colors">
-                        Batal
-                    </a>
-                </div>
-
-            </form>
+                    {{-- Actions --}}
+                    <div class="flex items-center justify-end gap-3 pt-6 border-t">
+                        <a href="{{ route('perusahaan.lowongan.lowongan') }}"
+                            class="px-6 py-2.5 text-slate-600 hover:text-slate-900 font-medium">
+                            Batal
+                        </a>
+                        <button type="submit" id="submitBtn"
+                            class="px-6 py-2.5 bg-slate-900 hover:bg-slate-800 text-white font-medium rounded-lg shadow-sm">
+                            Update Lowongan
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
-    </div>
+
+    </main>
+
+    @push('scripts')
+        <script>
+            document.getElementById('lowonganForm').addEventListener('submit', function () {
+                const btn = document.getElementById('submitBtn');
+                btn.disabled = true;
+                btn.textContent = 'Menyimpan...';
+                btn.classList.add('opacity-75');
+            });
+        </script>
+    @endpush
+
 @endsection
