@@ -53,11 +53,11 @@ class LamaranController extends Controller
 
         // Validasi
         $request->validate([
-            'cv' => $pelamar->cv ? 'nullable|file|mimes:pdf,doc,docx|max:2048' : 'required|file|mimes:pdf,doc,docx|max:2048',
+            'cv' => $pelamar->cv ? 'nullable|file|mimes:pdf|max:2048' : 'required|file|mimes:pdf|max:2048',
             'cover_letter' => 'nullable|string',
         ], [
             'cv.required' => 'CV wajib diupload',
-            'cv.mimes' => 'CV harus berformat PDF, DOC, atau DOCX',
+            'cv.mimes' => 'CV harus berformat PDF',
             'cv.max' => 'Ukuran CV maksimal 2MB',
         ]);
 

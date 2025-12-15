@@ -80,9 +80,9 @@
     focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition outline-none
     text-slate-900"
                         placeholder="••••••••">
-                    
+
                     <!-- Toggle Password Icon -->
-                    <button type="button" onclick="togglePassword()" 
+                    <button type="button" onclick="togglePassword()"
                         class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition">
                         <i id="toggleIcon" class="ri-eye-off-line text-lg"></i>
                     </button>
@@ -129,7 +129,7 @@
         <!-- Help -->
         <p class="text-center text-sm text-slate-500 mt-7">
             Butuh bantuan?
-            <a href="#" class="text-blue-600 font-medium hover:underline hover:text-blue-700">Hubungi Admin</a>
+            <a href="{{ route('frontend.kontak') }}" class="text-blue-600 font-medium hover:underline hover:text-blue-700">Hubungi Admin</a>
         </p>
     </div>
 
@@ -137,7 +137,7 @@
         function togglePassword() {
             const passwordInput = document.getElementById('password');
             const toggleIcon = document.getElementById('toggleIcon');
-            
+
             if (passwordInput.type === 'password') {
                 passwordInput.type = 'text';
                 toggleIcon.classList.remove('ri-eye-off-line');

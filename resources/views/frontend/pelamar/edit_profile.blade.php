@@ -164,7 +164,7 @@
                                 {{ $pelamar->cv ? 'Upload CV Baru (Opsional)' : 'Upload CV *' }}
                             </label>
 
-                            <input type="file" name="cv" accept=".pdf,.doc,.docx"
+                            <input type="file" name="cv" accept=".pdf"
                                 class="block w-full text-sm text-gray-600
                                       file:mr-4 file:py-2 file:px-4 file:rounded-lg
                                       file:border file:border-gray-300

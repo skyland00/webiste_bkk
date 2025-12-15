@@ -129,7 +129,7 @@
                     <p class="text-sm text-[#4B5057] mb-3">Anda belum memiliki CV di profil. Upload CV untuk melanjutkan:</p>
                     @endif
 
-                    <input type="file" name="cv" id="cv" accept=".pdf,.doc,.docx"
+                    <input type="file" name="cv" id="cv" accept=".pdf"
                            class="w-full px-4 py-3 border-2 border-[#F5F6F5] rounded-2xl focus:ring-2 focus:ring-[#F8BE09] focus:border-[#F8BE09] transition-all
                                   file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold
                                   file:bg-[#122431] file:text-white hover:file:bg-[#1a3345] file:cursor-pointer">
@@ -141,7 +141,7 @@
                     </p>
                     @enderror
 
-                    <p class="text-xs text-[#B2B2AF] mt-2">Format: PDF, DOC, DOCX. Maksimal 2MB</p>
+                    <p class="text-xs text-[#B2B2AF] mt-2">Format: PDF maksimal 2MB</p>
                 </div>
 
                 <!-- Cover Letter -->

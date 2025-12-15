@@ -167,7 +167,7 @@
                 <label class="block text-sm font-medium text-slate-700 mb-1">Upload CV (Opsional)</label>
                 <div class="relative">
                     <i class="ri-file-text-line absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg"></i>
-                    <input type="file" name="cv" accept=".pdf,.doc,.docx"
+                    <input type="file" name="cv" accept=".pdf"
                         class="w-full pl-11 pr-3 py-2.5 border rounded-lg bg-slate-50
                 @error('cv') border-red-500 bg-red-50 @else border-slate-300 @enderror
                 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition outline-none text-slate-900">
@@ -190,8 +190,8 @@
                 @error('password') border-red-500 bg-red-50 @else border-slate-300 @enderror
                 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition outline-none text-slate-900"
                         placeholder="••••••••">
-                    
-                    <button type="button" onclick="togglePasswordPelamar()" 
+
+                    <button type="button" onclick="togglePasswordPelamar()"
                         class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition">
                         <i id="toggleIconPelamar" class="ri-eye-off-line text-lg"></i>
                     </button>
@@ -213,8 +213,8 @@
                         class="w-full pl-11 pr-11 py-2.5 border rounded-lg bg-slate-50 border-slate-300
                 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition outline-none text-slate-900"
                         placeholder="••••••••">
-                    
-                    <button type="button" onclick="togglePasswordConfirmPelamar()" 
+
+                    <button type="button" onclick="togglePasswordConfirmPelamar()"
                         class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition">
                         <i id="toggleIconConfirmPelamar" class="ri-eye-off-line text-lg"></i>
                     </button>
@@ -359,8 +359,8 @@ focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition outline-
 @error('password') border-red-500 bg-red-50 @else border-slate-300 @enderror
 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition outline-none text-slate-900"
                         placeholder="••••••••">
-                    
-                    <button type="button" onclick="togglePasswordPerusahaan()" 
+
+                    <button type="button" onclick="togglePasswordPerusahaan()"
                         class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition">
                         <i id="toggleIconPerusahaan" class="ri-eye-off-line text-lg"></i>
                     </button>
@@ -382,8 +382,8 @@ focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition outline-
                         class="w-full pl-11 pr-11 py-2.5 border bg-slate-50 border-slate-300 rounded-lg
                                focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition outline-none text-slate-900"
                         placeholder="••••••••">
-                    
-                    <button type="button" onclick="togglePasswordConfirmPerusahaan()" 
+
+                    <button type="button" onclick="togglePasswordConfirmPerusahaan()"
                         class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition">
                         <i id="toggleIconConfirmPerusahaan" class="ri-eye-off-line text-lg"></i>
                     </button>
@@ -423,7 +423,7 @@ focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition outline-
         function togglePasswordPelamar() {
             const passwordInput = document.getElementById('password_pelamar');
             const toggleIcon = document.getElementById('toggleIconPelamar');
-            
+
             if (passwordInput.type === 'password') {
                 passwordInput.type = 'text';
                 toggleIcon.classList.remove('ri-eye-off-line');
@@ -438,7 +438,7 @@ focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition outline-
         function togglePasswordConfirmPelamar() {
             const passwordInput = document.getElementById('password_confirmation_pelamar');
             const toggleIcon = document.getElementById('toggleIconConfirmPelamar');
-            
+
             if (passwordInput.type === 'password') {
                 passwordInput.type = 'text';
                 toggleIcon.classList.remove('ri-eye-off-line');
@@ -454,7 +454,7 @@ focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition outline-
         function togglePasswordPerusahaan() {
             const passwordInput = document.getElementById('password_perusahaan');
             const toggleIcon = document.getElementById('toggleIconPerusahaan');
-            
+
             if (passwordInput.type === 'password') {
                 passwordInput.type = 'text';
                 toggleIcon.classList.remove('ri-eye-off-line');
@@ -469,7 +469,7 @@ focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition outline-
         function togglePasswordConfirmPerusahaan() {
             const passwordInput = document.getElementById('password_confirmation_perusahaan');
             const toggleIcon = document.getElementById('toggleIconConfirmPerusahaan');
-            
+
             if (passwordInput.type === 'password') {
                 passwordInput.type = 'text';
                 toggleIcon.classList.remove('ri-eye-off-line');
