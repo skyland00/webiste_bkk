@@ -265,7 +265,7 @@
                                         @endif
                                     </td>
                                     <td class="py-4 px-6 text-right">
-                                        <a href="{{ route('admin.pelamar.show', $lamaran->id) }}"
+                                        <a href="{{ route('admin.lamaran.show', $lamaran->id) }}"
                                             class="text-slate-600 hover:text-slate-900 hover:bg-slate-100 p-2 rounded-lg transition-colors inline-block">
                                             <i class="ri-eye-line text-lg"></i>
                                         </a>

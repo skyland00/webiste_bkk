@@ -165,7 +165,7 @@
                 <h2 class="text-4xl md:text-5xl font-black text-[#122431] mb-2">Daftar Lowongan Terbaru</h2>
                 <p class="text-lg text-[#4B5057]">Temukan pekerjaan yang sempurna untukmu</p>
             </div>
-            <a href="#"
+            <a href="#lowongan-section"
                 class="mt-6 md:mt-0 inline-flex items-center gap-2 text-[#122431] font-bold hover:text-[#F8BE09] transition-colors group">
                 Lihat Semua Lowongan
                 <i class="ri-arrow-right-line text-xl group-hover:translate-x-1 transition-transform"></i>

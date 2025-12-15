@@ -126,12 +126,14 @@
 
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
-                                    <button type="submit"
-                                        class="dropdown-item text-red-600 hover:bg-red-50 w-full text-left">
+                                    <a href="{{ route('logout') }}"
+                                        onclick="event.preventDefault(); this.closest('form').submit();"
+                                        class="dropdown-item text-red-600 hover:bg-[#F8BE09] hover:text-[#122431]">
                                         <i class="ri-logout-box-line"></i>
                                         Logout
-                                    </button>
+                                    </a>
                                 </form>
+
                             </div>
                         </div>
                     </div>
@@ -250,7 +252,7 @@
 </nav>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         const navbar = document.getElementById('navbar');
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
